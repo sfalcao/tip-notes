@@ -22,10 +22,10 @@ set -o pipefail
 #
 __script_name__="tip"
 
-#__link_dir__="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-#__linked_script__=$(readlink "${__link_dir__}/${__script_name__}")
-#__project_dir__=$(dirname "${__linked_script__}")
-#cd ${__project_dir__}
+__link_dir__="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+__linked_script__=$(readlink "${__link_dir__}/${__script_name__}")
+__project_dir__=$(dirname "${__linked_script__}")
+cd ${__project_dir__}
 
 source ./project-header.sh
 
@@ -34,6 +34,7 @@ source ./project-header.sh
 tip_config_folder=~/.config/tip-notes
 tip_config_file=${tip_config_folder}/tiprc
 tip_notes_folder=~/.config/tip-notes/notes
+tip_editor=''
 
 # if exist a config file, source it
 if [[ -f "${tip_config_file}" ]]; then
@@ -115,10 +116,14 @@ while [[ ${#} -gt 0 ]]; do
                 echo "ERROR: --edit option waits for a note name"
                 exit 1
             fi
+            note_file="${tip_notes_folder}/${1}"
             if [[ -z "${tip_editor}" ]]; then
-                xdg-open "${tip_notes_folder}/${1}"
+                if ! [[ -f "${note_file}" ]]; then
+                    touch "${note_file}"
+                fi
+                xdg-open ${note_file}
             else
-                ${tip_editor} "${tip_notes_folder}/${1}"
+                ${tip_editor} "${note_file}"
             fi
             exit 0
             ;;
@@ -128,8 +133,9 @@ while [[ ${#} -gt 0 ]]; do
                 echo "ERROR: --delete option waits for a note name"
                 exit 1
             fi
-            if [[ -f "${tip_notes_folder}/${1}" ]]; then
-                rm "${tip_notes_folder}/${1}"
+            note_file="${tip_notes_folder}/${1}"
+            if [[ -f "${note_file}" ]]; then
+                rm "${note_file}"
             else
                 echo "no ${1} note to be removed!"
                 exit 1
