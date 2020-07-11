@@ -122,6 +122,20 @@ while [[ ${#} -gt 0 ]]; do
             fi
             exit 0
             ;;
+        '-d' | '--delete')
+            shift
+            if [[ ${#} -ne 1 ]]; then
+                echo "ERROR: --delete option waits for a note name"
+                exit 1
+            fi
+            if [[ -f "${tip_notes_folder}/${1}" ]]; then
+                rm "${tip_notes_folder}/${1}"
+            else
+                echo "no ${1} note to be removed!"
+                exit 1
+            fi
+            exit 0
+            ;;
 
         *)
             # unknown option
