@@ -39,7 +39,6 @@ fi
 
 cp -r ./tip-notes "${project_base_folder}"
 cp remove "${project_destination_folder}"
-cp purge "${project_destination_folder}"
 
 # create links to executables
 ln "${project_destination_folder}/tip" "${link_destination_folder}/tip"
