@@ -136,6 +136,17 @@ while [[ ${#} -gt 0 ]]; do
             fi
             exit 0
             ;;
+        '--remove')
+            if ! rm -r /opt/tip-notes; then
+                echo "ERROR: failed to remove tip-notes folder!"
+                exit 1
+            fi
+            if ! rm -r /usr/local/bin/tip; then
+                echo "ERROR: failed to remove tip-notes link!"
+                exit 1
+            fi
+            exit 0
+            ;;
 
         *)
             # unknown option
