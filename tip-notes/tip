@@ -173,6 +173,10 @@ while [[ ${#} -gt 0 ]]; do
             fi
             exit ${error_status}
             ;;
+        '--version')
+            echo "${__project_version__}"
+            exit 0
+            ;;
 
         *)
             # unknown option
