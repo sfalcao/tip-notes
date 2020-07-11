@@ -12,6 +12,6 @@
 
 
 __project_name__="tip notes"
-__project_version__="v0.0.0"
+__project_version__="v0.1.0"
 __project_mail__="falecomigo.falcao@gmail.com"
 __project_dev_stage__="DRAFT"
