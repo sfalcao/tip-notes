@@ -147,8 +147,16 @@ while [[ ${#} -gt 0 ]]; do
             fi
             exit 0
             ;;
-        '--purge')
+        '--remove-purge')
             error_status=0
+            if ! rm -r /opt/tip-notes; then
+                echo "ERROR: failed to remove tip-notes folder!"
+                error_status=1
+            fi
+            if ! rm -r /usr/local/bin/tip; then
+                echo "ERROR: failed to remove tip-notes link!"
+                error_status=1
+            fi
             if ! rm -r ${tip_notes_folder}; then
                 echo "ERROR: failed to purge notes folder!"
                 error_status=1
