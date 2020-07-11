@@ -147,6 +147,18 @@ while [[ ${#} -gt 0 ]]; do
             fi
             exit 0
             ;;
+        '--purge')
+            error_status=0
+            if ! rm -r ${tip_notes_folder}; then
+                echo "ERROR: failed to purge notes folder!"
+                error_status=1
+            fi
+            if ! rm -r ${tip_config_folder}; then
+                echo "ERROR: failed to purge config folder!"
+                error_status=1
+            fi
+            exit ${error_status}
+            ;;
 
         *)
             # unknown option
