@@ -109,6 +109,19 @@ while [[ ${#} -gt 0 ]]; do
             VERBOSE_FLAG=1
             shift # past argument
             ;;
+        '-e' | '--edit')
+            shift
+            if [[ ${#} -ne 1 ]]; then
+                echo "ERROR: --edit option waits for a note name"
+                exit 1
+            fi
+            if [[ -z "${tip_editor}" ]]; then
+                xdg-open "${tip_notes_folder}/${1}"
+            else
+                ${tip_editor} "${tip_notes_folder}/${1}"
+            fi
+            exit 0
+            ;;
 
         *)
             # unknown option
@@ -150,5 +163,5 @@ if [[ "${#}" -eq 1 ]]; then
     exit 1
 fi
 
-echo "ERROR: Unexpected number of arguments!"
+echo "ERROR: Unexpected arguments!"
 exit 1
