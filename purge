@@ -1,0 +1,39 @@
+#!/bin/bash
+#==============================================================================
+#
+#   DESCRIPTION:  remove tip notes configuration files and notes
+#
+#         USAGE:  ./purge
+# 
+#        AUTHOR:  S. Falcao
+#       CREATED:  11.07.2020 16:09 BRST
+#
+#==============================================================================
+
+__project_name__="tip notes"
+__script_name__="purge"
+
+config_folder=~/.config/tip
+
+# if parameters are passed shows help
+if [[ $# -gt 0 ]]; then
+    echo
+    echo "purge ${__project_name__}"
+    echo
+    echo "usage:"
+    echo
+    echo "  sudo ${__script_name__}"
+    echo
+    exit 1
+fi
+
+# remove configuration and notes
+read -p "ATTENTION!!! This will remove all your notes, are you sure? Type 'YES' to proceed: " answer
+if [[ "${answer}" == "YES" ]]; then
+    #rm -r "${config_folder}"
+    echo "Tip Notes and configuration files purged!"
+    exit 0
+fi
+
+echo "OPERATION ABORTED! Your tip notes and configuration files remains untouched!"
+exit 1

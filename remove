@@ -1,0 +1,36 @@
+#!/bin/bash
+#==============================================================================
+#
+#   DESCRIPTION:  remove tip notes
+#
+#         USAGE:  ./remove
+# 
+#        AUTHOR:  S. Falcao
+#       CREATED:  11.07.2020 16:09 BRST
+#
+#==============================================================================
+
+__project_name__="tip notes"
+__script_name__="remove"
+
+project_folder=/opt/tip-notes
+link_folder=/usr/local/bin
+
+
+# if parameters are passed shows help
+if [[ $# -gt 0 ]]; then
+    echo
+    echo "remove ${__project_name__}"
+    echo
+    echo "usage:"
+    echo
+    echo "  sudo ${__script_name__}"
+    echo
+    exit 1
+fi
+
+# remove files and folders destination
+rm -r "${project_folder}"
+
+# remove links
+rm "${link_folder}/tip"

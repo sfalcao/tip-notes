@@ -1,0 +1,8 @@
+PRE-RELEASE CHECKLIST
+
+[ ] - edit program version (HEADER at begining of code. DEV after number means development version)
+[ ] - edit development state
+[ ] - edit change.log
+[ ] - edit todo.txt
+[ ] - edit readme.txt
+[ ] - edit install-remove.rc

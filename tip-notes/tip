@@ -1,0 +1,154 @@
+#!/usr/bin/env bash
+#===============================================================================
+#
+#   DESCRIPTION: terminal notes manager
+# 
+#         USAGE: ./tip --help
+#                
+#        AUTHOR: S. Falcao
+#       CREATED: 11.07.2020 16:09
+
+#===============================================================================
+
+set -o errexit
+set -o nounset
+set -o pipefail
+#set -o xtrace
+
+
+#-------------------------------------------------------------------------------
+# CONFIGURATION SECTION
+#-------------------------------------------------------------------------------
+#
+__script_name__="tip"
+
+#__link_dir__="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+#__linked_script__=$(readlink "${__link_dir__}/${__script_name__}")
+#__project_dir__=$(dirname "${__linked_script__}")
+#cd ${__project_dir__}
+
+source ./project-header.sh
+
+
+# default condition for the case a config folder does not exist
+tip_config_folder=~/.config/tip-notes
+tip_config_file=${tip_config_folder}/tiprc
+tip_notes_folder=~/.config/tip-notes/notes
+
+# if exist a config file, source it
+if [[ -f "${tip_config_file}" ]]; then
+    source "${tip_config_file}"
+fi
+
+# if doesn't exist a config folder create one
+if ! [[ -d "${tip_config_folder}" ]]; then
+    mkdir ${tip_config_folder}
+fi
+
+# if doesn't exist a notes folder create one
+if ! [[ -d "${tip_notes_folder}" ]]; then
+    mkdir ${tip_notes_folder}
+fi
+
+
+#-------------------------------------------------------------------------------
+# FUNCTIONS
+#-------------------------------------------------------------------------------
+# use this section to store your functions
+#
+#
+
+#####
+# P #
+#####
+#
+
+function print_if_not_silenced(){
+    if [[ "$FLAG_SILENT" -eq "0" ]] ; then
+        echo "$1"
+        return "0"
+    else
+        return "1"
+    fi
+}
+
+
+function print_if_verbose(){
+    if [[ "$FLAG_VERBOSE" -eq "1" ]] ; then
+        echo "$1"
+        return 0
+    else
+        return 1
+    fi
+}
+
+
+
+#-------------------------------------------------------------------------------
+# PARSING
+#-------------------------------------------------------------------------------
+#
+POSITIONAL_ARGUMENTS=()
+
+
+VERBOSE_FLAG=0
+SILENT_FLAG=0
+
+
+while [[ ${#} -gt 0 ]]; do
+
+    arg="$1"
+
+    case ${arg} in
+        '-s' | '--silent')
+            SILENT_FLAG=1
+            shift # past argument
+            ;;
+
+        '-v' | '--verbose')
+            VERBOSE_FLAG=1
+            shift # past argument
+            ;;
+
+        *)
+            # unknown option
+            # save it in an array for later
+            POSITIONAL_ARGUMENTS+=("$1")
+            shift # past argument
+            ;;
+    esac
+done
+
+
+
+# positional parameters are restored AUTOMATICALLY in order to be treated by the
+# caller (DO NOT CHANGE BELLOW)
+set -- "${POSITIONAL_ARGUMENTS[@]}"
+
+
+
+
+#-------------------------------------------------------------------------------
+# MAIN SECTION
+#-------------------------------------------------------------------------------
+#
+
+# if no arguments list available notes
+if [[ "${#}" -eq 0 ]]; then
+    ls -p "${tip_notes_folder}" | grep -v / | more
+    exit 0
+fi
+
+if [[ "${#}" -eq 1 ]]; then
+    #cat "${cola_dir}/${1}.txt"
+    if [[ -f "${tip_notes_folder}/${1}" ]]; then
+        more "${tip_notes_folder}/${1}"
+        exit 0
+    fi
+
+    echo "no tips for ${1}"
+    exit 1
+fi
+
+echo "ERROR: Unexpected number of arguments!"
+exit 1

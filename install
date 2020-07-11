@@ -1,0 +1,45 @@
+#!/bin/bash
+#==============================================================================
+#
+#   DESCRIPTION:  install tip notes
+# 
+#         USAGE:  ./install
+# 
+#        AUTHOR:  S. Falcao
+#       CREATED:  11.07.2020 16:09
+#
+#==============================================================================
+
+
+__PROJECT_NAME__="tip notes"
+__SCRIPT_NAME__="install"
+
+project_base_folder=/opt
+project_destination_folder="${project_base_folder}/tip-notes"
+link_destination_folder=/usr/local/bin
+
+
+# if any command line parameter has been passed display help message
+if [[ $# -gt 0 ]]; then
+    echo "${__SCRIPT_NAME__}"
+    echo
+    echo "installs ${__PROJECT_NAME__}"
+    echo
+    echo "usage:"
+    echo
+    echo "  sudo ${__SCRIPT_NAME__}"
+    echo
+    exit 1
+fi
+
+if ! mkdir -p "${project_destination_folder}"; then
+    echo "ERROR: destination folder could not be created"
+    exit 1
+fi
+
+cp -r ./tip-notes "${project_base_folder}"
+cp remove "${project_destination_folder}"
+cp purge "${project_destination_folder}"
+
+# create links to executables
+ln "${project_destination_folder}/tip" "${link_destination_folder}/tip"
