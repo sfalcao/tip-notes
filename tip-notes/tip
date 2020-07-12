@@ -130,6 +130,10 @@ while [[ ${#} -gt 0 ]]; do
             else
                 ${tip_editor} "${note_file}"
             fi
+            # removes a zero leght file that eventually remains
+            if ! [[ -s ${note_file} ]]; then
+                rm ${note_file}
+            fi
             exit 0
             ;;
         '-d' | '--delete')
