@@ -35,6 +35,8 @@ tip_config_folder=~/.config/tip-notes
 tip_config_file=${tip_config_folder}/tiprc
 tip_notes_folder=~/.config/tip-notes/notes
 tip_editor=''
+tip_confirm_remove=true
+tip_confirm_remove_purge=true
 
 # if exist a config file, source it
 if [[ -f "${tip_config_file}" ]]; then
@@ -143,6 +145,13 @@ while [[ ${#} -gt 0 ]]; do
             exit 0
             ;;
         '--remove')
+            if [ "${tip_confirm_remove}" = true ]; then
+                read -p "Are you sure? (y/n): " answer
+                if ! [[ "${answer}" =~ [y|Y] ]]; then
+                    echo "Remove operation aborted by user!"
+                    exit 1
+                fi
+            fi
             if ! rm -r /opt/tip-notes; then
                 echo "ERROR: failed to remove tip-notes folder!"
                 exit 1
@@ -155,6 +164,15 @@ while [[ ${#} -gt 0 ]]; do
             ;;
         '--remove-purge')
             error_status=0
+            if [ "${tip_confirm_remove_purge}" = true ]; then
+                message="Thil will remove all your configuration an notes! "
+                message+="Type 'YES' to proceed: "
+                read -p "${message}" answer
+                if [[ "${answer}" != 'YES' ]]; then
+                    echo "Remove operation aborted by user!"
+                    exit 1
+                fi
+            fi
             if ! rm -r /opt/tip-notes; then
                 echo "ERROR: failed to remove tip-notes folder!"
                 error_status=1
