@@ -107,15 +107,57 @@ while [[ ${#} -gt 0 ]]; do
     arg="$1"
 
     case ${arg} in
+        '-h' | '--help')
+            shift # past argument
+            echo
+            echo "${__project_name__} ${__project_version__}"
+            echo
+            echo
+            echo "----------------"
+            echo " USAGE:"
+            echo "----------------"
+            echo
+            echo "${__script_name__}                                list all notes"
+            echo "${__script_name__} [<group>]                      list all notes within the group"
+            echo "${__script_name__} [[<group>]/]<note>             list specific note"
+            echo
+            echo "${__script_name__} --config-init                  create an external configuration file"
+            echo "${__script_name__} --config-reset                 reset external configuration file"
+            echo "${__script_name__} --config                       edit external configuration file"
+            echo
+            echo "${__script_name__} --edit [[<group>]/]<note>      add/edit note"
+            echo "${__script_name__} --delete [[<group>]/]<note>    delete note"
+            echo
+            echo "${__script_name__} --remove                       remove ${__project_name__} from system"
+            echo "${__script_name__} --remove-purge                 remove ${__project_name__} from system including"
+            echo "                                   configuration files and notes"
+            echo
+            echo "${__script_name__} --version                      shows ${__project_name__} version"
+            echo "${__script_name__} --authors                      shows ${__project_name__} authors list"
+            echo
+            echo
+            echo "----------------"
+            echo " SHORT FORMS:"
+            echo "----------------"
+            echo
+            echo "-d is same of --delete"
+            echo "-e is same of --edit"
+            echo "-h is same of --help"
+            echo
+            echo
+            echo "${__script_name__} --help                         shows ${__project_name__}'s help"
+            echo
+            exit 0
+            ;;
         '-s' | '--silent')
             SILENT_FLAG=1
             shift # past argument
             ;;
-
         '-v' | '--verbose')
             VERBOSE_FLAG=1
             shift # past argument
             ;;
+
         '-e' | '--edit')
             shift
             if [[ ${#} -ne 1 ]]; then
