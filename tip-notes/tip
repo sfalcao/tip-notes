@@ -144,6 +144,10 @@ while [[ ${#} -gt 0 ]]; do
             fi
             exit 0
             ;;
+        '--config-init')
+            ./config-init
+            exit 0
+            ;;
         '--remove')
             if [ "${tip_confirm_remove}" = true ]; then
                 read -p "Are you sure? (y/n): " answer

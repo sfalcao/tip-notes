@@ -3,7 +3,6 @@
     + create a switch to control if confirmation is required to --remove-purge ???
 
 + implement --config option (edit tiprc)
-+ implement --config-init option (skips if already exist)
 + implement --config-reset option (ask for confirmation)
 
 + implement --backup option

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+#===============================================================================
+#
+#   DESCRIPTION: creates a brand new tip-notes config file
+# 
+#         USAGE: ./config-init
+#                
+#        AUTHOR: S. Falcao
+#       CREATED: 11.07.2020 16:09
+
+#===============================================================================
+
+set -o errexit
+set -o nounset
+set -o pipefail
+#set -o xtrace
+
+
+#-------------------------------------------------------------------------------
+# CONFIGURATION SECTION
+#-------------------------------------------------------------------------------
+#
+__script_name__="config-init"
+
+tip_config_folder=~/.config/tip-notes
+tip_config_file="${tip_config_folder}/tiprc"
+
+# if exist a config file, skip creation
+if [[ -f "${tip_config_file}" ]]; then
+    echo "ERROR: config file already exist!"
+    exit 1
+fi
+
+# if doesn't exist a config folder create one
+if ! [[ -d "${tip_config_folder}" ]]; then
+    mkdir ${tip_config_folder}
+fi
+
+
+
+#-------------------------------------------------------------------------------'
+# MAIN SECTION'
+#-------------------------------------------------------------------------------'
+
+./print-config >> "${tip_config_file}"
