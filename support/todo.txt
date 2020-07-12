@@ -1,1 +1,2 @@
++ --remove-purge should detect changes on tip_notes_folder in tiprc???
 + implement --backup option
