@@ -147,6 +147,20 @@ while [[ ${#} -gt 0 ]]; do
             fi
             exit 0
             ;;
+        '--config')
+            if [[ -s "${tip_config_file}" ]]; then
+                if [[ -z "${tip_editor}" ]]; then
+                    xdg-open ${tip_config_file}
+                else
+                    ${tip_editor} "${tip_config_file}"
+                fi
+                exit 0
+            fi
+            echo "ERROR: config file not found! To create a config file type:"
+            echo "tip --config-init"
+            echo
+            exit 1
+            ;;
         '--config-init')
             ./config-init
             exit 0
