@@ -147,6 +147,10 @@ while [[ ${#} -gt 0 ]]; do
             fi
             exit 0
             ;;
+        '--authors')
+            cat ./authors
+            exit 0
+            ;;
         '--config')
             if [[ -s "${tip_config_file}" ]]; then
                 if [[ -z "${tip_editor}" ]]; then
