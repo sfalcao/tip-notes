@@ -34,13 +34,13 @@ echo '#'
 echo '# you are welcome to make changes in configurations'
 echo '# bellow if you now what you are doing'
 echo '#========================================================='
-echo ''
-echo ''
+echo
+echo
 echo '#----------------------------------------------------------'
 echo '# point to folder where notes are stored'
 echo '#----------------------------------------------------------'
 echo 'tip_notes_folder=~/.config/tip-notes/notes'
-echo ''
+echo
 echo '#----------------------------------------------------------'
 echo '# choose alternative tip editor'
 echo '# if no tip_editor is set then tip will use'
@@ -51,7 +51,7 @@ echo "# tip_editor='vim'"
 echo "# tip_editor='nano'"
 echo '#----------------------------------------------------------'
 echo "#tip_editor='vim'"
-echo ''
+echo
 echo '#----------------------------------------------------------'
 echo '# control if --remove will ask for confirmation or not'
 echo '# IS SAFER TO KEEP IT true'
@@ -60,7 +60,7 @@ echo '# tip_confirm_remove=true       asks for confirmation'
 echo '# tip_confirm_remove=false      removes without asking'
 echo '#----------------------------------------------------------'
 echo 'tip_confirm_remove=true'
-echo ''
+echo
 echo '#----------------------------------------------------------'
 echo '# control if --remove-purge will ask for confirmation'
 echo '# IS STRONGLY RECOMMENDED TO KEEP IT true'
@@ -71,3 +71,12 @@ echo '# tip_confirm_remove_purge=true     asks for confirmation'
 echo '# tip_confirm_remove_purge=false    removes without asking'
 echo '#----------------------------------------------------------'
 echo 'tip_confirm_remove_purge=true'
+echo
+echo '#----------------------------------------------------------'
+echo '# control if --config-reset will ask for confirmation'
+echo '# IS SAFER TO KEEP IT true'
+echo '#'
+echo '# tip_confirm_config_reset          asks for confirmation'
+echo '# tip_confirm_config_reset          resets without asking'
+echo '#----------------------------------------------------------'
+echo 'tip_confirm_config_reset=true'

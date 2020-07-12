@@ -30,13 +30,16 @@ cd ${__project_dir__}
 source ./project-header.sh
 
 
-# default condition for the case a config folder does not exist
 tip_config_folder=~/.config/tip-notes
 tip_config_file=${tip_config_folder}/tiprc
+
+# default conditions, do not change here
+# is much safer to change in config file
 tip_notes_folder=~/.config/tip-notes/notes
 tip_editor=''
 tip_confirm_remove=true
 tip_confirm_remove_purge=true
+tip_confirm_config_reset=true
 
 # if exist a config file, source it
 if [[ -f "${tip_config_file}" ]]; then
@@ -145,6 +148,18 @@ while [[ ${#} -gt 0 ]]; do
             exit 0
             ;;
         '--config-init')
+            ./config-init
+            exit 0
+            ;;
+        '--config-reset')
+            if [ "${tip_confirm_config_reset}" = true ]; then
+                read -p "Are you sure? (y/n): " answer
+                if ! [[ "${answer}" =~ [y|Y] ]]; then
+                    echo "reset operation aborted by user!"
+                    exit 1
+                fi
+            fi
+            rm "${tip_config_file}"
             ./config-init
             exit 0
             ;;
