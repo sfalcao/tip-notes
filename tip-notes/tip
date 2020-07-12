@@ -258,13 +258,15 @@ set -- "${POSITIONAL_ARGUMENTS[@]}"
 
 # if no arguments list available notes
 if [[ "${#}" -eq 0 ]]; then
-    ls -p "${tip_notes_folder}" | grep -v / | more
+    ./list-notes
     exit 0
 fi
 
 if [[ "${#}" -eq 1 ]]; then
-    #cat "${cola_dir}/${1}.txt"
-    if [[ -f "${tip_notes_folder}/${1}" ]]; then
+    if [[ -d "${tip_notes_folder}/${1}" ]]; then
+        ./list-notes "${1}"
+        exit 0
+    elif [[ -f "${tip_notes_folder}/${1}" ]]; then
         more "${tip_notes_folder}/${1}"
         exit 0
     fi

@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+#===============================================================================
+#
+#   DESCRIPTION: list tip notes
+# 
+#         USAGE: ./list-notes
+#                
+#        AUTHOR: S. Falcao
+#       CREATED: 11.07.2020 16:09
+
+#===============================================================================
+
+set -o errexit
+set -o nounset
+set -o pipefail
+#set -o xtrace
+
+
+#-------------------------------------------------------------------------------
+# CONFIGURATION SECTION
+#-------------------------------------------------------------------------------
+#
+__script_name__="tip"
+
+tip_notes_folder=~/.config/tip-notes/notes
+
+if [[ "${#}" -eq 0 ]]; then
+    folder_to_list="${tip_notes_folder}"
+elif [[ "${#}" -eq 1 ]]; then
+    folder_to_list="${tip_notes_folder}/${1}"
+    if ! [[ -d "${folder_to_list}" ]]; then
+        echo "ERROR: ${1} seems no to be a valid GROUP of notes"
+        exit 1
+    fi
+else
+    echo "ERROR: unexpected number os parameters"
+    exit 1
+fi
+
+find ${folder_to_list} -type f | sort | grep -oP "${folder_to_list}/\K.*"
