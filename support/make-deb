@@ -85,3 +85,6 @@ echo '#!/bin/bash' > "${postrm_file}"
 echo >> "${postrm_file}"
 echo "rm  ${__project_links_folder__}/tip" >> "${postrm_file}"
 chmod 755 "${postrm_file}"
+
+cd "${destination_folder}"
+dpkg-deb --build "${package_folder}"
