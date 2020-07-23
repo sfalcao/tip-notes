@@ -245,11 +245,11 @@ while [[ ${#} -gt 0 ]]; do
                     exit 1
                 fi
             fi
-            if ! rm -r /opt/tip-notes; then
+            if ! rm -r "${__project_binaries_folder__}"; then
                 echo "ERROR: failed to remove tip-notes folder!"
                 exit 1
             fi
-            if ! rm -r /usr/local/bin/tip; then
+            if ! rm -r "${__project_links_folder__}/tip"; then
                 echo "ERROR: failed to remove tip-notes link!"
                 exit 1
             fi
@@ -266,11 +266,11 @@ while [[ ${#} -gt 0 ]]; do
                     exit 1
                 fi
             fi
-            if ! rm -r /opt/tip-notes; then
+            if ! rm -r "${__project_binaries_folder__}"; then
                 echo "ERROR: failed to remove tip-notes folder!"
                 error_status=1
             fi
-            if ! rm -r /usr/local/bin/tip; then
+            if ! rm -r ${__project_links_folder__}/tip; then
                 echo "ERROR: failed to remove tip-notes link!"
                 error_status=1
             fi
