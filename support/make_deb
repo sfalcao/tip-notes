@@ -1,0 +1,87 @@
+#!/bin/bash
+#==============================================================================
+#
+#   DESCRIPTION:  create a project deb package
+# 
+#         USAGE:  ./make_deb
+# 
+#        AUTHOR:  S. Falcao
+#       CREATED:  23.07.2020 18:25 BRST
+# 
+#==============================================================================
+
+set -o errexit
+#set -o nounset
+set -o pipefail
+#set -o xtrace
+
+
+
+#---------
+# HEADER
+#---------
+__script_name__="make_deb"
+
+package_architecture='all'
+
+
+
+
+#---------------
+# MAIN ROUTINE
+#---------------
+
+destination_folder="${1}"
+
+source ../tip-notes/project-header.sh
+
+
+if [[ "${#}" -eq 0 ]]; then
+    echo "ERROR: destination folder missing!"
+    echo
+    echo 'usage:'
+    echo "${__script_name__} <destination folder>"
+    echo
+    exit 1
+fi
+
+if ! [[ -d "${destination_folder}" ]]; then
+    echo "ERROR: destination folder does not exist!"
+    exit 1
+fi
+
+
+
+package_name=''
+package_name="${__project_name__}_${__project_version__}_${package_architecture}"
+package_folder="${destination_folder}/${package_name}"
+
+if [[ -d "${package_folder}" ]]; then
+    echo "ERROR: package folder already exist! Creation aborted!"
+    exit 1
+fi
+
+
+packaged_project_binaries_folder="${package_folder}${__project_binaries_folder__}"
+
+
+#echo "${package_name}"
+#echo "${packaged_project_binaries}"
+
+mkdir -p "${package_folder}"
+cp -r ./DEBIAN "${package_folder}"
+
+mkdir -p "${packaged_project_binaries_folder}"
+cp ../tip-notes/* "${packaged_project_binaries_folder}"
+
+postinst_file="${package_folder}/DEBIAN/postinst"
+echo '#!/bin/bash' > "${postinst_file}"
+echo >> "${postinst_file}"
+echo "ln -s ${__project_binaries_folder__}/tip ${__project_links_folder__}" >> "${postinst_file}"
+chmod 755 "${postinst_file}"
+
+postrm_file="${package_folder}/DEBIAN/postrm"
+echo '#!/bin/bash' > "${postrm_file}"
+echo >> "${postrm_file}"
+echo "rm  ${__project_links_folder__}/tip" >> "${postrm_file}"
+chmod 755 "${postrm_file}"

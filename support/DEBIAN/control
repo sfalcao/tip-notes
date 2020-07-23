@@ -1,0 +1,8 @@
+Package: tip-notes
+Version: 0.1.0
+Architecture: all
+Essential: no
+Priority: optional
+Maintainer: S. Falcao
+Installed-Size: 16000
+Description: A light weight terminal based note taking app
