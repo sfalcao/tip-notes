@@ -10,11 +10,13 @@
 #
 #==============================================================================
 
-__project_name__="tip notes"
 __script_name__="remove"
 
-project_folder=/opt/tip-notes
-link_folder=/usr/local/bin
+# get:
+# __project_name__, __project_binaries_folder__, __project_links_folder__
+#
+# from project-header file
+source ./tip-notes/project-header.sh
 
 
 # if parameters are passed shows help
@@ -30,7 +32,7 @@ if [[ $# -gt 0 ]]; then
 fi
 
 # remove files and folders destination
-rm -r "${project_folder}"
+rm -r "${__project_binaries_folder__}"
 
 # remove links
-rm "${link_folder}/tip"
+rm "${__project_links_folder__}/tip"
