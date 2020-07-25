@@ -29,32 +29,23 @@ cd ${__project_dir__}
 
 source ./project-header.sh
 
-
-tip_config_folder=~/.config/tip-notes
-tip_config_file=${tip_config_folder}/tiprc
-
-# default conditions, do not change here
-# is much safer to change in config file
-tip_notes_folder=~/.config/tip-notes/notes
-tip_editor=''
-tip_confirm_remove=true
-tip_confirm_remove_purge=true
-tip_confirm_config_reset=true
-tip_confirm_delete_note=true
-
-# if exist a config file, source it
+# if exist a config file, source it, otherwise prints an error
+# message, unless $1 is --config-init
 if [[ -f "${tip_config_file}" ]]; then
     source "${tip_config_file}"
-fi
-
-# if doesn't exist a config folder create one
-if ! [[ -d "${tip_config_folder}" ]]; then
-    mkdir ${tip_config_folder}
-fi
-
-# if doesn't exist a notes folder create one
-if ! [[ -d "${tip_notes_folder}" ]]; then
-    mkdir ${tip_notes_folder}
+else
+    if [[ "${#}" -eq 0 ]] || [[ "${1}" != '--config-init' ]]; then
+        echo
+        echo "ERROR: --> configuration file does not exist!"
+        echo
+        echo "To fix it type:"
+        echo "tip --config-init"
+        echo
+        echo "then, if  required:"
+        echo "tip --config"
+        echo
+        exit 1
+    fi
 fi
 
 
@@ -288,10 +279,6 @@ while [[ ${#} -gt 0 ]]; do
                     echo "ERROR: failed to remove tip-notes link!"
                     error_status=1
                 fi
-                if ! rm -r ${tip_notes_folder}; then
-                    echo "ERROR: failed to purge notes folder!"
-                    error_status=1
-                fi
                 if ! rm -r ${tip_config_folder}; then
                     echo "ERROR: failed to purge config folder!"
                     error_status=1
@@ -336,6 +323,11 @@ set -- "${POSITIONAL_ARGUMENTS[@]}"
 # MAIN SECTION
 #-------------------------------------------------------------------------------
 #
+
+# if no notes folfer creates one
+if ! [[ -d "${tip_notes_folder}" ]]; then
+    mkdir "${tip_notes_folder}"
+fi
 
 # if no arguments list available notes
 if [[ "${#}" -eq 0 ]]; then

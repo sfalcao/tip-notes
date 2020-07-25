@@ -39,7 +39,7 @@ echo
 echo '#----------------------------------------------------------'
 echo '# point to folder where notes are stored'
 echo '#----------------------------------------------------------'
-echo 'tip_notes_folder=~/.config/tip-notes/notes'
+echo 'tip_notes_folder=~/.tip-notes'
 echo
 echo '#----------------------------------------------------------'
 echo '# choose alternative tip editor'

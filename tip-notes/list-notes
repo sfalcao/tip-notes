@@ -22,7 +22,21 @@ set -o pipefail
 #
 __script_name__="tip"
 
-tip_notes_folder=~/.config/tip-notes/notes
+source ./project-header.sh
+
+if [[ -f "${tip_config_file}" ]]; then
+    source "${tip_config_file}"
+else
+    echo "ERROR: --> configuration file does not exist!"
+    echo
+    echo "To fix it type:"
+    echo "tip --config-init"
+    echo
+    echo "then, if  required:"
+    echo "tip --config"
+    echo
+    exit 1
+fi
 
 if [[ "${#}" -eq 0 ]]; then
     folder_to_list="${tip_notes_folder}"

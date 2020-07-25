@@ -159,7 +159,7 @@ this will restore configuration file to it's default
 #### notes are by default stored at following folder location:
 
 ```bash
-$HOME/.config/tip-notes/notes
+~/.tip-notes
 ```
 
 #### To change notes location, type:
@@ -171,7 +171,7 @@ tip --config
 and then change this line accordingly:
 
 ```bash
-tip_notes_folder=~/.config/tip-notes/notes
+tip_notes_folder=~/.tip-notes
 ```
 
 e.g.
@@ -180,7 +180,30 @@ e.g.
 tip_notes_folder=~/my_notes
 ```
 
-**ATTENTION!** Do not leave empty spaces around '=' sign when editing this line and change only the part AFTER '=' sign!
+#### ATTENTION!
+Do not leave empty spaces around '=' sign when editing this line and change
+only the part AFTER '=' sign!
+
+#### Visible x hidden notes folder
+
+If folder name is preceded by a dot (".") your notes folder will be hidden.
+**tip-notes** is not affected by visibility of notes folder, **tip-notes**
+will always access your notes, this only affects whether your notes will be
+seen by other apps or listed by default on file browsers like Nemo, Nautilus,
+etc
+
+##### visible folder example:
+
+```bash
+tip_notes_folder=~/this_is_a_visible_folder
+```
+
+##### invisible folder example:
+
+```bash
+tip_notes_folder=~/.this_is_a_hidden_folder
+```
+
 
 ## SEE ALSO
 
