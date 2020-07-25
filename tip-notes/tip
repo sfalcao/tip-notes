@@ -238,49 +238,74 @@ while [[ ${#} -gt 0 ]]; do
             exit 0
             ;;
         '--remove')
-            if [ "${tip_confirm_remove}" = true ]; then
-                read -p "Are you sure? (y/n): " answer
-                if ! [[ "${answer}" =~ [y|Y] ]]; then
-                    echo "Remove operation aborted by user!"
-                    exit 1
+            error_status=0
+            if ! apt list --installed 2> /dev/null | grep 'tip-notes'; then
+                if [ "${tip_confirm_remove}" = true ]; then
+                    read -p "Are you sure? (y/n): " answer
+                    if ! [[ "${answer}" =~ [y|Y] ]]; then
+                        echo "Remove operation aborted by user!"
+                        exit 1
+                    fi
                 fi
-            fi
-            if ! rm -r "${__project_binaries_folder__}"; then
-                echo "ERROR: failed to remove tip-notes folder!"
+                if ! rm -r "${__project_binaries_folder__}"; then
+                    echo "ERROR: failed to remove tip-notes folder!"
+                    error_status=1
+                fi
+                if ! rm -r "${__project_links_folder__}/tip"; then
+                    echo "ERROR: failed to remove tip-notes link!"
+                    error_status=1
+                fi
+            else
+                echo
+                echo "ERROR: Operation aborted!"
+                echo
+                echo "${__project_name__} has been installed using apt"
+                echo "system's package manager! To remove it type:"
+                echo
+                echo "sudo apt remove ${__project_name__}"
+                echo
                 exit 1
             fi
-            if ! rm -r "${__project_links_folder__}/tip"; then
-                echo "ERROR: failed to remove tip-notes link!"
-                exit 1
-            fi
-            exit 0
+            exit ${error_status}
             ;;
         '--remove-purge')
             error_status=0
-            if [ "${tip_confirm_remove_purge}" = true ]; then
-                message="Thil will remove all your configuration an notes! "
-                message+="Type 'YES' to proceed: "
-                read -p "${message}" answer
-                if [[ "${answer}" != 'YES' ]]; then
-                    echo "Remove operation aborted by user!"
-                    exit 1
+            if ! apt list --installed 2> /dev/null | grep 'tip-notes'; then
+                if [ "${tip_confirm_remove_purge}" = true ]; then
+                    message="Thil will remove all your configuration an notes! "
+                    message+="Type 'YES' to proceed: "
+                    read -p "${message}" answer
+                    if [[ "${answer}" != 'YES' ]]; then
+                        echo "Remove operation aborted by user!"
+                        exit 1
+                    fi
                 fi
-            fi
-            if ! rm -r "${__project_binaries_folder__}"; then
-                echo "ERROR: failed to remove tip-notes folder!"
-                error_status=1
-            fi
-            if ! rm -r ${__project_links_folder__}/tip; then
-                echo "ERROR: failed to remove tip-notes link!"
-                error_status=1
-            fi
-            if ! rm -r ${tip_notes_folder}; then
-                echo "ERROR: failed to purge notes folder!"
-                error_status=1
-            fi
-            if ! rm -r ${tip_config_folder}; then
-                echo "ERROR: failed to purge config folder!"
-                error_status=1
+                if ! rm -r "${__project_binaries_folder__}"; then
+                    echo "ERROR: failed to remove tip-notes folder!"
+                    error_status=1
+                fi
+                if ! rm -r ${__project_links_folder__}/tip; then
+                    echo "ERROR: failed to remove tip-notes link!"
+                    error_status=1
+                fi
+                if ! rm -r ${tip_notes_folder}; then
+                    echo "ERROR: failed to purge notes folder!"
+                    error_status=1
+                fi
+                if ! rm -r ${tip_config_folder}; then
+                    echo "ERROR: failed to purge config folder!"
+                    error_status=1
+                fi
+            else
+                echo
+                echo "ERROR: Operation aborted!"
+                echo
+                echo "${__project_name__} has been installed using apt"
+                echo "system's package manager! To remove it type:"
+                echo
+                echo "sudo apt purge ${__project_name__}"
+                echo
+                exit 1
             fi
             exit ${error_status}
             ;;
