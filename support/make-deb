@@ -10,6 +10,25 @@
 # 
 #==============================================================================
 
+# Copyright (C) 2020 tip-notes authors.
+#
+# This file is part of tip-notes.
+#
+#     tip-notes is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+#
+#     tip-notes is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with Foobar.  If not, see <https://www.gnu.org/licenses/>
+
+
+
 set -o errexit
 #set -o nounset
 set -o pipefail
@@ -73,6 +92,8 @@ cp -r ./DEBIAN "${package_folder}"
 
 mkdir -p "${packaged_project_binaries_folder}"
 cp ../tip-notes/* "${packaged_project_binaries_folder}"
+
+find "${package_folder}" -type d -exec chmod 755 {} \;
 
 cd "${destination_folder}"
 dpkg-deb --build "${package_folder}"
