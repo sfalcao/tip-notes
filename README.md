@@ -204,6 +204,10 @@ tip_notes_folder=~/this_is_a_visible_folder
 tip_notes_folder=~/.this_is_a_hidden_folder
 ```
 
+## LICENSE
+
+**tip-notes** is licensed under Public General License GNU v3.0 or later.
+Please see LICENSE.txt for details
 
 ## SEE ALSO
 
