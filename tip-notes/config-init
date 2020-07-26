@@ -40,4 +40,4 @@ fi
 # MAIN SECTION'
 #-------------------------------------------------------------------------------'
 
-./print-config >> "${tip_config_file}"
+cp ./tiprc-default "${tip_config_file}"

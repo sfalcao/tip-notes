@@ -1,0 +1,61 @@
+#=========================================================
+# tip notes configuration file
+#
+# you are welcome to make changes in configurations
+# bellow if you now what you are doing
+#=========================================================
+
+
+#----------------------------------------------------------
+# point to folder where notes are stored'
+#----------------------------------------------------------
+tip_notes_folder=~/.tip-notes
+
+#----------------------------------------------------------
+# choose alternative tip editor
+# if no tip_editor is set then tip will use
+# system's defaults to open the note
+#
+# eg:
+# tip_editor='vim'
+# tip_editor='nano'
+#----------------------------------------------------------
+#tip_editor='vim'
+
+#----------------------------------------------------------
+# control if --remove will ask for confirmation or not
+# IS SAFER TO KEEP IT true
+#
+# tip_confirm_remove=true       asks for confirmation
+# tip_confirm_remove=false      removes without asking
+#----------------------------------------------------------
+tip_confirm_remove=true
+
+#----------------------------------------------------------
+# control if --remove-purge will ask for confirmation
+# IS STRONGLY RECOMMENDED TO KEEP IT true
+# Changing this option may lead to accidentally loosing all
+# your notes
+#
+# tip_confirm_remove_purge=true     asks for confirmation
+# tip_confirm_remove_purge=false    removes without asking
+#----------------------------------------------------------
+tip_confirm_remove_purge=true
+
+#----------------------------------------------------------
+# control if --config-reset will ask for confirmation
+# IS SAFER TO KEEP IT true
+#'
+# tip_confirm_config_reset          asks for confirmation
+# tip_confirm_config_reset          resets without asking
+#----------------------------------------------------------
+tip_confirm_config_reset=true
+
+#----------------------------------------------------------
+# control if --delete will ask for confirmation
+# IS SAFER TO KEEP IT true
+#'
+# tip_confirm_delete_note          asks for confirmation
+# tip_confirm_delete_note          resets without asking
+#----------------------------------------------------------
+tip_confirm_delete_note=true
