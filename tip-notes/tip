@@ -196,6 +196,7 @@ while [[ ${#} -gt 0 ]]; do
                 echo "no ${1} note to be removed!"
                 exit 1
             fi
+            find "${tip_notes_folder}" -type d -empty -delete
             exit 0
             ;;
         '--authors')
