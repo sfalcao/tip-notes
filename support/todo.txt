@@ -1,2 +1,3 @@
-+ option to delete groups (only empty? forced option?)
++ implement --delete-group (only empty? forced option?)
 + implement --backup option
++ implement --find
