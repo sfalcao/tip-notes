@@ -156,6 +156,10 @@ while [[ ${#} -gt 0 ]]; do
                 exit 1
             fi
             note_file="${tip_notes_folder}/${1}"
+
+            if [[ -n ${note_file} ]]; then
+                mkdir -p $(dirname ${note_file}) && touch ${note_file}
+            fi
             if [[ -z "${tip_editor}" ]]; then
                 if ! [[ -f "${note_file}" ]]; then
                     touch "${note_file}"
