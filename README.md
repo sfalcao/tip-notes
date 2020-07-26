@@ -156,7 +156,7 @@ this will restore configuration file to it's default
 
 ### notes folder
 
-#### notes are by default stored at following folder location:
+#### notes are, by default, stored at following folder location:
 
 ```bash
 ~/.tip-notes
