@@ -3,6 +3,17 @@ Version: 0.1.0
 Architecture: all
 Essential: no
 Priority: optional
-Maintainer: S. Falcao
+Maintainer: S. Falcao <falecomigo.falcao@gmail.com>
 Installed-Size: 16000
-Description: A light weight terminal based note taking app
+Description: tip-notes is Light weight terminal based note taking app.
+ .
+ With tip-notes you can track your notes in a fast and simple fashion.
+ Notes can be grouped in folders, view and edit are separated actions
+ to avoid unwanted modifications, an external configuration file allow
+ extra tweaks!
+ .
+ Written entirely in bash, it is initially focused on GNU/Linux, but
+ possibly will also work on other 'nix' like system with little or no
+ modifications. If you work on Free BSD, MAC, or UNIX system, and could
+ test it, please, report any problems and we will be happy to make
+ necessary adjustments.
