@@ -1,3 +1,2 @@
 + option to delete groups (only empty? forced option?)
-+ --remove-purge should detect changes on tip_notes_folder in tiprc???
 + implement --backup option
