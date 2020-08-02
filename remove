@@ -50,5 +50,8 @@ fi
 # remove files and folders destination
 rm -r "${__project_binaries_folder__}"
 
+# remove autocompletion file
+rm /etc/bash_completion.d/tip-autocomplete
+
 # remove links
 rm "${__project_links_folder__}/tip"

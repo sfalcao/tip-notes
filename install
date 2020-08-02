@@ -72,5 +72,12 @@ fi
 cp -r ./tip-notes/* "${__project_binaries_folder__}"
 cp remove "${__project_binaries_folder__}"
 
+if [[ -d /etc/bash_completion.d ]]; then
+    cp ./tip-notes/autocomplete.sh /etc/bash_completion.d/tip-autocomplete
+    sed -i \
+        "s|./project-header.sh|${__project_binaries_folder__}/project-header.sh|" \
+        /etc/bash_completion.d/tip-autocomplete
+fi
+
 # create links to executables
 ln -s "${__project_binaries_folder__}/tip" "${__project_links_folder__}"
