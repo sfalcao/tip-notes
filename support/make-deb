@@ -73,7 +73,7 @@ fi
 
 package_name=''
 package_name="${__project_name__}_${__project_version__}_${package_architecture}"
-package_folder="${destination_folder}/${package_name}"
+package_folder="${destination_folder}${package_name}"
 
 if [[ -d "${package_folder}" ]]; then
     echo "ERROR: package folder already exist! Creation aborted!"
@@ -94,6 +94,19 @@ mkdir -p "${packaged_project_binaries_folder}"
 cp ../tip-notes/* "${packaged_project_binaries_folder}"
 
 find "${package_folder}" -type d -exec chmod 755 {} \;
+
+
+
+# deal with autocomplete file
+autocompletion_folder="${package_folder}/etc/bash_completion.d"
+original_file=../tip-notes/autocomplete.sh
+destination_file="${autocompletion_folder}/tip-autocomplete"
+mkdir -p "${autocompletion_folder}"
+cat "${original_file}" | sed \
+    "s|./project-header.sh|${__project_binaries_folder__}/project-header.sh|" \
+    > "${destination_file}"
+chmod 644 "${destination_file}"
+
 
 cd "${destination_folder}"
 dpkg-deb --build "${package_folder}"
