@@ -1,0 +1,69 @@
+#!/bin/bash
+#==============================================================================
+#
+#   DESCRIPTION:  test if tip-notes is uninstalled
+# 
+#         USAGE:  ./test-uninstalled
+# 
+#        AUTHOR:  S. Falcao
+#       CREATED:  08.08.2020 18:25 BRST
+# 
+#==============================================================================
+
+# Copyright (C) 2020 tip-notes authors.
+#
+# This file is part of tip-notes.
+#
+#     tip-notes is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+#
+#     tip-notes is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with Foobar.  If not, see <https://www.gnu.org/licenses/>
+
+
+
+set -o errexit
+#set -o nounset
+set -o pipefail
+#set -o xtrace
+
+source ../tip-notes/project-header.sh
+
+
+#---------
+# HEADER
+#---------
+__script_name__="test-uninstalled"
+
+
+exit_status=0
+
+if [[ -d "${__project_binaries_folder__}" ]]; then
+    echo "UNINSTALL ERROR: ${__project_binaries_folder__} folder not removed!"
+    exit_status=1
+fi
+
+if [[ -d "${__project_doc_folder__}" ]]; then
+    echo "UNINSTALL ERROR: ${__project_doc_folder__} folder not removed!"
+    exit_status=1
+fi
+
+if [[ -f "${__project_autocompletion_file__}" ]]; then
+    echo "UNINSTALL ERROR: ${__project_autocompletion_file__} file not removed!"
+    exit_status=1
+fi
+
+if [[ -f "${__project_links_folder__}/tip" ]]; then
+    echo "UNINSTALL ERROR: ${__project_links_folder__}/tip link not removed!"
+    exit_status=1
+fi
+
+
+exit ${exit_status}
