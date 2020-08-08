@@ -98,7 +98,7 @@ echo >> "${postrm}"
 echo "rm -f ${__project_links_folder__}/tip" >>  "${postrm}"
 echo >> "${postrm}"
 echo 'if [[ "${1}" == "purge" ]]; then' >> "${postrm}"
-echo "    rm -rf ~/.${__project_name__}" >> "${postrm}"
+echo "    rm -rf ~/.config/${__project_name__}" >> "${postrm}"
 echo "fi" >> "${postrm}"
 chmod 755 "${postrm}"
 
