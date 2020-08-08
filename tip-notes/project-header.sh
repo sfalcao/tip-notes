@@ -41,8 +41,8 @@ __project_doc_folder__="/usr/share/doc/${__project_name__}"
 __project_autocompletion_file__="/etc/bash_completion.d/tip-autocomplete"
 
 # if change the following line, change also deb-make purge section
-tip_config_folder=~/.config/tip-notes
-tip_config_file=${tip_config_folder}/tiprc
+tip_config_folder=~/.config/"${__project_name__}"
+tip_config_file="${tip_config_folder}/tiprc"
 
 # defaults (may be changed after sourcing configuration file)
 tip_editor=''
