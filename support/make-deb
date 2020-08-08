@@ -108,5 +108,14 @@ cat "${original_file}" | sed \
 chmod 644 "${destination_file}"
 
 
+# deal with copyright file
+package_doc_folder="${package_folder}/usr/share/doc/tip-notes/"
+copyright_file=./copyright
+destination_file="${package_doc_folder}/copyright"
+mkdir -p "${package_doc_folder}"
+cp "${copyright_file}" "${destination_file}"
+chmod 644 "${destination_file}"
+
+
 cd "${destination_folder}"
 dpkg-deb --build "${package_folder}"
