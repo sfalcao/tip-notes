@@ -81,27 +81,39 @@ if [[ -d "${package_folder}" ]]; then
 fi
 
 
-packaged_project_binaries_folder="${package_folder}${__project_binaries_folder__}"
-
-
-#echo "${package_name}"
-#echo "${packaged_project_binaries}"
-
+# deal with DEBIAN files
+# copy control file
 mkdir -p "${package_folder}"
 cp -r ./DEBIAN "${package_folder}"
+# deal with postinst
+postinst="${package_folder}/DEBIAN/postinst"
+echo "#!/bin/bash" > "${postinst}"
+echo >> "${postinst}"
+echo "ln -s ${__project_binaries_folder__}/tip ${__project_links_folder__}" >> "${postinst}"
+chmod 755 "${postinst}"
+# deal with postrm
+postrm="${package_folder}/DEBIAN/postrm"
+echo "#!/bin/bash" > "${postrm}"
+echo >> "${postrm}"
+echo "rm -f ${__project_links_folder__}/tip" >>  "${postrm}"
+echo >> "${postrm}"
+echo 'if [[ "${1}" == "purge" ]]; then' >> "${postrm}"
+echo "    rm -rf ~/.${__project_name__}" >> "${postrm}"
+echo "fi" >> "${postrm}"
+chmod 755 "${postrm}"
 
+
+# deal with 'executables'
+packaged_project_binaries_folder="${package_folder}${__project_binaries_folder__}"
 mkdir -p "${packaged_project_binaries_folder}"
 cp ../tip-notes/* "${packaged_project_binaries_folder}"
-
 find "${package_folder}" -type d -exec chmod 755 {} \;
 
 
-
 # deal with autocomplete file
-autocompletion_folder="${package_folder}/etc/bash_completion.d"
 original_file=../tip-notes/autocomplete.sh
-destination_file="${autocompletion_folder}/tip-autocomplete"
-mkdir -p "${autocompletion_folder}"
+destination_file="${package_folder}${__project_autocompletion_file__}"
+mkdir -p "${package_folder}/etc/bash_completion.d"
 cat "${original_file}" | sed \
     "s|./project-header.sh|${__project_binaries_folder__}/project-header.sh|" \
     > "${destination_file}"
@@ -109,10 +121,9 @@ chmod 644 "${destination_file}"
 
 
 # deal with copyright file
-package_doc_folder="${package_folder}/usr/share/doc/tip-notes/"
 copyright_file=./copyright
-destination_file="${package_doc_folder}/copyright"
-mkdir -p "${package_doc_folder}"
+destination_file="${package_folder}${__project_doc_folder__}/copyright"
+mkdir -p "${package_folder}${__project_doc_folder__}"
 cp "${copyright_file}" "${destination_file}"
 chmod 644 "${destination_file}"
 

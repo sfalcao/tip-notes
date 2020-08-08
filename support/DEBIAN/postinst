@@ -1,3 +1,0 @@
-#!/bin/bash
-
-ln -s /usr/local/bin/tip-notes/tip /usr/local/bin
