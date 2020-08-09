@@ -9,8 +9,11 @@ source ${__project_config_file__}
 
 MY_OPTIONS='
     -d -e -f -F -h \
-    --config --init --reset --delete --edit --help --version \
-    --authors
+    --config --init --reset \
+    --delete --edit \
+    --find --find-content \
+    --authors --version \
+    --help
 '
 
 NOTES_LIST=$(
