@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+#===============================================================================
+#
+#   DESCRIPTION: find notes by name
+# 
+#         USAGE: ./find-notes-by-name
+#                
+#        AUTHOR: S. Falcao
+#       CREATED: 09.08.2020 16:09
+
+#===============================================================================
+
+# Copyright (C) 2020 tip-notes authors.
+#
+# This file is part of tip-notes.
+#
+#     tip-notes is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+#
+#     tip-notes is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with Foobar.  If not, see <https://www.gnu.org/licenses/>
+
+
+
+set -o errexit
+set -o nounset
+set -o pipefail
+#set -o xtrace
+
+
+#-------------------------------------------------------------------------------
+# CONFIGURATION SECTION
+#-------------------------------------------------------------------------------
+#
+__script_name__="find-notes-by-name"
+
+source ./project-header.sh
+
+if [[ -f "${__project_config_file__}" ]]; then
+    source "${__project_config_file__}"
+else
+    echo "ERROR: --> configuration file does not exist!"
+    echo
+    echo "To fix it type:"
+    echo "tip --config-init"
+    echo
+    echo "then, if  required:"
+    echo "tip --config"
+    echo
+    exit 1
+fi
+
+folder_to_list=''
+if [[ "${#}" -eq 1 ]]; then
+    folder_to_list="${tip_notes_folder}"
+    text="${1}"
+elif [[ "${#}" -eq 2 ]]; then
+    folder_to_list="${tip_notes_folder}/${1}"
+    text="${2}"
+    if ! [[ -d "${folder_to_list}" ]]; then
+        echo "ERROR: ${1} seems no to be a valid GROUP of notes"
+        exit 1
+    fi
+else
+    echo "ERROR: unexpected number os parameters"
+    exit 1
+fi
+
+find \
+    ${folder_to_list} \
+    -type f \
+    | sort \
+    | grep -oP "${folder_to_list}/\K.*" \
+    | grep "${text}"
+

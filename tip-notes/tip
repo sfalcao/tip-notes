@@ -137,6 +137,7 @@ while [[ ${#} -gt 0 ]]; do
             echo
             echo "${__script_name__} --edit [[<group>]/]<note>      add/edit note"
             echo "${__script_name__} --delete [[<group>]/]<note>    delete note"
+            echo "${__script_name__} --find <text>                  find notes which name contains <text>"
             echo
             echo "${__script_name__} --remove                       remove ${__project_name__} from system"
             echo "${__script_name__} --remove-purge                 remove ${__project_name__} from system including"
@@ -152,6 +153,7 @@ while [[ ${#} -gt 0 ]]; do
             echo
             echo "-d is same of --delete"
             echo "-e is same of --edit"
+            echo "-f is same of --find"
             echo "-h is same of --help"
             echo
             echo
@@ -217,6 +219,24 @@ while [[ ${#} -gt 0 ]]; do
             fi
             find "${tip_notes_folder}" -type d -empty -delete
             exit 0
+            ;;
+        '-f' | '--find')
+            shift
+            if [[ "${#}" -eq 1 ]]; then
+                ./find-notes-by-name "${1}"
+                exit 0
+            elif [[ "${#}" -eq 2 ]]; then
+                ./find-notes-by-name "${1}" "${2}"
+                exit 0
+            fi
+            echo "ERROR: --find received unexpected number of arguments!"
+            echo
+            echo "usage:"
+            echo "${__script_name__} --find [<group>] <text>"
+            echo
+            echo "[<group>] is optional"
+            echo
+            exit 1
             ;;
         '--authors')
             cat ./authors
