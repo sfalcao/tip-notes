@@ -81,3 +81,11 @@ fi
 
 # create links to executables
 ln -s "${__project_binaries_folder__}/tip" "${__project_links_folder__}"
+
+# create docs
+mkdir -p "${__project_doc_folder__}"
+cp ./support/copyright "${__project_doc_folder__}"
+
+# copy autocomplete file
+cp ./tip-notes/autocomplete.sh "${__project_autocompletion_file__}"
+

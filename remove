@@ -20,7 +20,7 @@ source ./tip-notes/project-header.sh
 
 
 # if parameters are passed shows help
-if [[ $# -gt 0 ]]; then
+if [[ $# -eq 0 ]]; then
     echo
     echo "remove ${__project_name__}"
     echo
@@ -51,7 +51,14 @@ fi
 rm -r "${__project_binaries_folder__}"
 
 # remove autocompletion file
-rm /etc/bash_completion.d/tip-autocomplete
+rm "${__project_autocompletion_file__}"
 
 # remove links
 rm "${__project_links_folder__}/tip"
+
+# remove docs
+rm -r "${__project_doc_folder__}"
+
+if [[ "${1}" == "--purge" ]]; then
+    rm -r "${tip_config_folder}"
+fi
