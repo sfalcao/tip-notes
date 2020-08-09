@@ -39,7 +39,7 @@ set -o pipefail
 # CONFIGURATION SECTION
 #-------------------------------------------------------------------------------
 #
-__script_name__="tip"
+__script_name__="list-notes"
 
 source ./project-header.sh
 
