@@ -3,6 +3,17 @@
 #
 # you are welcome to make changes in configurations
 # bellow if you now what you are doing
+#
+# If messed around and feel unsafe, just open terminal
+# and type:
+#
+# tip --reset
+#
+# This will not affect your notes, only this
+# configuration file will be restored.
+# NOTE THAT IF YOU CHANGED tip_notes_folder YOU MAY
+# HAVE DO MOVE YOUR NOTES TO DEFAULT LOCATION OR EDIT
+# THIS LINE AGAIN!
 #=========================================================
 
 
@@ -26,30 +37,30 @@ tip_notes_folder=~/.tip-notes
 # control if --remove will ask for confirmation or not
 # IS SAFER TO KEEP IT true
 #
-# tip_confirm_remove=true       asks for confirmation
-# tip_confirm_remove=false      removes without asking
+# tip_confirm_remove=true           asks for confirmation
+# tip_confirm_remove=false          removes without asking
 #----------------------------------------------------------
 tip_confirm_remove=true
 
 #----------------------------------------------------------
-# control if --remove-purge will ask for confirmation
+# control if --purge will ask for confirmation
 # IS STRONGLY RECOMMENDED TO KEEP IT true
 # Changing this option may lead to accidentally loosing all
 # your notes
 #
-# tip_confirm_remove_purge=true     asks for confirmation
-# tip_confirm_remove_purge=false    removes without asking
+# tip_confirm_purge=true            asks for confirmation
+# tip_confirm_purge=false           removes without asking
 #----------------------------------------------------------
-tip_confirm_remove_purge=true
+tip_confirm_purge=true
 
 #----------------------------------------------------------
-# control if --config-reset will ask for confirmation
+# control if --reset will ask for confirmation
 # IS SAFER TO KEEP IT true
 #'
-# tip_confirm_config_reset          asks for confirmation
-# tip_confirm_config_reset          resets without asking
+# tip_confirm_reset                 asks for confirmation
+# tip_confirm_reset                 resets without asking
 #----------------------------------------------------------
-tip_confirm_config_reset=true
+tip_confirm_reset=true
 
 #----------------------------------------------------------
 # control if --delete will ask for confirmation

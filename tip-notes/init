@@ -3,7 +3,7 @@
 #
 #   DESCRIPTION: creates a brand new tip-notes config file
 # 
-#         USAGE: ./config-init
+#         USAGE: ./init
 #                
 #        AUTHOR: S. Falcao
 #       CREATED: 11.07.2020 16:09
@@ -39,7 +39,7 @@ set -o pipefail
 # CONFIGURATION SECTION
 #-------------------------------------------------------------------------------
 #
-__script_name__="config-init"
+__script_name__="init"
 
 source ./project-header.sh
 

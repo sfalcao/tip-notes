@@ -4,5 +4,7 @@ PRE-RELEASE CHECKLIST
 [ ] - edit development state
 [ ] - edit change.log
 [ ] - edit todo.txt
-[ ] - edit readme.txt
-[ ] - edit install-remove.rc
+[ ] - edit README.md
+[ ] - edit install
+[ ] - edit remove
+[ ] - edit DEBIAN/control

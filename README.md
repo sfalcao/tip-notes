@@ -39,7 +39,7 @@ sudo ./install
 
 The method used to install **tip-notes** affects the way you remove it
 
-#### prefered mode (if in doubt, try this first):
+#### preferred mode (if in doubt, try this first):
 
 ```bash
 sudo apt remove tip-notes
@@ -70,7 +70,7 @@ sudo apt purge tip-notes
 if preferred mode above fails, then type:
 
 ```bash
-sudo tip --remove-purge
+sudo tip --purge
 ```
 
 ## QUICK START
@@ -81,10 +81,10 @@ See **INSTALL** section above
 ### create a configuration file
 
 ```bash
-tip --config--init
+tip --init
 ```
 
-### edit configuration file if you want (e.g. to change tip notes default editor)
+### edit configuration file if you want (skip this step is OK)
 
 ```bash
 tip --config
@@ -126,6 +126,23 @@ tip
 tip <group_name>
 ```
 
+### list all notes which name contain a text
+
+Information within [] is optional an may be omitted if you want to search in all groups
+
+```bash
+tip -f [<group_name>] <text>
+
+```
+
+### list all notes which contain a text incorporated to the note itself
+
+Information within [] is optional an may be omitted if you want to search in all groups
+
+```bash
+tip -F [<group_name>] <text>
+```
+
 
 ## CONFIGURATION FILES AND NOTES
 
@@ -149,7 +166,7 @@ tip --config
 #### if you messed around and fell unsafe about you have done, type:
 
 ```bash
-tip --config-reset
+tip --reset
 ```
 
 this will restore configuration file to it's default

@@ -8,8 +8,8 @@ source ./project-header.sh
 source ${__project_config_file__}
 
 MY_OPTIONS='
-    -d -e -h \
-    --config --config-init --config-reset --delete --edit --help --version \
+    -d -e -f -F -h \
+    --config --init --reset --delete --edit --help --version \
     --authors
 '
 

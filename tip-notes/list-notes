@@ -49,10 +49,7 @@ else
     echo "ERROR: --> configuration file does not exist!"
     echo
     echo "To fix it type:"
-    echo "tip --config-init"
-    echo
-    echo "then, if  required:"
-    echo "tip --config"
+    echo "tip --init"
     echo
     exit 1
 fi
@@ -62,7 +59,7 @@ if [[ "${#}" -eq 0 ]]; then
 elif [[ "${#}" -eq 1 ]]; then
     folder_to_list="${tip_notes_folder}/${1}"
     if ! [[ -d "${folder_to_list}" ]]; then
-        echo "ERROR: ${1} seems no to be a valid GROUP of notes"
+        echo "ERROR: [${1}] seems no to be a valid GROUP of notes"
         exit 1
     fi
 else
