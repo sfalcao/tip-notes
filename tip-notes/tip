@@ -50,8 +50,8 @@ source ./project-header.sh
 
 # if exist a config file, source it, otherwise prints an error
 # message, unless $1 is --config-init
-if [[ -f "${tip_config_file}" ]]; then
-    source "${tip_config_file}"
+if [[ -f "${__project_config_file__}" ]]; then
+    source "${__project_config_file__}"
 else
     if [[ "${#}" -eq 0 ]] || [[ "${1}" != '--config-init' ]]; then
         echo
@@ -223,11 +223,11 @@ while [[ ${#} -gt 0 ]]; do
             exit 0
             ;;
         '--config')
-            if [[ -s "${tip_config_file}" ]]; then
+            if [[ -s "${__project_config_file__}" ]]; then
                 if [[ -z "${tip_editor}" ]]; then
-                    xdg-open ${tip_config_file}
+                    xdg-open ${__project_config_file__}
                 else
-                    ${tip_editor} "${tip_config_file}"
+                    ${tip_editor} "${__project_config_file__}"
                 fi
                 exit 0
             fi
@@ -248,7 +248,7 @@ while [[ ${#} -gt 0 ]]; do
                     exit 1
                 fi
             fi
-            rm "${tip_config_file}"
+            rm "${__project_config_file__}"
             ./config-init
             exit 0
             ;;

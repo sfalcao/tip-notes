@@ -84,13 +84,13 @@ if [[ ! -f "${__project_links_folder__}/tip" ]]; then
     exit_status=1
 fi
 
-if [[ -d "${tip_config_folder}" ]]; then
-    if [[ ! -f "${tip_config_file}" ]]; then
-        echo ".. ${tip_config_file} --> file is missing!"
+if [[ -d "${__project_config_folder__}" ]]; then
+    if [[ ! -f "${__project_config_file__}" ]]; then
+        echo ".. ${__project_config_file__} --> file is missing!"
         exit_status=1
     fi
 else
-    echo "[${tip_config_folder}] --> folder is missing!"
+    echo "[${__project_config_folder__}] --> folder is missing!"
     exit_status=1
 fi
 

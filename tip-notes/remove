@@ -59,7 +59,7 @@ rm -r "${__project_doc_folder__}"
 
 # puge files if required
 if [[ "${1}" == "--purge" ]]; then
-    rm -r "${tip_config_folder}"
+    rm -r "${__project_config_folder__}"
 fi
 
 exit 0

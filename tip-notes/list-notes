@@ -43,8 +43,8 @@ __script_name__="tip"
 
 source ./project-header.sh
 
-if [[ -f "${tip_config_file}" ]]; then
-    source "${tip_config_file}"
+if [[ -f "${__project_config_file__}" ]]; then
+    source "${__project_config_file__}"
 else
     echo "ERROR: --> configuration file does not exist!"
     echo

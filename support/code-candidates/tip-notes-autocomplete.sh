@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source ./project-header.sh
-source ${tip_config_file}
+source ${__project_config_file__}
 
 
 _tip_notes ()

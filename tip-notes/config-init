@@ -44,12 +44,12 @@ __script_name__="config-init"
 source ./project-header.sh
 
 # if doesn't exist a config folder create one
-if ! [[ -d "${tip_config_folder}" ]]; then
-    mkdir ${tip_config_folder}
+if ! [[ -d "${__project_config_folder__}" ]]; then
+    mkdir ${__project_config_folder__}
 fi
 
 # if exist a config file, skip creation
-if [[ -f "${tip_config_file}" ]]; then
+if [[ -f "${__project_config_file__}" ]]; then
     echo "ERROR: config file already exist!"
     exit 1
 fi
@@ -59,4 +59,4 @@ fi
 # MAIN SECTION'
 #-------------------------------------------------------------------------------'
 
-cp ./tiprc-default "${tip_config_file}"
+cp ./tiprc-default "${__project_config_file__}"

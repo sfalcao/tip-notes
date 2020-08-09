@@ -5,7 +5,7 @@
 #       files is present. Please see /support/code-candidates
 
 source ./project-header.sh
-source ${tip_config_file}
+source ${__project_config_file__}
 
 MY_OPTIONS='
     -d -e -h \

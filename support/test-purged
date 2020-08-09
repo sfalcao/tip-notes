@@ -49,8 +49,8 @@ if ! ./test-unistalled; then
     exit_status=1
 fi
 
-if [[ -d "${tip_config_folder}" ]]; then
-    echo "PURGE ERROR....: ${tip_config_folder} folder not removed!"
+if [[ -d "${__project_config_folder__}" ]]; then
+    echo "PURGE ERROR....: ${__project_config_folder__} folder not removed!"
     exit_status=1
 fi
 
