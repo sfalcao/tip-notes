@@ -70,7 +70,7 @@ if ! mkdir -p "${__project_binaries_folder__}"; then
 fi
 
 cp -r ./tip-notes/* "${__project_binaries_folder__}"
-cp remove "${__project_binaries_folder__}"
+#cp remove "${__project_binaries_folder__}"
 
 if [[ -d /etc/bash_completion.d ]]; then
     cp ./tip-notes/autocomplete.sh /etc/bash_completion.d/tip-autocomplete

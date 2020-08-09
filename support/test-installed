@@ -54,10 +54,6 @@ if [[ -d "${__project_binaries_folder__}" ]]; then
             exit_status=1
         fi
     done
-    if [[ ! -f "${__project_binaries_folder__}/remove" ]]; then
-        echo ".. ${__project_binaries_folder__}/remove} --> file is missing!"
-        exit_status=1
-    fi
 else
     echo "[${__project_binaries_folder__}] --> folder is missing!"
     exit_status=1
