@@ -4,7 +4,7 @@ Architecture: all
 Essential: no
 Priority: optional
 Maintainer: S. Falcao <falecomigo.falcao@gmail.com>
-Installed-Size: 24000
+Installed-Size: 27000
 Description: tip-notes is Light weight terminal based note taking app.
  .
  With tip-notes you can track your notes in a fast and simple fashion.
