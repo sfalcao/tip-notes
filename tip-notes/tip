@@ -123,37 +123,35 @@ while [[ ${#} -gt 0 ]]; do
             echo "${__project_name__} ${__project_version__}"
             echo
             echo
-            echo "----------------"
-            echo " USAGE:"
-            echo "----------------"
+            echo "USAGE:"
             echo
-            echo "${__script_name__}                                list all notes"
-            echo "${__script_name__} [<group>]                      list all notes within the group"
-            echo "${__script_name__} [[<group>]/]<note>             list specific note"
+            echo "${__script_name__}                                    list all notes"
+            echo "${__script_name__} [<group>]                          list all notes within the group"
+            echo "${__script_name__} [[<group>]/]<note>                 list specific note"
             echo
-            echo "${__script_name__} --config-init                  create an external configuration file"
-            echo "${__script_name__} --config-reset                 reset external configuration file"
-            echo "${__script_name__} --config                       edit external configuration file"
+            echo "${__script_name__} --config-init                      create an external configuration file"
+            echo "${__script_name__} --config-reset                     reset external configuration file"
+            echo "${__script_name__} --config                           edit external configuration file"
             echo
-            echo "${__script_name__} --edit [[<group>]/]<note>      add/edit note"
-            echo "${__script_name__} --delete [[<group>]/]<note>    delete note"
-            echo "${__script_name__} --find <text>                  find notes which name contains <text>"
+            echo "${__script_name__} --edit [[<group>]/]<note>          add/edit note"
+            echo "${__script_name__} --delete [[<group>]/]<note>        delete note"
+            echo "${__script_name__} --find [<group>] <text>            find notes which name contains <text>"
+            echo "${__script_name__} --find-content [<group>] <text>    find notes which contains <text>"
             echo
-            echo "${__script_name__} --remove                       remove ${__project_name__} from system"
-            echo "${__script_name__} --remove-purge                 remove ${__project_name__} from system including"
-            echo "                                   configuration files and notes"
+            echo "${__script_name__} --remove                           remove ${__project_name__} from system"
+            echo "${__script_name__} --remove-purge                     remove ${__project_name__} from system including"
+            echo "                                       configuration files and notes"
             echo
-            echo "${__script_name__} --version                      shows ${__project_name__} version"
-            echo "${__script_name__} --authors                      shows ${__project_name__} authors list"
+            echo "${__script_name__} --version                          shows ${__project_name__} version"
+            echo "${__script_name__} --authors                          shows ${__project_name__} authors list"
             echo
             echo
-            echo "----------------"
-            echo " SHORT FORMS:"
-            echo "----------------"
+            echo "SHORT FORMS:"
             echo
             echo "-d is same of --delete"
             echo "-e is same of --edit"
             echo "-f is same of --find"
+            echo "-F is same of --find-content"
             echo "-h is same of --help"
             echo
             echo
@@ -219,6 +217,24 @@ while [[ ${#} -gt 0 ]]; do
             fi
             find "${tip_notes_folder}" -type d -empty -delete
             exit 0
+            ;;
+        '-F' | '--find-content')
+            shift
+            if [[ "${#}" -eq 1 ]]; then
+                ./find-notes-by-content "${1}"
+                exit 0
+            elif [[ "${#}" -eq 2 ]]; then
+                ./find-notes-by-content "${1}" "${2}"
+                exit 0
+            fi
+            echo "ERROR: --find-content received unexpected number of arguments!"
+            echo
+            echo "usage:"
+            echo "${__script_name__} --find-content [<group>] <text>"
+            echo
+            echo "[<group>] is optional"
+            echo
+            exit 1
             ;;
         '-f' | '--find')
             shift
