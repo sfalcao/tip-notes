@@ -59,6 +59,7 @@ rm "${__project_links_folder__}/tip"
 # remove docs
 rm -r "${__project_doc_folder__}"
 
+# puge files if required
 if [[ "${1}" == "--purge" ]]; then
     rm -r "${tip_config_folder}"
 fi
