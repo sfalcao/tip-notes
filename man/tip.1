@@ -1,0 +1,146 @@
+.TH tip-notes "Aug 09 2020" "Version 0.1.0" "tip-notes Manual Pages"
+
+
+.SH NAME
+tip-notes - a terminal based note taking application
+
+
+.SH SYNOPSIS
+.B tip
+[\-h] [\-\-help] [\-\-version] [\-\-authors] [\-\-init] [\-\-reset] [\-\-config]
+[\-\-remove] [\-\-purge]
+
+.B tip [[<group>/]<note>]
+
+.B tip [\-e] [\-\-edit] [\-d] [\-\-delete] [<group>/]<note>
+
+.B tip [\-f] [\-\-find] [\-F] [\-\-find\-content] [<group>] <text>
+
+...
+
+
+.SH DESCRIPTION
+.PP
+tip-notes is a terminal note taking application. It is used to track plain
+text notes in an easy and fast way. Notes can be managed by tip-notes built
+in routines or trough any file browser and plain text editor as well.
+.PP
+Notes can be kept either in a hidden or visible folder. User can tweak
+tip-notes, trough editing it's configuration file, where among other
+possibilities, is possible to choose his preferred editor, enable or disable
+deletion confirmations, etc.
+.PP
+User can also take advantage from shell autocomplete feature to easily access
+his notes. Simple but useful routines allows user to find notes by name and
+also by note's content limiting or not the search by a group of notes
+.PP
+Notes can be grouped in a tree structure simply putting them in subfolders
+that can be freely rearranged by user at any moment, without any additional
+effort.
+
+.SH OPTIONS
+tip-notes accepts the following options:
+.TP 8
+.B  \-h, \-\-help
+Show command\-line options.
+.TP 8
+.B  \-\-version
+Output version information and exit.
+.TP 8
+.B \-\-authors
+Output authors information and exit.
+.TP 8
+.B \-d, \-\-delete [<group>/]<note>
+delete <note> which can be optionally preceded by it's group when needed
+.TP 8
+.B \-e, \-\-edit [<group>/]<note>
+edit <note> which can be optionally preceded by it's group when needed
+.TP 8
+.B \-\-init
+creates the configuration file
+.TP 8
+.B \-\-reset
+restore configuration file to it's default
+.TP 8
+.B \-\-remove
+uninstall tip-notes preserving configuration folder. If tip-notes has been
+installed using apt or apt-get, it will warn user to uninstall using
+apt/apt-get and abort.
+.TP 8
+.B \-\-purge
+uninstall tip-notes and remove configuration folder. If tip-notes has been
+installed using apt or apt-get, it will warn user to uninstall using
+apt/apt-get and abort.
+.TP 8
+.B \-f, \-\-find [<group>] <text>
+list all notes which name contains <text>. Group is optional and if passed
+limits search. 
+.TP 8
+.B \-F, \-\-find-content [<group>] <text>
+list all notes which content contains <text>. Group is optional and if passed
+limits search. 
+
+
+.SH FILES
+tip-notes files are stored in different locations
+
+
+\fB/$HOME/.config/tip-notes/tiprc\fP - configuration file
+
+\fB/$HOME/.tip-notes/tiprc\fP - default notes folder (can be modified by
+user)
+
+\fB/usr/lib/tip-notes\fP - binaries folder
+
+\fB/usr/local/bin/tip\fP - link to main script
+
+\fB/usr/share/doc/tip-notes/copyright\fP - copyright machine readable file
+
+\fB/usr/share/man/man1/tip-notes\fP - manual file
+
+\fB/etc/bash_completion.d/tip-autocomplete\fP - autocompletion file
+
+
+.SH AUTHORS
+tip-notes is a project developed initially by S. Falcão, contributors
+are welcome and their names can be found with:
+
+\fBtip --authors\fP
+
+
+.SH EXAMPLES
+\fBtip\fP - list all notes
+
+\fBtip\ <group>\fP - list all notes within the <group>
+
+\fBtip\ <my-note>\fP - show <my-note> content
+
+\fBtip\ <group>/<my-note>\fP - show <group>/<my-note> content (as many nested
+groups as user desire are allowed)
+
+\fBtip\ \-e\ <my-note>\fP - edit/add <my-note> using text editor
+
+\fBtip\ \-e\ <group>/<my-note>\fP - edit/add <group>/<my-note> using text editor
+
+\fBtip\ \-d\ <my-note>\fP - delete <my-note>
+
+\fBtip\ \-d\ <group>/<my-note>\fP - delete <group>/<my-note> (if <my-note>
+deletion makes <group> empty, then <group> is also removed)
+
+\fBtip\ \-f\ <text>\fP - find all notes which name contains <text> 
+
+\fBtip\ \-f\ <group> <text>\fP - find notes which name contains <text> limiting
+search to <group>
+
+\fBtip\ \-F\ <text>\fP - find all notes which contains <text> inside the note
+
+\fBtip\ \-F\ <group> <text>\fP - find notes which contains <text> inside the
+note limiting search to <group>
+
+\fBtip\ \-\-config\fP - edit tiprc config file using text editor
+
+\fBtip\ \-\-reset\fP - reset tiprc config file to it's defaults
+
+
+.SH "SEE ALSO"
+.BR tip\ \-\-help

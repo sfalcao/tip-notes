@@ -127,6 +127,13 @@ mkdir -p "${package_folder}${__project_doc_folder__}"
 cp "${copyright_file}" "${destination_file}"
 chmod 644 "${destination_file}"
 
+# deal with manpage
+man_file=../man/tip.1
+destination_file="${package_folder}/usr/local/man/man1/tip.1"
+mkdir -p $(dirname ${destination_file})
+cp "${man_file}" "${destination_file}"
+chmod 644 "${destination_file}"
+gzip "${destination_file}"
 
 cd "${destination_folder}"
 dpkg-deb --build "${package_folder}"
