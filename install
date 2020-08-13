@@ -84,8 +84,11 @@ ln -s "${__project_binaries_folder__}/tip" "${__project_links_folder__}"
 
 # create docs
 mkdir -p "${__project_doc_folder__}"
-cp ./support/copyright "${__project_doc_folder__}"
+cp ./packaging/copyright "${__project_doc_folder__}"
 
 # copy autocomplete file
 cp ./tip-notes/autocomplete.sh "${__project_autocompletion_file__}"
 
+# copy man page
+cp ./man/tip.1 /usr/local/man/man1/tip.1
+gzip /usr/local/man/man1/tip.1

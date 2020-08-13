@@ -60,6 +60,11 @@ if [[ -f "${__project_autocompletion_file__}" ]]; then
     exit_status=1
 fi
 
+if [[ -f "/usr/local/man/man1/tip.1.gz" ]]; then
+    echo "UNINSTALL ERROR: /usr/local/man/man1/tip.1.gz file not removed!"
+    exit_status=1
+fi
+
 if [[ -f "${__project_links_folder__}/tip" ]]; then
     echo "UNINSTALL ERROR: ${__project_links_folder__}/tip link not removed!"
     exit_status=1

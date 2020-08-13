@@ -1,7 +1,7 @@
 #!/bin/bash
 #==============================================================================
 #
-#   DESCRIPTION:  remove tip notes
+#   DESCRIPTION:  remove tip-notes
 #
 #         USAGE:  ./remove
 # 
@@ -56,6 +56,9 @@ rm "${__project_links_folder__}/tip"
 
 # remove docs
 rm -r "${__project_doc_folder__}"
+
+# remove man page
+rm -r /usr/local/man/man1/tip.1.gz
 
 # puge files if required
 if [[ "${1}" == "--purge" ]]; then

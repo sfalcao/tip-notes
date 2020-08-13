@@ -84,6 +84,13 @@ if [[ ! -f "${__project_links_folder__}/tip" ]]; then
     exit_status=1
 fi
 
+# check man page
+if [[ ! -f "/usr/local/man/man1/tip.1.gz" ]]; then
+    echo ".. /usr/local/man/man1/tip.1.gz  --> man page is missing!"
+    exit_status=1
+fi
+
+
 if [[ -d "${__project_config_folder__}" ]]; then
     if [[ ! -f "${__project_config_file__}" ]]; then
         echo ".. ${__project_config_file__} --> file is missing!"
