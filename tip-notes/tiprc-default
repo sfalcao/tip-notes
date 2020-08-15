@@ -17,12 +17,12 @@
 #=========================================================
 
 
-#----------------------------------------------------------
+#------------------------------------------------------------------
 # point to folder where notes are stored'
-#----------------------------------------------------------
+#------------------------------------------------------------------
 tip_notes_folder=~/.tip-notes
 
-#----------------------------------------------------------
+#------------------------------------------------------------------
 # choose alternative tip editor
 # if no tip_editor is set then tip will use
 # system's defaults to open the note
@@ -30,43 +30,57 @@ tip_notes_folder=~/.tip-notes
 # eg:
 # tip_editor='vim'
 # tip_editor='nano'
-#----------------------------------------------------------
+#------------------------------------------------------------------
 #tip_editor='vim'
 
-#----------------------------------------------------------
+#------------------------------------------------------------------
 # control if --remove will ask for confirmation or not
 # IS SAFER TO KEEP IT true
 #
-# tip_confirm_remove=true           asks for confirmation
-# tip_confirm_remove=false          removes without asking
-#----------------------------------------------------------
+# tip_confirm_remove=true                   asks for confirmation
+# tip_confirm_remove=false                  removes without asking
+#------------------------------------------------------------------
 tip_confirm_remove=true
 
-#----------------------------------------------------------
+#------------------------------------------------------------------
 # control if --purge will ask for confirmation
 # IS STRONGLY RECOMMENDED TO KEEP IT true
 # Changing this option may lead to accidentally loosing all
 # your notes
 #
-# tip_confirm_purge=true            asks for confirmation
-# tip_confirm_purge=false           removes without asking
-#----------------------------------------------------------
+# tip_confirm_purge=true                    asks for confirmation
+# tip_confirm_purge=false                   removes without asking
+#------------------------------------------------------------------
 tip_confirm_purge=true
 
-#----------------------------------------------------------
+#------------------------------------------------------------------
 # control if --reset will ask for confirmation
 # IS SAFER TO KEEP IT true
 #'
-# tip_confirm_reset                 asks for confirmation
-# tip_confirm_reset                 resets without asking
-#----------------------------------------------------------
+# tip_confirm_reset=true                    asks for confirmation
+# tip_confirm_reset=false                   resets without asking
+#------------------------------------------------------------------
 tip_confirm_reset=true
 
-#----------------------------------------------------------
+#------------------------------------------------------------------
 # control if --delete will ask for confirmation
 # IS SAFER TO KEEP IT true
 #'
-# tip_confirm_delete_note          asks for confirmation
-# tip_confirm_delete_note          resets without asking
-#----------------------------------------------------------
+# tip_confirm_delete_note=true              asks for confirmation
+# tip_confirm_delete_note=false             resets without asking
+#------------------------------------------------------------------
 tip_confirm_delete_note=true
+
+#------------------------------------------------------------------
+# point to folder where notes are stored'
+#------------------------------------------------------------------
+tip_backup_folder=~/
+
+#------------------------------------------------------------------
+# control if --backup will ask for confirmation before
+# creating backup folder if it does not exist
+#'
+# tip_confirm_backup_folder_creation=true   asks for confirmation
+# tip_confirm_backup_folder_creation=false  asks for confirmation
+#------------------------------------------------------------------
+tip_confirm_backup_folder_creation=true

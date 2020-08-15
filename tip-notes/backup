@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+#===============================================================================
+#
+#   DESCRIPTION: creates a notes folder backup & configuration backup
+# 
+#         USAGE: ./backup --help
+#                
+#        AUTHOR: S. Falcao
+#       CREATED: 15.08.2020 12:09
+#
+#===============================================================================
+
+# Copyright (C) 2020 tip-notes authors.
+#
+# This file is part of tip-notes.
+#
+#     tip-notes is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+#
+#     tip-notes is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with Foobar.  If not, see <https://www.gnu.org/licenses/>
+
+
+
+set -o errexit
+set -o nounset
+set -o pipefail
+#set -o xtrace
+
+
+#-------------------------------------------------------------------------------
+# CONFIGURATION SECTION
+#-------------------------------------------------------------------------------
+#
+__script_name__="backup"
+
+source ./project-header.sh
+
+if [[ -f "${__project_config_file__}" ]]; then
+    source "${__project_config_file__}"
+else
+    echo "ERROR: --> configuration file does not exist!"
+    echo
+    echo "To fix it type:"
+    echo "tip --init"
+    echo
+    exit 1
+fi
+
+
+#-------------------------------------------------------------------------------'
+# MAIN SECTION'
+#-------------------------------------------------------------------------------'
+tip_backup_prefix="$(date '+%Y%m%d-%H%M%S-')"
+tip_backup_file="${tip_backup_folder}"/"${tip_backup_prefix}"tip-backup.tar
+
+if [[ ! -d "${tip_backup_folder}" ]]; then
+    if [ "${tip_confirm_backup_folder_creation}" == true ]; then
+        echo "tip-notes backup folder does not exist!"
+        read -p "Do you like to create it now? Type 'y' or 'n' :" answer
+        if [[ ! "${answer}" =~ [Y|y] ]]; then
+            echo "ERRO: tip backup folder creation aborted by user!"
+            exit 1
+        fi
+    fi
+    mkdir "${tip_backup_folder}"
+fi
+
+tar -cvf \
+    "${tip_backup_file}" \
+    "${__project_config_folder__}" "${tip_notes_folder}" \
+    &> /dev/null
+gzip "${tip_backup_file}"
