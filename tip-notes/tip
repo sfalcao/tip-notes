@@ -170,6 +170,7 @@ while [[ ${#} -gt 0 ]]; do
         '-b' | '--backup')
             shift
             ./backup
+            exit 0
             ;;
         '-e' | '--edit')
             shift
