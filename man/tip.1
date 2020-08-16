@@ -8,7 +8,7 @@ tip-notes - a terminal based note taking application
 .SH SYNOPSIS
 .B tip
 [\-h] [\-\-help] [\-\-version] [\-\-authors] [\-\-init] [\-\-reset] [\-\-config]
-[\-\-remove] [\-\-purge]
+[\-\-remove] [\-\-purge] [\-b] [\-\-backup]
 
 .B tip [[<group>/]<note>]
 
@@ -41,36 +41,17 @@ effort.
 .SH OPTIONS
 tip-notes accepts the following options:
 .TP 8
-.B  \-h, \-\-help
-Show command\-line options.
-.TP 8
-.B  \-\-version
-Output version information and exit.
-.TP 8
 .B \-\-authors
 Output authors information and exit.
+.TP 8
+.B \-b, \-\-backup
+backup notes and configuration folders
 .TP 8
 .B \-d, \-\-delete [<group>/]<note>
 delete <note> which can be optionally preceded by it's group when needed
 .TP 8
 .B \-e, \-\-edit [<group>/]<note>
 edit <note> which can be optionally preceded by it's group when needed
-.TP 8
-.B \-\-init
-creates the configuration file
-.TP 8
-.B \-\-reset
-restore configuration file to it's default
-.TP 8
-.B \-\-remove
-uninstall tip-notes preserving configuration folder. If tip-notes has been
-installed using apt or apt-get, it will warn user to uninstall using
-apt/apt-get and abort.
-.TP 8
-.B \-\-purge
-uninstall tip-notes and remove configuration folder. If tip-notes has been
-installed using apt or apt-get, it will warn user to uninstall using
-apt/apt-get and abort.
 .TP 8
 .B \-f, \-\-find [<group>] <text>
 list all notes which name contains <text>. Group is optional and if passed
@@ -79,6 +60,28 @@ limits search.
 .B \-F, \-\-find-content [<group>] <text>
 list all notes which content contains <text>. Group is optional and if passed
 limits search. 
+.TP 8
+.B  \-h, \-\-help
+Show command\-line options.
+.TP 8
+.B \-\-init
+creates the configuration file
+.TP 8
+.B \-\-purge
+uninstall tip-notes and remove configuration folder. If tip-notes has been
+installed using apt or apt-get, it will warn user to uninstall using
+apt/apt-get and abort.
+.TP 8
+.B \-\-remove
+uninstall tip-notes preserving configuration folder. If tip-notes has been
+installed using apt or apt-get, it will warn user to uninstall using
+apt/apt-get and abort.
+.TP 8
+.B \-\-reset
+restore configuration file to it's default
+.TP 8
+.B  \-\-version
+Output version information and exit.
 
 
 .SH FILES
@@ -141,6 +144,7 @@ note limiting search to <group>
 
 \fBtip\ \-\-reset\fP - reset tiprc config file to it's defaults
 
+\fBtip\ \-b\fP - backups notes and configurations folders
 
 .SH "SEE ALSO"
 .BR tip\ \-\-help
