@@ -130,6 +130,8 @@ while [[ ${#} -gt 0 ]]; do
             echo "${__script_name__} --init                             create an external configuration file"
             echo "${__script_name__} --reset                            reset external configuration file"
             echo
+            echo "${__script_name__} --backup                           creates a backup of notes and configuration"
+            echo
             echo "${__script_name__} --edit [[<group>]/]<note>          add/edit note"
             echo "${__script_name__} --delete [[<group>]/]<note>        delete note"
             echo "${__script_name__} --find [<group>] <text>            find notes which name contains <text>"
@@ -145,6 +147,7 @@ while [[ ${#} -gt 0 ]]; do
             echo
             echo "SHORT FORMS:"
             echo
+            echo "-b is same of --backup"
             echo "-d is same of --delete"
             echo "-e is same of --edit"
             echo "-f is same of --find"
@@ -152,7 +155,7 @@ while [[ ${#} -gt 0 ]]; do
             echo "-h is same of --help"
             echo
             echo
-            echo "${__script_name__} --help                         shows ${__project_name__}'s help"
+            echo "${__script_name__} --help                             shows ${__project_name__}'s help"
             echo
             exit 0
             ;;
@@ -164,7 +167,10 @@ while [[ ${#} -gt 0 ]]; do
             VERBOSE_FLAG=1
             shift # past argument
             ;;
-
+        '-b' | '--backup')
+            shift
+            ./backup
+            ;;
         '-e' | '--edit')
             shift
             if [[ ${#} -ne 1 ]]; then
