@@ -169,7 +169,11 @@ while [[ ${#} -gt 0 ]]; do
             ;;
         '-b' | '--backup')
             shift
-            ./backup
+            if [[ "${#}" -gt 0 ]]; then
+                ./backup ${@}
+            else
+                ./backup
+            fi
             exit 0
             ;;
         '-e' | '--edit')
