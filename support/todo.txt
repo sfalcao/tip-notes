@@ -1,4 +1,6 @@
 + implement --delete-group (only empty? forced option?)
-+ implement --backup option
++ implement a routine to clean backups
++ implement --rsync option
++ group things in tiprc???
 
 + improove autocompletion (see code-canditates)

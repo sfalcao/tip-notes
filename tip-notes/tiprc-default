@@ -72,14 +72,14 @@ tip_confirm_reset=true
 tip_confirm_delete_note=true
 
 #------------------------------------------------------------------
-# point to folder where notes are stored'
+# point to folder where notes and configs are backuped
 #------------------------------------------------------------------
-tip_backup_folder=~/
+tip_backup_folder=~/tip-notes-backup
 
 #------------------------------------------------------------------
 # control if --backup will ask for confirmation before
 # creating backup folder if it does not exist
-#'
+#
 # tip_confirm_backup_folder_creation=true   asks for confirmation
 # tip_confirm_backup_folder_creation=false  asks for confirmation
 #------------------------------------------------------------------

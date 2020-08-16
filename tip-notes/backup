@@ -59,7 +59,7 @@ fi
 # MAIN SECTION'
 #-------------------------------------------------------------------------------'
 tip_backup_prefix="$(date '+%Y%m%d-%H%M%S-')"
-tip_backup_file="${tip_backup_folder}"/"${tip_backup_prefix}"tip-backup.tar
+tip_backup_file="${tip_backup_folder}"/"${tip_backup_prefix}"tip-notes-backup.tar
 
 if [[ ! -d "${tip_backup_folder}" ]]; then
     if [ "${tip_confirm_backup_folder_creation}" == true ]; then
