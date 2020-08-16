@@ -58,8 +58,6 @@ fi
 #-------------------------------------------------------------------------------'
 # MAIN SECTION'
 #-------------------------------------------------------------------------------'
-tip_backup_prefix="$(date '+%Y%m%d-%H%M%S-')"
-tip_backup_file="${tip_backup_folder}"/"${tip_backup_prefix}"tip-notes-backup.tar
 
 if [[ ! -d "${tip_backup_folder}" ]]; then
     if [ "${tip_confirm_backup_folder_creation}" == true ]; then
@@ -84,26 +82,36 @@ else
     exit 1
 fi
 
+tip_backup_time_stamp="$(date '+%Y%m%d-%H%M%S-')"
+
+tip_backup_file_prefix="${tip_backup_folder}"
+tip_backup_file_prefix+="/${tip_backup_time_stamp}"
+tip_backup_file_prefix+="_tip-notes-backup_-_"
+
 if [[ "${behaviour}" == '--all' ]];then
-tar -cvf \
-    "${tip_backup_file}" \
-    "${__project_config_folder__}" "${tip_notes_folder}" \
-    &> /dev/null
+    tip_backup_file_sufix='all.tar'
+    tar -cvf \
+        "${tip_backup_file_prefix}${tip_backup_file_sufix}" \
+        "${__project_config_folder__}" "${tip_notes_folder}" \
+        &> /dev/null
 elif [[ "${behaviour}" == '--config-only' ]];then
-tar -cvf \
-    "${tip_backup_file}" \
-    "${__project_config_folder__}" \
-    &> /dev/null
-    echo 'WARNING --> only configurations have been saved!'
+    tip_backup_file_sufix='config-only.tar'
+    tar -cvf \
+        "${tip_backup_file_prefix}${tip_backup_file_sufix}" \
+        "${__project_config_folder__}" \
+        &> /dev/null
+        echo 'WARNING --> only configurations have been saved!'
 elif [[ "${behaviour}" == '--notes-only' ]];then
-tar -cvf \
-    "${tip_backup_file}" \
-    "${tip_notes_folder}" \
-    &> /dev/null
-    echo 'WARNING --> only notes have been saved!'
+    tip_backup_file_sufix='notes-only.tar'
+    tar -cvf \
+        "${tip_backup_file_prefix}${tip_backup_file_sufix}" \
+        "${tip_notes_folder}" \
+        &> /dev/null
+        echo 'WARNING --> only notes have been saved!'
 else
     echo "ERROR: unknown backup parameter!"
     exit 1
 fi
-gzip "${tip_backup_file}"
+
+gzip "${tip_backup_file_prefix}${tip_backup_file_sufix}"
 exit 0
