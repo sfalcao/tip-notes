@@ -84,3 +84,17 @@ tip_backup_folder=~/tip-notes-backup
 # tip_confirm_backup_folder_creation=false  asks for confirmation
 #------------------------------------------------------------------
 tip_confirm_backup_folder_creation=true
+
+#------------------------------------------------------------------
+# control --backup behaviour as follow:
+# IS SAFER TO KEEP IT 'default'
+#
+# tip_backup_behaviour='--all'              configurations and
+#                                           notes are saved
+#
+# tip_backup_behaviour='--config-only'      only configurations
+#                                           are saved
+#
+# tip_backup_behaviour='--notes-only'      only notes are saved
+#------------------------------------------------------------------
+tip_backup_behaviour='--all'

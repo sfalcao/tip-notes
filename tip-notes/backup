@@ -66,16 +66,44 @@ if [[ ! -d "${tip_backup_folder}" ]]; then
         echo "tip-notes backup folder does not exist!"
         read -p "Do you like to create it now? Type 'y' or 'n' :" answer
         if [[ ! "${answer}" =~ [Y|y] ]]; then
-            echo "ERRO: tip backup folder creation aborted by user!"
+            echo "ERROR: tip backup folder creation aborted by user!"
             exit 1
         fi
     fi
     mkdir "${tip_backup_folder}"
 fi
 
+if [[ "${#}" -eq 0 ]]; then
+    behaviour="${tip_backup_behaviour}"
+elif [[ "${#}" -eq 1 ]]; then
+    behaviour="${1}"
+else
+    echo
+    echo "ERROR: unexpected number of parameters!"
+    echo
+    exit 1
+fi
+
+if [[ "${behaviour}" == '--all' ]];then
 tar -cvf \
     "${tip_backup_file}" \
     "${__project_config_folder__}" "${tip_notes_folder}" \
     &> /dev/null
+elif [[ "${behaviour}" == '--config-only' ]];then
+tar -cvf \
+    "${tip_backup_file}" \
+    "${__project_config_folder__}" \
+    &> /dev/null
+    echo 'WARNING --> only configurations have been saved!'
+elif [[ "${behaviour}" == '--notes-only' ]];then
+tar -cvf \
+    "${tip_backup_file}" \
+    "${tip_notes_folder}" \
+    &> /dev/null
+    echo 'WARNING --> only notes have been saved!'
+else
+    echo "ERROR: unknown backup parameter!"
+    exit 1
+fi
 gzip "${tip_backup_file}"
 exit 0
