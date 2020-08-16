@@ -78,3 +78,4 @@ tar -cvf \
     "${__project_config_folder__}" "${tip_notes_folder}" \
     &> /dev/null
 gzip "${tip_backup_file}"
+exit 0
