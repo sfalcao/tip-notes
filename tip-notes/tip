@@ -124,7 +124,7 @@ while [[ ${#} -gt 0 ]]; do
             echo
             echo "${__script_name__}                                    list all notes"
             echo "${__script_name__} [<group>]                          list all notes within the group"
-            echo "${__script_name__} [[<group>]/]<note>                 list specific note"
+            echo "${__script_name__} [<group>/]<note>                   list specific note"
             echo
             echo "${__script_name__} --config                           edit external configuration file"
             echo "${__script_name__} --init                             create an external configuration file"
@@ -135,8 +135,8 @@ while [[ ${#} -gt 0 ]]; do
             echo "${__script_name__} --backup --config-only             creates a backup containing configurations"
             echo "${__script_name__} --backup --notes-only              creates a backup containing notes"
             echo
-            echo "${__script_name__} --edit [[<group>]/]<note>          add/edit note"
-            echo "${__script_name__} --delete [[<group>]/]<note>        delete note"
+            echo "${__script_name__} --edit [<group>/]<note>            add/edit note"
+            echo "${__script_name__} --delete [<group>/]<note>          delete note"
             echo "${__script_name__} --find [<group>] <text>            find notes which name contains <text>"
             echo "${__script_name__} --find-content [<group>] <text>    find notes which contains <text>"
             echo
