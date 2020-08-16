@@ -86,7 +86,7 @@ tip_backup_time_stamp="$(date '+%Y%m%d-%H%M%S-')"
 
 tip_backup_file_prefix="${tip_backup_folder}"
 tip_backup_file_prefix+="/${tip_backup_time_stamp}"
-tip_backup_file_prefix+="_tip-notes-backup_-_"
+tip_backup_file_prefix+="tip-notes-backup_-_"
 
 if [[ "${behaviour}" == '--all' ]];then
     tip_backup_file_sufix='all.tar'
