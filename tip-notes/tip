@@ -130,7 +130,10 @@ while [[ ${#} -gt 0 ]]; do
             echo "${__script_name__} --init                             create an external configuration file"
             echo "${__script_name__} --reset                            reset external configuration file"
             echo
-            echo "${__script_name__} --backup                           creates a backup of notes and configuration"
+            echo "${__script_name__} --backup                           creates a backup according to tiprc configuration"
+            echo "${__script_name__} --backup --all                     creates a backup containing notes and configurations"
+            echo "${__script_name__} --backup --config-only             creates a backup containing configurations"
+            echo "${__script_name__} --backup --notes-only              creates a backup containing notes"
             echo
             echo "${__script_name__} --edit [[<group>]/]<note>          add/edit note"
             echo "${__script_name__} --delete [[<group>]/]<note>        delete note"

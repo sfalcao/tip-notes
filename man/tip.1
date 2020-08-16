@@ -1,22 +1,36 @@
-.TH tip-notes "Aug 09 2020" "Version 0.1.0" "tip-notes Manual Pages"
-
-
+.TH tip-notes "Aug 15 2020" "1" "" ""
 .SH NAME
 tip-notes - a terminal based note taking application
 
-
 .SH SYNOPSIS
-.B tip
-[\-h] [\-\-help] [\-\-version] [\-\-authors] [\-\-init] [\-\-reset] [\-\-config]
-[\-\-remove] [\-\-purge] [\-b] [\-\-backup]
 
-.B tip [[<group>/]<note>]
+.PP 
+.nf 
+configuration:
+  tip --init | --reset | --config
 
-.B tip [\-e] [\-\-edit] [\-d] [\-\-delete] [<group>/]<note>
+backup:
+  tip --backup [--all | --config-only | --notes-only]
 
-.B tip [\-f] [\-\-find] [\-F] [\-\-find\-content] [<group>] <text>
+list:
+  tip [GROUP]
 
-...
+view:
+  tip [GROUP/]NOTE
+
+find:
+  tip --find [GROUP/]PATTERN
+  tip --find-content [GROUP/]/PATTERN
+
+delete:
+  tip --delete [GROUP/]NOTE
+
+add/edit:
+  tip --edit [GROUP/]NOTE
+
+uninstall:
+  tip --remove | --purge
+.fi
 
 
 .SH DESCRIPTION
@@ -27,8 +41,8 @@ in routines or trough any file browser and plain text editor as well.
 .PP
 Notes can be kept either in a hidden or visible folder. User can tweak
 tip-notes, trough editing it's configuration file, where among other
-possibilities, is possible to choose his preferred editor, enable or disable
-deletion confirmations, etc.
+possibilities, is possible to choose his preferred editor, backup location,
+enable or disable deletion confirmations.
 .PP
 User can also take advantage from shell autocomplete feature to easily access
 his notes. Simple but useful routines allows user to find notes by name and
@@ -39,112 +53,96 @@ that can be freely rearranged by user at any moment, without any additional
 effort.
 
 .SH OPTIONS
+.PP
 tip-notes accepts the following options:
-.TP 8
-.B \-\-authors
-Output authors information and exit.
-.TP 8
-.B \-b, \-\-backup
-backup notes and configuration folders
-.TP 8
-.B \-d, \-\-delete [<group>/]<note>
-delete <note> which can be optionally preceded by it's group when needed
-.TP 8
-.B \-e, \-\-edit [<group>/]<note>
-edit <note> which can be optionally preceded by it's group when needed
-.TP 8
-.B \-f, \-\-find [<group>] <text>
-list all notes which name contains <text>. Group is optional and if passed
-limits search. 
-.TP 8
-.B \-F, \-\-find-content [<group>] <text>
-list all notes which content contains <text>. Group is optional and if passed
-limits search. 
-.TP 8
-.B  \-h, \-\-help
-Show command\-line options.
-.TP 8
-.B \-\-init
-creates the configuration file
-.TP 8
-.B \-\-purge
-uninstall tip-notes and remove configuration folder. If tip-notes has been
-installed using apt or apt-get, it will warn user to uninstall using
-apt/apt-get and abort.
-.TP 8
-.B \-\-remove
-uninstall tip-notes preserving configuration folder. If tip-notes has been
-installed using apt or apt-get, it will warn user to uninstall using
-apt/apt-get and abort.
-.TP 8
-.B \-\-reset
-restore configuration file to it's default
-.TP 8
-.B  \-\-version
-Output version information and exit.
+.nf
 
+ \-\-authors                           output authors information
+
+ \-b, \-\-backup [OPTION]               if no [OPTION] backup information according to tiprc setup
+     \-\-all                           backups configurations and notes
+     \-\-config-only                   backups configurations only
+     \-\-notes-only                    backups notes only
+
+ \-\-config                            edit tiprc file (configuration file)
+
+ \-d, \-\-delete [GROUP/]NOTE           delete NOTE
+
+ \-e, \-\-edit [GROUP/]NOTE             edit NOTE
+
+ \-f, \-\-find [GROUP] PATTERN          find PATTERN in note's names. (Pass a GROUP to limit search)
+ \-F, \-\-find-content [GROUP] PATTERN  find PATTERN in note's contents. (Pass a GROUP to limit search)
+
+ \-h, \-\-help                          shows basic help and usage
+
+ \-\-purge                             uninstall tip-notes and remove configuration folder.
+                                     If tip-notes has been installed using system package manager
+                                     purge process will be aborted
+
+ \-\-init                              creates the configuration file if it does not exist
+
+ \-\-reset                             restore configuration file to it's default
+
+ \-\-remove                            uninstall tip-notes preserving configuration folder. If tip-notes
+                                     has been installed using system package manager, remove process
+                                     will be aborted
+
+ \-\-version                           output version information and exit.
+.fi
 
 .SH FILES
-tip-notes files are stored in different locations
-
-
-\fB/$HOME/.config/tip-notes/tiprc\fP - configuration file
-
-\fB/$HOME/.tip-notes/tiprc\fP - default notes folder (can be modified by
-user)
-
-\fB/usr/lib/tip-notes\fP - binaries folder
-
-\fB/usr/local/bin/tip\fP - link to main script
-
-\fB/usr/share/doc/tip-notes/copyright\fP - copyright machine readable file
-
-\fB/usr/local/man/man1/tip.1.gz\fP - manual file
-
-\fB/etc/bash_completion.d/tip-autocomplete\fP - autocompletion file
-
+.nf
+\fB/$HOME/.config/tip-notes/tiprc\fP                configuration file
+\fB/$HOME/.tip-notes/tiprc\fP                       default notes folder (can be modified by user)
+\fB/etc/bash_completion.d/tip-autocomplete\fP       autocompletion file
+\fB/usr/lib/tip-notes\fP                            binaries folder
+\fB/usr/local/bin/tip\fP                            link to main script
+\fB/usr/local/man/man1/tip.1.gz\fP                  manual file
+\fB/usr/share/doc/tip-notes/copyright\fP            machine readable copyright file
+.fi
 
 .SH AUTHORS
-tip-notes is a project developed initially by S. Falcão, contributors
-are welcome and their names can be found with:
+.nf
+tip-notes is a project initially developed by S. Falcão.
+Contributors are welcome and their names can be found with:
 
 \fBtip --authors\fP
+.fi
 
 
 .SH EXAMPLES
-\fBtip\fP - list all notes
+.nf
+\fBtip\fP                        list all notes
+\fBtip\ <GROUP>\fP                list all notes within the <group>
 
-\fBtip\ <group>\fP - list all notes within the <group>
+\fBtip\ <my-note>\fP              show <my-note> content
+\fBtip\ <group>/<my-note>\fP      show <group>/<my-note> content (as many nested groups as user desire are allowed)
 
-\fBtip\ <my-note>\fP - show <my-note> content
+\fBtip\ \-e\ <my-note>\fP           edit/add <my-note> using text editor
+\fBtip\ \-e\ <GROUP>/<my-note>\fP   edit/add <group>/<my-note> using text editor
 
-\fBtip\ <group>/<my-note>\fP - show <group>/<my-note> content (as many nested
-groups as user desire are allowed)
+\fBtip\ \-d\ <my-note>\fP           delete <my-note>
+\fBtip\ \-d\ <GROUP>/<my-note>\fP   delete <group>/<my-note> (if <my-note> deletion makes <group> empty, then <group> is also removed)
 
-\fBtip\ \-e\ <my-note>\fP - edit/add <my-note> using text editor
+\fBtip\ \-f\ <text>\fP              find all notes which name contains <text> 
+\fBtip\ \-f\ <GROUP> <text>\fP      find notes which name contains <text> limiting search to <group>
 
-\fBtip\ \-e\ <group>/<my-note>\fP - edit/add <group>/<my-note> using text editor
+\fBtip\ \-F\ <text>\fP              find all notes which contains <text> inside the note
+\fBtip\ \-F\ <GROUP> <text>\fP      find notes which contains <text> inside the note limiting search to <group>
 
-\fBtip\ \-d\ <my-note>\fP - delete <my-note>
+\fBtip\ \-\-config\fP               edit tiprc config file using text editor
 
-\fBtip\ \-d\ <group>/<my-note>\fP - delete <group>/<my-note> (if <my-note>
-deletion makes <group> empty, then <group> is also removed)
+\fBtip\ \-\-reset\fP                reset tiprc config file to it's defaults
 
-\fBtip\ \-f\ <text>\fP - find all notes which name contains <text> 
+\fBtip\ \-b \-\-all\fP               backups notes and configurations folders
+.fi
 
-\fBtip\ \-f\ <group> <text>\fP - find notes which name contains <text> limiting
-search to <group>
+.SH "BUGS"
+.nF
+There are not known BUGS so far
 
-\fBtip\ \-F\ <text>\fP - find all notes which contains <text> inside the note
-
-\fBtip\ \-F\ <group> <text>\fP - find notes which contains <text> inside the
-note limiting search to <group>
-
-\fBtip\ \-\-config\fP - edit tiprc config file using text editor
-
-\fBtip\ \-\-reset\fP - reset tiprc config file to it's defaults
-
-\fBtip\ \-b\fP - backups notes and configurations folders
+Please report any trough GITHUB project's page. Add as many relevant information as possible!
+.fi
 
 .SH "SEE ALSO"
 .BR tip\ \-\-help
