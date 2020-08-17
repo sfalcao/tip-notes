@@ -128,7 +128,7 @@ tip <group_name>
 
 ### list all notes which name contain a text
 
-Information within [] is optional an may be omitted if you want to search in all groups
+Information within [ ] is optional and if passed limits the search within that group
 
 ```bash
 tip -f [<group_name>] <text>
@@ -137,10 +137,35 @@ tip -f [<group_name>] <text>
 
 ### list all notes which contain a text incorporated to the note itself
 
-Information within [] is optional an may be omitted if you want to search in all groups
+Information within [ ] is optional and if passed limits the search within that group
 
 ```bash
 tip -F [<group_name>] <text>
+```
+
+### backup your notes and configuration files
+
+**tip-notes** has it's own backup routine. Basically user can choose among saving
+configurations, notes or both. Backups are stored on a specific backup location
+pointed in **tiprc** configuration file, where also is possible to choose
+default backup behaviour among --all, --config-only or --notes-only. Backups
+are composed by time stamped tar.gz files which names are pretty much self descriptive
+
+To make a backup based on tiprc setup:
+```bash
+tip -b
+```
+To override tiprc and backup both, configurations and notes:
+```bash
+tip -b --all
+```
+To override tiprc and backup configurations only:
+```bash
+tip -b --config-only
+```
+To override tiprc and backup notes only:
+```bash
+tip -b --notes-only
 ```
 
 
@@ -148,10 +173,10 @@ tip -F [<group_name>] <text>
 
 ### configuration file
 
-#### configuration file is stored in a fixed location:
+#### configuration file is stored in:
 
 ```bash
-$HOME/.config/tip-notes/tiprc
+~/.config/tip-notes/tiprc
 ```
 
 **tiprc** has self explanatory comments, and everything there is made exactly
@@ -173,11 +198,13 @@ this will restore configuration file to it's default
 
 ### notes folder
 
-#### notes are, by default, stored at following folder location:
+notes are, by default, stored at following folder location:
 
 ```bash
 ~/.tip-notes
 ```
+notice that is a hidden folder. If you want this can be easily changed editing
+**tiprc**. See **Visible x hidden notes** folder section bellow
 
 #### To change notes location, type:
 
@@ -197,17 +224,15 @@ e.g.
 tip_notes_folder=~/my_notes
 ```
 
-#### ATTENTION!
-Do not leave empty spaces around '=' sign when editing this line and change
-only the part AFTER '=' sign!
+**NOTE:** do not leave empty spaces around '=' sign when editing this line and
+change only the part AFTER '=' sign!
 
 #### Visible x hidden notes folder
 
 If folder name is preceded by a dot (".") your notes folder will be hidden.
-**tip-notes** is not affected by visibility of notes folder, **tip-notes**
-will always access your notes, this only affects whether your notes will be
-seen by other apps or listed by default on file browsers like Nemo, Nautilus,
-etc
+**tip-notes** itself is not affected by visibility of notes folder.
+The folder visibility only affects whether your notes will be seen by other
+apps or listed by default on file browsers like Nemo, Nautilus, etc
 
 ##### visible folder example:
 
@@ -228,6 +253,11 @@ Please see LICENSE.txt for details
 
 ## SEE ALSO
 
+for basic usage:
 ```bash
 tip --help
+```
+for a more comprehensive description:
+```bash
+man tip
 ```
