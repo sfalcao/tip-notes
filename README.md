@@ -169,78 +169,46 @@ tip -b --notes-only
 ```
 
 
-## CONFIGURATION FILES AND NOTES
+## IMPORTANT FILES AND FOLDERS
 
 ### configuration file
-
-#### configuration file is stored in:
 
 ```bash
 ~/.config/tip-notes/tiprc
 ```
-
 **tiprc** has self explanatory comments, and everything there is made exactly
 to be edited by users who wants to change **tip-note**'s default behaviour!
 
-#### to edit tiprc:
-
-```bash
-tip --config
-```
-
-#### if you messed around and fell unsafe about you have done, type:
-
-```bash
-tip --reset
-```
-
-this will restore configuration file to it's default
-
 ### notes folder
-
-notes are, by default, stored at following folder location:
 
 ```bash
 ~/.tip-notes
 ```
-notice that is a hidden folder. If you want this can be easily changed editing
-**tiprc**. See **Visible x hidden notes** folder section bellow
+notice that is a hidden folder. See **Visible x hidden notes** folder section
+bellow. This location can be changed editing **tiprc** file
 
-#### To change notes location, type:
-
-```bash
-tip --config
-```
-
-and then change this line accordingly:
+### backup folder
 
 ```bash
-tip_notes_folder=~/.tip-notes
+~/tip-notes-backup
 ```
+This location can be changed editing **tiprc** file
 
-e.g.
+### Visible x hidden folders
 
-```bash
-tip_notes_folder=~/my_notes
-```
+If folder name is preceded by a dot (".") your folder will be hidden.
+**tip-notes** itself is not affected by visibility of folders.
+The folder visibility only affects whether your notes, backups and
+configurations will be seen by other apps or listed on file browsers like
+Nemo, Nautilus, etc
 
-**NOTE:** do not leave empty spaces around '=' sign when editing this line and
-change only the part AFTER '=' sign!
-
-#### Visible x hidden notes folder
-
-If folder name is preceded by a dot (".") your notes folder will be hidden.
-**tip-notes** itself is not affected by visibility of notes folder.
-The folder visibility only affects whether your notes will be seen by other
-apps or listed by default on file browsers like Nemo, Nautilus, etc
-
-##### visible folder example:
+#### visible folder example:
 
 ```bash
 tip_notes_folder=~/this_is_a_visible_folder
 ```
 
-##### invisible folder example:
+#### invisible folder example:
 
 ```bash
 tip_notes_folder=~/.this_is_a_hidden_folder
