@@ -81,13 +81,14 @@ tip_backup_folder=~/tip-notes-backup
 # creating backup folder if it does not exist
 #
 # tip_confirm_backup_folder_creation=true   asks for confirmation
-# tip_confirm_backup_folder_creation=false  asks for confirmation
+# tip_confirm_backup_folder_creation=false  do not ask for
+#                                           confirmation
 #------------------------------------------------------------------
 tip_confirm_backup_folder_creation=true
 
 #------------------------------------------------------------------
 # control --backup behaviour as follow:
-# IS SAFER TO KEEP IT 'default'
+# IS SAFER TO KEEP IT '--all'
 #
 # tip_backup_behaviour='--all'              configurations and
 #                                           notes are saved
@@ -95,6 +96,64 @@ tip_confirm_backup_folder_creation=true
 # tip_backup_behaviour='--config-only'      only configurations
 #                                           are saved
 #
-# tip_backup_behaviour='--notes-only'      only notes are saved
+# tip_backup_behaviour='--notes-only'       only notes are saved
 #------------------------------------------------------------------
 tip_backup_behaviour='--all'
+
+#------------------------------------------------------------------
+# point to folder where notes and configs are mirrored
+#------------------------------------------------------------------
+tip_mirror_folder=~/tip-notes-mirror
+
+#------------------------------------------------------------------
+# control if --mirror will ask for confirmation before
+# creating mirror folder if it does not exist
+#
+# tip_confirm_mirror_folder_creation=true   asks for confirmation
+# tip_confirm_mirror_folder_creation=false  do not ask for
+#                                           confirmation
+#------------------------------------------------------------------
+tip_confirm_mirror_folder_creation=true
+
+#------------------------------------------------------------------
+# control --mirror behaviour as follow:
+# IS SAFER TO KEEP IT '--all'
+#
+# tip_mirror_behaviour='--all'              configurations and
+#                                           notes are saved
+#
+# tip_mirror_behaviour='--config-only'      only configurations
+#                                           are saved
+#
+# tip_mirror_behaviour='--notes-only'       only notes are saved
+#------------------------------------------------------------------
+tip_mirror_behaviour='--all'
+
+#------------------------------------------------------------------
+# control if --mirror saves safe copy of deleted files
+# IS SAFER TO KEEP IT 'true'
+#
+tip_mirror_to_keep_safe_copy_of_deleted_notes=true
+
+#------------------------------------------------------------------
+# control if --mirror saves timestamped copies of modified files
+# IS SAFER TO KEEP IT 'true'
+#
+tip_mirror_to_keep_timestamped_copies_of_changed_files=true
+
+
+#------------------------------------------------------------------
+# control if --mirror will ask for confirmation before
+# permanently propagate file deletions without safe copies
+# IS SAFER TO KEEP IT 'true'
+#
+#------------------------------------------------------------------
+tip_confirm_mirror_permanent_deletions=true
+
+#------------------------------------------------------------------
+# control if --mirror will ask for confirmation if asked not to
+# keep timestamped changed files history
+# IS SAFER TO KEEP IT 'true'
+#
+#------------------------------------------------------------------
+tip_confirm_mirror_do_not_keep_changed_files_history=true
