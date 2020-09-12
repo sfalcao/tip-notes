@@ -1,14 +1,4 @@
-#!/bin/bash
-#==============================================================================
-#
-#   DESCRIPTION:  create a project deb package
-# 
-#         USAGE:  ./make_deb
-# 
-#        AUTHOR:  S. Falcao
-#       CREATED:  23.07.2020 18:25 BRST
-# 
-#==============================================================================
+#!/usr/bin/env bash
 
 # Copyright (C) 2020 tip-notes authors.
 #
@@ -39,7 +29,7 @@ set -o pipefail
 #---------
 # HEADER
 #---------
-__script_name__="make_deb"
+__script_name__="make-deb"
 
 package_architecture='all'
 
