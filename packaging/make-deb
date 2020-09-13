@@ -4,26 +4,24 @@
 #
 # This file is part of tip-notes.
 #
-#     tip-notes is free software: you can redistribute it and/or modify
+#     This program is free software: you can redistribute it and/or modify
 #     it under the terms of the GNU General Public License as published by
 #     the Free Software Foundation, either version 3 of the License, or
 #     (at your option) any later version.
 #
-#     tip-notes is distributed in the hope that it will be useful,
+#     This program is distributed in the hope that it will be useful,
 #     but WITHOUT ANY WARRANTY; without even the implied warranty of
 #     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #     GNU General Public License for more details.
 #
 #     You should have received a copy of the GNU General Public License
-#     along with Foobar.  If not, see <https://www.gnu.org/licenses/>
+#     along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 
-
-set -o errexit
+#set -o errexit
 #set -o nounset
-set -o pipefail
+#set -o pipefail
 #set -o xtrace
-
 
 
 #---------
@@ -34,15 +32,16 @@ __script_name__="make-deb"
 package_architecture='all'
 
 
-
-
 #---------------
 # MAIN ROUTINE
 #---------------
 
+source ../tip-notes/project-header.sh
+source ../tip-notes/comprename-lib.sh
+
+
 destination_folder="${1}"
 
-source ../tip-notes/project-header.sh
 
 
 if [[ "${#}" -eq 0 ]]; then
@@ -60,70 +59,19 @@ if ! [[ -d "${destination_folder}" ]]; then
 fi
 
 
-
-package_name=''
-package_name="${__project_name__}_${__project_version__}_${package_architecture}"
-package_folder="${destination_folder}${package_name}"
-
-if [[ -d "${package_folder}" ]]; then
-    echo "ERROR: package folder already exist! Creation aborted!"
-    exit 1
-fi
+# 1. create package folder named according to conventions
+source ./make-deb-create-pack-folder
 
 
-# deal with DEBIAN files
-# copy control file
-mkdir -p "${package_folder}"
-cp -r ./DEBIAN "${package_folder}"
-# deal with postinst
-postinst="${package_folder}/DEBIAN/postinst"
-echo "#!/bin/bash" > "${postinst}"
-echo >> "${postinst}"
-echo "ln -s ${__project_binaries_folder__}/tip ${__project_links_folder__}" >> "${postinst}"
-chmod 755 "${postinst}"
-# deal with postrm
-postrm="${package_folder}/DEBIAN/postrm"
-echo "#!/bin/bash" > "${postrm}"
-echo >> "${postrm}"
-echo "rm -f ${__project_links_folder__}/tip" >>  "${postrm}"
-echo >> "${postrm}"
-echo 'if [[ "${1}" == "purge" ]]; then' >> "${postrm}"
-echo "    rm -rf ~/.config/${__project_name__}" >> "${postrm}"
-echo "fi" >> "${postrm}"
-chmod 755 "${postrm}"
+# 2. add elements to package folder as required.
+#    Uncomment optional elements to activate
+source ./make-deb-control-files
+source ./make-deb-exec
+source ./make-deb-autocompletion
+source ./make-deb-doc
+source ./make-deb-man
 
 
-# deal with 'executables'
-packaged_project_binaries_folder="${package_folder}${__project_binaries_folder__}"
-mkdir -p "${packaged_project_binaries_folder}"
-cp ../tip-notes/* "${packaged_project_binaries_folder}"
-find "${package_folder}" -type d -exec chmod 755 {} \;
-
-
-# deal with autocomplete file
-original_file=../tip-notes/autocomplete.sh
-destination_file="${package_folder}${__project_autocompletion_file__}"
-mkdir -p "${package_folder}/etc/bash_completion.d"
-cat "${original_file}" | sed \
-    "s|./project-header.sh|${__project_binaries_folder__}/project-header.sh|" \
-    > "${destination_file}"
-chmod 644 "${destination_file}"
-
-
-# deal with copyright file
-copyright_file=./copyright
-destination_file="${package_folder}${__project_doc_folder__}/copyright"
-mkdir -p "${package_folder}${__project_doc_folder__}"
-cp "${copyright_file}" "${destination_file}"
-chmod 644 "${destination_file}"
-
-# deal with manpage
-man_file=../man/tip.1
-destination_file="${package_folder}/usr/local/man/man1/tip.1"
-mkdir -p $(dirname ${destination_file})
-cp "${man_file}" "${destination_file}"
-chmod 644 "${destination_file}"
-gzip "${destination_file}"
-
+# 3. build the deb file from package folder
 cd "${destination_folder}"
 dpkg-deb --build "${package_folder}"

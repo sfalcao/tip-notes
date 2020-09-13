@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+# Copyright (C) 2020 tip-notes authors.
+#
+# This file is part of tip-notes.
+#
+#     This program is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+#
+#     This program is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with this program.  If not, see <https://www.gnu.org/licenses/>
+
+
+
+# deal with DEBIAN files
+
+# copy control file
+cp -r ./DEBIAN "${package_folder}"
+
+# adjust version number in control file
+sed -i \
+    "s/Version:\ [0-9]*\.[0-9]*\.[0-9]*$/Version:\ ${__project_version__}/" \
+    "${package_folder}/DEBIAN/control"
+
+# create postinst file
+postinst_file="${package_folder}/DEBIAN/postinst"
+echo "#!/bin/bash" > "${postinst_file}"
+echo >> "${postinst_file}"
+echo \
+    "ln -s ${__project_binaries_folder__}/tip" \
+    " ${__project_links_folder__}" >> "${postinst_file}"
+chmod 755 "${postinst_file}"
+
+# create postrm file
+postrm_file="${package_folder}/DEBIAN/postrm"
+echo "#!/bin/bash" > "${postrm_file}"
+echo >> "${postrm_file}"
+echo "rm -f ${__project_links_folder__}/tip" >>  "${postrm_file}"
+echo >> "${postrm_file}"
+echo 'if [[ "${1}" == "purge" ]]; then' >> "${postrm_file}"
+echo "    rm -rf ~/.config/${__project_name__}" >> "${postrm_file}"
+echo "fi" >> "${postrm_file}"
+chmod 755 "${postrm_file}"

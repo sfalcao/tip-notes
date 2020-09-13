@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# Copyright (C) 2020 tip-notes authors.
+#
+# This file is part of tip-notes.
+#
+#     This program is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+#
+#     This program is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with this program.  If not, see <https://www.gnu.org/licenses/>
+
+
+
+# 1. put all involved files full paths in full_path_list separated by '\t'
+# 2. make sure that names in 1 correspond to your project names
+# 3. if your project demands more than one file, uncomment and
+#    add required lines so that full_path_list contain all of them
+IFS=$'\t'
+full_path_list='../autocompletion/tip-notes'
+#full_path_list+="${IFS}../autocompletion/<autocompletion_file_2>>"
+#...
+destination_folder="${package_folder}${__project_autocompletion_folder__}"
+copy_and_set_permissions \
+    "${full_path_list}" \
+    "${destination_folder}" \
+    644
