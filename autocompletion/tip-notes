@@ -7,13 +7,19 @@
 source ./project-header.sh
 source ${__project_config_file__}
 
+SPACER=' '
 MY_OPTIONS=''
-MY_OPTIONS+='-d -e -f -F -h '
-MY_OPTIONS+='--config --init --reset '
-MY_OPTIONS+=' --delete --edit '
-MY_OPTIONS+='--find --find-content '
-MY_OPTIONS+='--authors --version '
-MY_OPTIONS+='--help '
+MY_OPTIONS+='-d -e -f -F -h'
+MY_OPTIONS="${SPACER}"
+MY_OPTIONS+='--config --init --reset'
+MY_OPTIONS="${SPACER}"
+MY_OPTIONS+='--delete --edit'
+MY_OPTIONS="${SPACER}"
+MY_OPTIONS+='--find --find-content'
+MY_OPTIONS="${SPACER}"
+MY_OPTIONS+='--authors --version'
+MY_OPTIONS="${SPACER}"
+MY_OPTIONS+='--help'
 
 NOTES_LIST=$(
     find ${tip_notes_folder} \
