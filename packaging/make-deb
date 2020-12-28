@@ -37,7 +37,7 @@ package_architecture='all'
 #---------------
 
 source ../tip-notes/project-header.sh
-source ../tip-notes/comprename-lib.sh
+source ./make-deb-lib.sh
 
 
 destination_folder="${1}"

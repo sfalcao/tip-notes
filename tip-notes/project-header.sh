@@ -39,6 +39,7 @@ __project_binaries_folder__="/usr/lib/${__project_name__}"
 __project_links_folder__='/usr/local/bin'
 __project_doc_folder__="/usr/share/doc/${__project_name__}"
 __project_autocompletion_file__="/etc/bash_completion.d/tip-autocomplete"
+__project_autocompletion_folder__="/etc/bash_completion.d"
 
 # if change the following line, change also deb-make purge section
 __project_config_folder__=~/.config/"${__project_name__}"
