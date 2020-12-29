@@ -16,11 +16,16 @@
 # THIS LINE AGAIN!
 #=========================================================
 
+#------------------------------------------------------------------
+# DO NOT CHANGE the following two lines
+#------------------------------------------------------------------
+my_home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
+my_home=${my_home:-$HOME}
 
 #------------------------------------------------------------------
 # point to folder where notes are stored'
 #------------------------------------------------------------------
-tip_notes_folder=~/.tip-notes
+tip_notes_folder="${my_home}/.tip-notes"
 
 #------------------------------------------------------------------
 # choose alternative tip editor
@@ -74,7 +79,7 @@ tip_confirm_delete_note=true
 #------------------------------------------------------------------
 # point to folder where notes and configs are backuped
 #------------------------------------------------------------------
-tip_backup_folder=~/tip-notes-backup
+tip_backup_folder="${my_home}/tip-notes-backup"
 
 #------------------------------------------------------------------
 # control if --backup will ask for confirmation before

@@ -42,7 +42,9 @@ __project_autocompletion_file__="/etc/bash_completion.d/tip-autocomplete"
 __project_autocompletion_folder__="/etc/bash_completion.d"
 
 # if change the following line, change also deb-make purge section
-__project_config_folder__=~/.config/"${__project_name__}"
+my_home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
+my_home=${my_home:-$HOME}
+__project_config_folder__="${my_home}/.config/${__project_name__}"
 __project_config_file__="${__project_config_folder__}/tiprc"
 
 # defaults (may be changed after sourcing configuration file)
