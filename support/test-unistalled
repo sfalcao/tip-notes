@@ -45,28 +45,28 @@ __script_name__="test-uninstalled"
 
 exit_status=0
 
-if [[ -d "${__project_binaries_folder__}" ]]; then
-    echo "UNINSTALL ERROR: ${__project_binaries_folder__} folder not removed!"
+if [[ -d "${___HEADER___PROJECT_EXECUTABLES_FOLDER___}" ]]; then
+    echo "UNINSTALL ERROR: ${___HEADER___PROJECT_EXECUTABLES_FOLDER___} folder not removed!"
     exit_status=1
 fi
 
-if [[ -d "${__project_doc_folder__}" ]]; then
-    echo "UNINSTALL ERROR: ${__project_doc_folder__} folder not removed!"
+if [[ -d "${___HEADER___PROJECT_DOC_FOLDER___}" ]]; then
+    echo "UNINSTALL ERROR: ${___HEADER___PROJECT_DOC_FOLDER___} folder not removed!"
     exit_status=1
 fi
 
-if [[ -f "${__project_autocompletion_file__}" ]]; then
-    echo "UNINSTALL ERROR: ${__project_autocompletion_file__} file not removed!"
+if [[ -f "${___HEADER___PROJECT_AUTOCOMPLETION_FILE___}" ]]; then
+    echo "UNINSTALL ERROR: ${___HEADER___PROJECT_AUTOCOMPLETION_FILE___} file not removed!"
     exit_status=1
 fi
 
-if [[ -f "/usr/local/man/man1/tip.1.gz" ]]; then
-    echo "UNINSTALL ERROR: /usr/local/man/man1/tip.1.gz file not removed!"
+if [[ -f "${___HEADER___PROJECT_MAN_FOLDER___}/tip.1.gz" ]]; then
+    echo "UNINSTALL ERROR: ${___HEADER___PROJECT_MAN_FOLDER___}/tip.1.gz file not removed!"
     exit_status=1
 fi
 
-if [[ -f "${__project_links_folder__}/tip" ]]; then
-    echo "UNINSTALL ERROR: ${__project_links_folder__}/tip link not removed!"
+if [[ -f "${___HEADER___PROJECT_LINKS_FOLDER___}/tip" ]]; then
+    echo "UNINSTALL ERROR: ${___HEADER___PROJECT_LINKS_FOLDER___}/tip link not removed!"
     exit_status=1
 fi
 

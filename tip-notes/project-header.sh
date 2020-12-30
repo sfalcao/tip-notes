@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#===============================================================================
+#==============================================================================
 #
 #   DESCRIPTION: tip notes's Header
 # 
@@ -8,7 +8,7 @@
 #        AUTHOR: S. Falcao
 #       CREATED: 11.07.2020 16:09
 # 
-#===============================================================================
+#==============================================================================
 
 # Copyright (C) 2020 tip-notes authors.
 #
@@ -29,23 +29,27 @@
 
 
 
-__project_name__="tip-notes"
-__project_version__="0.1.0"
-__project_mail__="falecomigo.falcao@gmail.com"
-__project_dev_stage__="DRAFT"
+___HEADER___PROJECT_NAME___="tip-notes"
+___HEADER___PROJECT_VERSION___="0.1.0"
+___HEADER___PROJECT_MAIL___="falecomigo.falcao@gmail.com"
+___HEADER___PROJECT_DEV_STAGE___="DRAFT"
 
 
-__project_binaries_folder__="/usr/lib/${__project_name__}"
-__project_links_folder__='/usr/local/bin'
-__project_doc_folder__="/usr/share/doc/${__project_name__}"
-__project_autocompletion_file__="/etc/bash_completion.d/tip-autocomplete"
-__project_autocompletion_folder__="/etc/bash_completion.d"
+___HEADER___PROJECT_EXECUTABLES_FOLDER___="/usr/lib/${___HEADER___PROJECT_NAME___}"
+___HEADER___PROJECT_LINKS_FOLDER___='/usr/local/bin'
+___HEADER___PROJECT_DOC_FOLDER___="/usr/share/doc/${___HEADER___PROJECT_NAME___}"
+___HEADER___PROJECT_AUTOCOMPLETION_FOLDER___="/etc/bash_completion.d"
+___HEADER___PROJECT_AUTOCOMPLETION_FILE___="${___HEADER___PROJECT_AUTOCOMPLETION_FOLDER___}/tip.bash"
+___HEADER___PROJECT_MAN_FOLDER___="/usr/local/man/man1"
+
 
 # if change the following line, change also deb-make purge section
 my_home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
 my_home=${my_home:-$HOME}
-__project_config_folder__="${my_home}/.config/${__project_name__}"
-__project_config_file__="${__project_config_folder__}/tiprc"
+___HEADER___PROJECT_CONFIG_FOLDER___="${my_home}/.config/${___HEADER___PROJECT_NAME___}"
+___HEADER___PROJECT_CONFIG_FILE___="${___HEADER___PROJECT_CONFIG_FOLDER___}/tiprc"
+
 
 # defaults (may be changed after sourcing configuration file)
+# TODO: remove from here
 tip_editor=''

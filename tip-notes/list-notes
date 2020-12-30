@@ -43,8 +43,8 @@ __script_name__="list-notes"
 
 source ./project-header.sh
 
-if [[ -f "${__project_config_file__}" ]]; then
-    source "${__project_config_file__}"
+if [[ -f "${___HEADER___PROJECT_CONFIG_FILE___}" ]]; then
+    source "${___HEADER___PROJECT_CONFIG_FILE___}"
 else
     echo "ERROR: --> configuration file does not exist!"
     echo

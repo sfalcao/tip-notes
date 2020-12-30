@@ -3,7 +3,7 @@
 #
 
 source /usr/lib/tip-notes/project-header.sh
-source ${__project_config_file__}
+source ${___HEADER___PROJECT_CONFIG_FILE___}
 
 have tip &&
 _complete_me()
@@ -50,7 +50,7 @@ _complete_me()
         if [[ ${COMP_WORDS[1]} == "--backup" ]]; then
             #echo "--backup detected"
             COMPREPLY=( $(compgen -W '
-                --all --config-only --notes--only
+                --all --config-only --notes-only
                 ' -- "$cur" ) )
             return 0
 	fi

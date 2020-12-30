@@ -27,7 +27,7 @@ IFS=$'\t'
 full_path_list='../autocompletion/tip.bash'
 #full_path_list+="${IFS}../autocompletion/<autocompletion_file_2>>"
 #...
-destination_folder="${package_folder}${__project_autocompletion_folder__}"
+destination_folder="${package_folder}${___HEADER___PROJECT_AUTOCOMPLETION_FOLDER___}"
 copy_and_set_permissions \
     "${full_path_list}" \
     "${destination_folder}" \

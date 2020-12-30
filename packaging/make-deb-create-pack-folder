@@ -20,7 +20,7 @@
 
 # create package folder according to project name, version and architecture
 package_name=''
-package_name="${__project_name__}_${__project_version__}_${package_architecture}"
+package_name="${___HEADER___PROJECT_NAME___}_${___HEADER___PROJECT_VERSION___}_${package_architecture}"
 package_folder="${destination_folder}${package_name}"
 
 if [[ -d "${package_folder}" ]]; then

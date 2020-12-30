@@ -45,13 +45,18 @@ __script_name__="test-purged"
 
 exit_status=0
 
-if ! ./test-unistalled; then
+if ! ./test-unistalled &> /dev/null; then
+    echo "WARNING........: ${___HEADER___PROJECT_NAME___} not uninstalled!"
     exit_status=1
 fi
 
-if [[ -d "${__project_config_folder__}" ]]; then
-    echo "PURGE ERROR....: ${__project_config_folder__} folder not removed!"
+if [[ -d "${___HEADER___PROJECT_CONFIG_FOLDER___}" ]]; then
+    echo "[${___HEADER___PROJECT_CONFIG_FOLDER___}] --> configuration folder not removed!"
     exit_status=1
+else
+    if [[ ${exit_status} -eq 1 ]]; then
+        echo "INFORMATION....: config folder removed!"
+    fi
 fi
 
 exit ${exit_status}

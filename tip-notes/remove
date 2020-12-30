@@ -36,7 +36,7 @@ if apt list --installed 2> /dev/null | grep 'tip-notes'; then
     echo "ATTENTION!"
     echo
     echo\
-        "${__project_name__} has been installed using apt system's"\
+        "${___HEADER___PROJECT_NAME___} has been installed using apt system's"\
         "package manager!"
     echo
     echo "Remove installed version using:"
@@ -46,23 +46,24 @@ if apt list --installed 2> /dev/null | grep 'tip-notes'; then
 fi
 
 # remove files and folders destination
-rm -r "${__project_binaries_folder__}"
+rm -r "${___HEADER___PROJECT_EXECUTABLES_FOLDER___}"
 
 # remove autocompletion file
-rm "${__project_autocompletion_file__}"
+# TODO: expand to remove also fish autocompletion
+rm "${___HEADER___PROJECT_AUTOCOMPLETION_FILE___}"
 
 # remove links
-rm "${__project_links_folder__}/tip"
+rm "${___HEADER___PROJECT_LINKS_FOLDER___}/tip"
 
 # remove docs
-rm -r "${__project_doc_folder__}"
+rm -r "${___HEADER___PROJECT_DOC_FOLDER___}"
 
 # remove man page
 rm -r /usr/local/man/man1/tip.1.gz
 
-# puge files if required
+# purge files if required
 if [[ "${1}" == "--purge" ]]; then
-    rm -r "${__project_config_folder__}"
+    rm -r "${___HEADER___PROJECT_CONFIG_FOLDER___}"
 fi
 
 exit 0

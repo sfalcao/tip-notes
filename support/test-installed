@@ -46,58 +46,84 @@ __script_name__="test-installed"
 exit_status=0
 
 # check binaries
-if [[ -d "${__project_binaries_folder__}" ]]; then
+if [[ -d "${___HEADER___PROJECT_EXECUTABLES_FOLDER___}" ]]; then
     for element in ../tip-notes/*; do
         element="$(basename ${element})"
-        if [[ ! -f "${__project_binaries_folder__}/${element}" ]]; then
-            echo ".. ${__project_binaries_folder__}/${element} --> file is missing!"
+        if [[ ! -f \
+        "${___HEADER___PROJECT_EXECUTABLES_FOLDER___}/${element}" ]]; then
+            echo \
+                "[${___HEADER___PROJECT_EXECUTABLES_FOLDER___}/${element}"
+                "           "\
+                "] --> file is missing!"
             exit_status=1
         fi
     done
 else
-    echo "[${__project_binaries_folder__}] --> folder is missing!"
+    echo \
+        "[${___HEADER___PROJECT_EXECUTABLES_FOLDER___}"\
+        "             "\
+        "] --> folder is missing!"
     exit_status=1
 fi
 
 
 # check docs
-if [[ -d "${__project_doc_folder__}" ]]; then
-    if [[ ! -f "${__project_doc_folder__}/copyright" ]]; then
-        echo ".. ${__project_doc_folder__}/copyright} --> file is missing!"
+if [[ -d "${___HEADER___PROJECT_DOC_FOLDER___}" ]]; then
+    if [[ ! -f "${___HEADER___PROJECT_DOC_FOLDER___}/copyright" ]]; then
+        echo \
+            "[${___HEADER___PROJECT_DOC_FOLDER___}/copyright}"\
+            "              "\
+            "--> file is missing!"
         exit_status=1
     fi
 else
-    echo "[${__project_doc_folder__}] --> folder is missing!"
+    echo "[${___HEADER___PROJECT_DOC_FOLDER___}"\
+        "       "\
+        "] --> folder is missing!"
     exit_status=1
 fi
 
 
 # check autocompletion
-if [[ ! -f "${__project_autocompletion_file__}" ]]; then
-    echo ".. ${__project_autocompletion_file__} --> file is missing!"
+if [[ ! -f "${___HEADER___PROJECT_AUTOCOMPLETION_FILE___}" ]]; then
+    echo \
+        "[${___HEADER___PROJECT_AUTOCOMPLETION_FILE___}"\
+        ""\
+        "] --> file is missing!"
     exit_status=1
 fi
 
 # check link
-if [[ ! -f "${__project_links_folder__}/tip" ]]; then
-    echo ".. ${__project_links_folder__}/tip --> link is missing/broken!"
+if [[ ! -f "${___HEADER___PROJECT_LINKS_FOLDER___}/tip" ]]; then
+    echo \
+        "[${___HEADER___PROJECT_LINKS_FOLDER___}/tip"\
+        "             "\
+        "] --> link is missing/broken!"
     exit_status=1
 fi
 
 # check man page
-if [[ ! -f "/usr/local/man/man1/tip.1.gz" ]]; then
-    echo ".. /usr/local/man/man1/tip.1.gz  --> man page is missing!"
+if [[ ! -f "${___HEADER___PROJECT_MAN_FOLDER___}/tip.1.gz" ]]; then
+    echo \
+        "[${___HEADER___PROJECT_MAN_FOLDER___}/tip.1.gz"\
+        "   "\
+        "] --> man page is missing!"
     exit_status=1
 fi
 
 
-if [[ -d "${__project_config_folder__}" ]]; then
-    if [[ ! -f "${__project_config_file__}" ]]; then
-        echo ".. ${__project_config_file__} --> file is missing!"
+if [[ -d "${___HEADER___PROJECT_CONFIG_FOLDER___}" ]]; then
+    if [[ ! -f "${___HEADER___PROJECT_CONFIG_FILE___}" ]]; then
+        echo \
+            "[${___HEADER___PROJECT_CONFIG_FILE___}"\
+            "   "\
+            "--> file is missing!"
         exit_status=1
     fi
 else
-    echo "[${__project_config_folder__}] --> folder is missing!"
+    echo "[${___HEADER___PROJECT_CONFIG_FOLDER___}"\
+        " "\
+        "] --> folder is missing!"
     exit_status=1
 fi
 

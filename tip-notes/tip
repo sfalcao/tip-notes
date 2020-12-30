@@ -50,8 +50,8 @@ source ./project-header.sh
 
 # if exist a config file, source it, otherwise prints an error
 # message, unless $1 is --config-init
-if [[ -f "${__project_config_file__}" ]]; then
-    source "${__project_config_file__}"
+if [[ -f "${___HEADER___PROJECT_CONFIG_FILE___}" ]]; then
+    source "${___HEADER___PROJECT_CONFIG_FILE___}"
 else
     if [[ "${#}" -eq 0 ]] || [[ "${1}" != '--init' ]]; then
         echo
@@ -117,35 +117,74 @@ while [[ ${#} -gt 0 ]]; do
         '-h' | '--help')
             shift # past argument
             echo
-            echo "${__project_name__} ${__project_version__}"
+            echo \
+                "${___HEADER___PROJECT_NAME___} "\
+                "${___HEADER___PROJECT_VERSION___}"
             echo
             echo
             echo "USAGE:"
             echo
-            echo "${__script_name__}                                    list all notes"
-            echo "${__script_name__} [<group>]                          list all notes within the group"
-            echo "${__script_name__} [<group>/]<note>                   list specific note"
+            echo \
+                "${__script_name__}                                    "\
+                "list all notes"
+            echo \
+                "${__script_name__} [<group>]                          "\
+                "list all notes within the group"
+            echo \
+                "${__script_name__} [<group>/]<note>                   "\
+                "list specific note"
             echo
-            echo "${__script_name__} --config                           edit external configuration file"
-            echo "${__script_name__} --init                             create an external configuration file"
-            echo "${__script_name__} --reset                            reset external configuration file"
+            echo \
+                "${__script_name__} --config                           "\
+                "edit external configuration file"
+            echo \
+                "${__script_name__} --init                             "\
+                "create an external configuration file"
+            echo \
+                "${__script_name__} --reset                            "\
+                "reset external configuration file"
             echo
-            echo "${__script_name__} --backup                           creates a backup according to tiprc configuration"
-            echo "${__script_name__} --backup --all                     creates a backup containing notes and configurations"
-            echo "${__script_name__} --backup --config-only             creates a backup containing configurations"
-            echo "${__script_name__} --backup --notes-only              creates a backup containing notes"
+            echo \
+                "${__script_name__} --backup                           "\
+                "creates a backup according to tiprc configuration"
+            echo \
+                "${__script_name__} --backup --all                     "\
+                "creates a backup containing notes and configurations"
+            echo \
+                "${__script_name__} --backup --config-only             "\
+                "creates a backup containing configurations"
+            echo \
+                "${__script_name__} --backup --notes-only              "\
+                "creates a backup containing notes"
             echo
-            echo "${__script_name__} --edit [<group>/]<note>            add/edit note"
-            echo "${__script_name__} --delete [<group>/]<note>          delete note"
-            echo "${__script_name__} --find [<group>] <text>            find notes which name contains <text>"
-            echo "${__script_name__} --find-content [<group>] <text>    find notes which contains <text>"
+            echo \
+                "${__script_name__} --edit [<group>/]<note>            "\
+                "add/edit note"
+            echo \
+                "${__script_name__} --delete [<group>/]<note>          "\
+                "delete note"
+            echo \
+                "${__script_name__} --find [<group>] <text>            "\
+                "find notes which name contains <text>"
+            echo \
+                "${__script_name__} --find-content [<group>] <text>    "\
+                "find notes which contains <text>"
             echo
-            echo "${__script_name__} --remove                           remove ${__project_name__} from system"
-            echo "${__script_name__} --purge                            remove ${__project_name__} from system including"
-            echo "                                       configuration files and notes"
+            echo \
+                "${__script_name__} --remove                           "\
+                "remove ${___HEADER___PROJECT_NAME___} from system"
+            echo \
+                "${__script_name__} --purge                            "\
+                "remove ${___HEADER___PROJECT_NAME___} from system including"
+            echo "                                       "\
+                "configuration files and notes"
             echo
-            echo "${__script_name__} --version                          shows ${__project_name__} version"
-            echo "${__script_name__} --authors                          shows ${__project_name__} authors list"
+            echo \
+                "${__script_name__} --version                          "\
+                "shows ${___HEADER___PROJECT_NAME___} version"
+            echo \
+                "${__script_name__} --authors                          "\
+                "shows ${___HEADER___PROJECT_NAME___} authors list"
             echo
             echo
             echo "SHORT FORMS:"
@@ -158,7 +197,9 @@ while [[ ${#} -gt 0 ]]; do
             echo "-h is same of --help"
             echo
             echo
-            echo "${__script_name__} --help                             shows ${__project_name__}'s help"
+            echo \
+                "${__script_name__} --help                             "\
+                "shows ${___HEADER___PROJECT_NAME___}'s help"
             echo
             exit 0
             ;;
@@ -270,11 +311,11 @@ while [[ ${#} -gt 0 ]]; do
             exit 0
             ;;
         '--config')
-            if [[ -s "${__project_config_file__}" ]]; then
+            if [[ -s "${___HEADER___PROJECT_CONFIG_FILE___}" ]]; then
                 if [[ -z "${tip_editor}" ]]; then
-                    xdg-open ${__project_config_file__}
+                    xdg-open ${___HEADER___PROJECT_CONFIG_FILE___}
                 else
-                    ${tip_editor} "${__project_config_file__}"
+                    ${tip_editor} "${___HEADER___PROJECT_CONFIG_FILE___}"
                 fi
                 exit 0
             fi
@@ -295,7 +336,7 @@ while [[ ${#} -gt 0 ]]; do
                     exit 1
                 fi
             fi
-            rm "${__project_config_file__}"
+            rm "${___HEADER___PROJECT_CONFIG_FILE___}"
             ./init
             exit 0
             ;;
@@ -322,7 +363,7 @@ while [[ ${#} -gt 0 ]]; do
             exit 0
             ;;
         '--version')
-            echo "${__project_version__}"
+            echo "${___HEADER___PROJECT_VERSION___}"
             exit 0
             ;;
 
