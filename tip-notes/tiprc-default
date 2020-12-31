@@ -82,7 +82,7 @@ ___CONFIG___TIP_CONFIRM_DELETE_NOTE=true
 #-----------------------------------------------------------------------------
 # point to folder where notes and configs are backuped
 #-----------------------------------------------------------------------------
-___CONFIG___TIP_BACKUP_FOLDER="${my_home}/tip-notes-backup"
+___CONFIG___TIP_BACKUP_FOLDER="${_home}/tip-notes-backup"
 
 #-----------------------------------------------------------------------------
 # control if --backup will ask for confirmation before
