@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Copyright (C) 2020 tip-notes authors.
+#
+# This file is part of tip-notes.
+#
+#     tip-notes is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+#
+#     tip-notes is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with Foobar.  If not, see <https://www.gnu.org/licenses/>
+
+
+
+set -o errexit
+#set -o nounset
+set -o pipefail
+#set -o xtrace
+
+source ../../tip-notes/project-header.sh
+
+
+#---------
+# HEADER
+#---------
+__script_name__="${0}"
+
+
+exit_status=0
+
+# check if autocompletion file is missing
+if [[ ! -f "${___HEADER___PROJECT_AUTOCOMPLETION_FILE___}" ]]; then
+    echo \
+        "[${0}] --> FAIL!"\
+        "File"\
+        "[${___HEADER___PROJECT_AUTOCOMPLETION_FILE___}]"\
+        "is missing!"
+    exit_status=1
+fi
+
+# TODO: expand to check fish autocomplete also
+
+exit ${exit_status}

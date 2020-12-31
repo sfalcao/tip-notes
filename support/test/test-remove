@@ -1,12 +1,12 @@
 #!/bin/bash
 #==============================================================================
 #
-#   DESCRIPTION:  test if tip-notes is uninstalled
+#   DESCRIPTION:  test if tip-notes is uninstalled but not purged
 # 
-#         USAGE:  ./test-uninstalled
+#         USAGE:  ./test-apt-remove
 # 
 #        AUTHOR:  S. Falcao
-#       CREATED:  08.08.2020 18:25 BRST
+#       CREATED:  31.12.2020 10:30 BRST
 # 
 #==============================================================================
 
@@ -34,41 +34,23 @@ set -o errexit
 set -o pipefail
 #set -o xtrace
 
-source ../tip-notes/project-header.sh
+source ../../tip-notes/project-header.sh
 
 
 #---------
 # HEADER
 #---------
-__script_name__="test-uninstalled"
+__script_name__="${0}"
 
 
 exit_status=0
 
-if [[ -d "${___HEADER___PROJECT_EXECUTABLES_FOLDER___}" ]]; then
-    echo "UNINSTALL ERROR: ${___HEADER___PROJECT_EXECUTABLES_FOLDER___} folder not removed!"
+if ! ./test-if-all-project-files-are-absent; then
     exit_status=1
 fi
 
-if [[ -d "${___HEADER___PROJECT_DOC_FOLDER___}" ]]; then
-    echo "UNINSTALL ERROR: ${___HEADER___PROJECT_DOC_FOLDER___} folder not removed!"
+if  ! ./test-if-config-files-are-present; then
     exit_status=1
 fi
-
-if [[ -f "${___HEADER___PROJECT_AUTOCOMPLETION_FILE___}" ]]; then
-    echo "UNINSTALL ERROR: ${___HEADER___PROJECT_AUTOCOMPLETION_FILE___} file not removed!"
-    exit_status=1
-fi
-
-if [[ -f "${___HEADER___PROJECT_MAN_FOLDER___}/tip.1.gz" ]]; then
-    echo "UNINSTALL ERROR: ${___HEADER___PROJECT_MAN_FOLDER___}/tip.1.gz file not removed!"
-    exit_status=1
-fi
-
-if [[ -f "${___HEADER___PROJECT_LINKS_FOLDER___}/tip" ]]; then
-    echo "UNINSTALL ERROR: ${___HEADER___PROJECT_LINKS_FOLDER___}/tip link not removed!"
-    exit_status=1
-fi
-
 
 exit ${exit_status}
