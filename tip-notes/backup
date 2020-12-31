@@ -59,8 +59,8 @@ fi
 # MAIN SECTION'
 #-------------------------------------------------------------------------------'
 
-if [[ ! -d "${tip_backup_folder}" ]]; then
-    if [ "${tip_confirm_backup_folder_creation}" == true ]; then
+if [[ ! -d "${___CONFIG___TIP_BACKUP_FOLDER}" ]]; then
+    if [ "${___CONFIG___TIP_CONFIRM_BACKUP_FOLDER_CREATION}" == true ]; then
         echo "tip-notes backup folder does not exist!"
         read -p "Do you like to create it now? Type 'y' or 'n' :" answer
         if [[ ! "${answer}" =~ [Y|y] ]]; then
@@ -68,11 +68,11 @@ if [[ ! -d "${tip_backup_folder}" ]]; then
             exit 1
         fi
     fi
-    mkdir "${tip_backup_folder}"
+    mkdir "${___CONFIG___TIP_BACKUP_FOLDER}"
 fi
 
 if [[ "${#}" -eq 0 ]]; then
-    behaviour="${tip_backup_behaviour}"
+    behaviour="${___CONFIG___TIP_BACKUP_BEHAVIOUR}"
 elif [[ "${#}" -eq 1 ]]; then
     behaviour="${1}"
 else
@@ -84,7 +84,7 @@ fi
 
 tip_backup_time_stamp="$(date '+%Y%m%d-%H%M%S-')"
 
-tip_backup_file_prefix="${tip_backup_folder}"
+tip_backup_file_prefix="${___CONFIG___TIP_BACKUP_FOLDER}"
 tip_backup_file_prefix+="/${tip_backup_time_stamp}"
 tip_backup_file_prefix+="tip-notes-backup_-_"
 
@@ -92,7 +92,7 @@ if [[ "${behaviour}" == '--all' ]];then
     tip_backup_file_sufix='all.tar'
     tar -cvf \
         "${tip_backup_file_prefix}${tip_backup_file_sufix}" \
-        "${___HEADER___PROJECT_CONFIG_FOLDER___}" "${tip_notes_folder}" \
+        "${___HEADER___PROJECT_CONFIG_FOLDER___}" "${___CONFIG___TIP_NOTES_FOLDER}" \
         &> /dev/null
 elif [[ "${behaviour}" == '--config-only' ]];then
     tip_backup_file_sufix='config-only.tar'
@@ -105,7 +105,7 @@ elif [[ "${behaviour}" == '--notes-only' ]];then
     tip_backup_file_sufix='notes-only.tar'
     tar -cvf \
         "${tip_backup_file_prefix}${tip_backup_file_sufix}" \
-        "${tip_notes_folder}" \
+        "${___CONFIG___TIP_NOTES_FOLDER}" \
         &> /dev/null
         echo 'WARNING --> only notes have been saved!'
 else

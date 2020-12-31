@@ -61,9 +61,9 @@ _complete_me()
     if [[ ${COMP_WORDS[1]} =~ -[d|e] ]] || [[ ${COMP_WORDS[1]} == '' ]]; then
         # Completion of existing notes
         NOTES_LIST=$(
-    	    find ${tip_notes_folder} \
+    	    find ${___CONFIG___TIP_NOTES_FOLDER} \
     	    | sort \
-    	    | grep -oP "${tip_notes_folder}/\K.*" \
+    	    | grep -oP "${___CONFIG___TIP_NOTES_FOLDER}/\K.*" \
         )
     
         COMPREPLY=( $(compgen -W ' ${NOTES_LIST}' -- "$cur" ) )

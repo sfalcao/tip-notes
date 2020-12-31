@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #==============================================================================
 #
-#   DESCRIPTION: tip notes's Header
+#   DESCRIPTION: tip-notes's Header
 # 
 #         USAGE: source this file in script that need project informations
 #                
@@ -44,12 +44,12 @@ ___HEADER___PROJECT_MAN_FOLDER___="/usr/local/man/man1"
 
 
 # if change the following line, change also deb-make purge section
-my_home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
-my_home=${my_home:-$HOME}
-___HEADER___PROJECT_CONFIG_FOLDER___="${my_home}/.config/${___HEADER___PROJECT_NAME___}"
+_home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
+_home=${_home:-$HOME}
+___HEADER___PROJECT_CONFIG_FOLDER___="${_home}/.config/${___HEADER___PROJECT_NAME___}"
 ___HEADER___PROJECT_CONFIG_FILE___="${___HEADER___PROJECT_CONFIG_FOLDER___}/tiprc"
 
 
 # defaults (may be changed after sourcing configuration file)
-# TODO: remove from here
-tip_editor=''
+# TODO: transferred to config file. I believe can be removed fro  here
+#___CONFIG___TIP_EDITOR=''

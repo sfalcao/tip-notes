@@ -1,4 +1,4 @@
-#=========================================================
+#=============================================================================
 # tip notes configuration file
 #
 # you are welcome to make changes in configurations
@@ -14,93 +14,97 @@
 # NOTE THAT IF YOU CHANGED tip_notes_folder YOU MAY
 # HAVE DO MOVE YOUR NOTES TO DEFAULT LOCATION OR EDIT
 # THIS LINE AGAIN!
-#=========================================================
+#=============================================================================
 
-#------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 # DO NOT CHANGE the following two lines
-#------------------------------------------------------------------
-my_home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
-my_home=${my_home:-$HOME}
+#-----------------------------------------------------------------------------
+_home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
+_home=${_home:-$HOME}
 
-#------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 # point to folder where notes are stored'
-#------------------------------------------------------------------
-tip_notes_folder="${my_home}/.tip-notes"
+#-----------------------------------------------------------------------------
+___CONFIG___TIP_NOTES_FOLDER="${_home}/.tip-notes"
 
-#------------------------------------------------------------------
-# choose alternative tip editor
-# if no tip_editor is set then tip will use
-# system's defaults to open the note
+#-----------------------------------------------------------------------------
+# choose editor to be used by tip-notes
 #
-# eg:
-# tip_editor='vim'
-# tip_editor='nano'
-#------------------------------------------------------------------
-#tip_editor='vim'
+# if ___CONFIG___TIP_EDITOR is set to '' then tip will use system's
+# default editor to edit notes and configurations
+#
+# ___CONFIG___TIP_EDITOR=''                 system default editor
+# ___CONFIG___TIP_EDITOR='vim'              vim as editor (must be installed)
+# ___CONFIG___TIP_EDITOR='nano'             nano as editor (must be installed)
+# and so on...
+#
+#-----------------------------------------------------------------------------
+___CONFIG___TIP_EDITOR=''
 
-#------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 # control if --remove will ask for confirmation or not
 # IS SAFER TO KEEP IT true
 #
-# tip_confirm_remove=true                   asks for confirmation
-# tip_confirm_remove=false                  removes without asking
-#------------------------------------------------------------------
-tip_confirm_remove=true
+# ___CONFIG___TIP_CONFIRM_REMOVE=true           asks for confirmation
+# ___CONFIG___TIP_CONFIRM_REMOVE=false          removes without asking
+#-----------------------------------------------------------------------------
+___CONFIG___TIP_CONFIRM_REMOVE=true
 
-#------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 # control if --purge will ask for confirmation
 # IS STRONGLY RECOMMENDED TO KEEP IT true
 # Changing this option may lead to accidentally loosing all
 # your notes
 #
-# tip_confirm_purge=true                    asks for confirmation
-# tip_confirm_purge=false                   removes without asking
-#------------------------------------------------------------------
-tip_confirm_purge=true
+# ___CONFIG___TIP_CONFIRM_PURGE=true            asks for confirmation
+# ___CONFIG___TIP_CONFIRM_PURGE=false           removes without asking
+#-----------------------------------------------------------------------------
+___CONFIG___TIP_CONFIRM_PURGE=true
 
-#------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 # control if --reset will ask for confirmation
 # IS SAFER TO KEEP IT true
 #'
-# tip_confirm_reset=true                    asks for confirmation
-# tip_confirm_reset=false                   resets without asking
-#------------------------------------------------------------------
-tip_confirm_reset=true
+# ___CONFIG___TIP_CONFIRM_RESET=true            asks for confirmation
+# ___CONFIG___TIP_CONFIRM_RESET=false           resets without asking
+#-----------------------------------------------------------------------------
+___CONFIG___TIP_CONFIRM_RESET=true
 
-#------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 # control if --delete will ask for confirmation
 # IS SAFER TO KEEP IT true
 #'
-# tip_confirm_delete_note=true              asks for confirmation
-# tip_confirm_delete_note=false             resets without asking
-#------------------------------------------------------------------
-tip_confirm_delete_note=true
+# ___CONFIG___TIP_CONFIRM_DELETE_NOTE=true      asks for confirmation
+# ___CONFIG___TIP_CONFIRM_DELETE_NOTE=false     resets without asking
+#-----------------------------------------------------------------------------
+___CONFIG___TIP_CONFIRM_DELETE_NOTE=true
 
-#------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 # point to folder where notes and configs are backuped
-#------------------------------------------------------------------
-tip_backup_folder="${my_home}/tip-notes-backup"
+#-----------------------------------------------------------------------------
+___CONFIG___TIP_BACKUP_FOLDER="${my_home}/tip-notes-backup"
 
-#------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 # control if --backup will ask for confirmation before
 # creating backup folder if it does not exist
 #
-# tip_confirm_backup_folder_creation=true   asks for confirmation
-# tip_confirm_backup_folder_creation=false  do not ask for
-#                                           confirmation
-#------------------------------------------------------------------
-tip_confirm_backup_folder_creation=true
+# ___CONFIG___TIP_CONFIRM_BACKUP_FOLDER_CREATION=true   asks for confirmation
+# ___CONFIG___TIP_CONFIRM_BACKUP_FOLDER_CREATION=false  do not ask confirmation
+#-----------------------------------------------------------------------------
+___CONFIG___TIP_CONFIRM_BACKUP_FOLDER_CREATION=true
 
-#------------------------------------------------------------------
-# control --backup behaviour as follow:
+#-----------------------------------------------------------------------------
+# this section controls --backup behaviour. Basically you choose what is to
+# be saved when user calls 'tip --backup' or 'tip -b'
+#
+# Notice though that if at any time the long form is called,
+# (e.g 'tip --backup --all'), then the behavior defined here is overridden
+# by users choice for that very occasion only
+#
 # IS SAFER TO KEEP IT '--all'
 #
-# tip_backup_behaviour='--all'              configurations and
-#                                           notes are saved
-#
-# tip_backup_behaviour='--config-only'      only configurations
-#                                           are saved
-#
-# tip_backup_behaviour='--notes-only'       only notes are saved
-#------------------------------------------------------------------
-tip_backup_behaviour='--all'
+# ___CONFIG___TIP_BACKUP_BEHAVIOUR='--all'          configurations and notes
+# ___CONFIG___TIP_BACKUP_BEHAVIOUR='--config-only'  only configurations
+# ___CONFIG___TIP_BACKUP_BEHAVIOUR='--notes-only'   only notes
+#-----------------------------------------------------------------------------
+___CONFIG___TIP_BACKUP_BEHAVIOUR='--all'

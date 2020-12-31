@@ -55,9 +55,9 @@ else
 fi
 
 if [[ "${#}" -eq 0 ]]; then
-    folder_to_list="${tip_notes_folder}"
+    folder_to_list="${___CONFIG___TIP_NOTES_FOLDER}"
 elif [[ "${#}" -eq 1 ]]; then
-    folder_to_list="${tip_notes_folder}/${1}"
+    folder_to_list="${___CONFIG___TIP_NOTES_FOLDER}/${1}"
     if ! [[ -d "${folder_to_list}" ]]; then
         echo "ERROR: [${1}] seems no to be a valid GROUP of notes"
         exit 1
