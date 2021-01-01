@@ -38,17 +38,44 @@ echo \
     " ${___HEADER___PROJECT_LINKS_FOLDER___}" >> "${postinst_file}"
 chmod 755 "${postinst_file}"
 
+
+
 # create postrm file
+
+# add:
+# #!/bin/bash
+#
 postrm_file="${package_folder}/DEBIAN/postrm"
 echo "#!/bin/bash" > "${postrm_file}"
 echo >> "${postrm_file}"
+
+# add:
+# _home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
+# _home=${_home:-$HOME}
+#
+echo \
+'_home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: '\
+'| cut -d: -f 6`"'\
+>> "${postrm_file}"
+echo '_home=${_home:-$HOME}' >> "${postrm_file}"
+echo >> "${postrm_file}"
+
+# add:
+# rm -f /usr/local/bin/tip
+#
 echo \
     "rm -f ${___HEADER___PROJECT_LINKS_FOLDER___}/tip" >>  "${postrm_file}"
 echo >> "${postrm_file}"
+
+# add:
+# if [[ "${1}" == "purge" ]]; then
+#     rm -rf "${_home}/.config/tip-notes"
+# fi
+# 
 echo 'if [[ "${1}" == "purge" ]]; then' >> "${postrm_file}"
-# TODO: change the way to obtain home folder
 echo \
-    "    rm -rf ~/.config/${___HEADER___PROJECT_NAME___}" \
-    >> "${postrm_file}"
+'    rm -rf "${_home}"/.config/'\
+"${___HEADER___PROJECT_NAME___}"\
+>> "${postrm_file}"
 echo "fi" >> "${postrm_file}"
 chmod 755 "${postrm_file}"
