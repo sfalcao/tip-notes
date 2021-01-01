@@ -1,10 +1,3 @@
-+ when sudo apt remove --purge tip-notes or sudo apt purge tip-notes,
-  configuration folder is being kept.
-
-  I guess the problem is due to accessing root /home instead of user /home
-
-  Probably easy to fix
-
 + tip.bash autocomplete when called in form of tip [TAB] [TAB], list notes
   correctly but fails in autocomplete them, when calledin form
   tip -e [TAB] [TAB] it works correctly
