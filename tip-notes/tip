@@ -29,7 +29,7 @@
 
 
 
-set -o errexit
+#set -o errexit
 set -o nounset
 set -o pipefail
 #set -o xtrace
@@ -39,14 +39,19 @@ set -o pipefail
 # CONFIGURATION SECTION
 #-------------------------------------------------------------------------------
 #
-__script_name__="tip"
+SCRIPT_NAME=$(basename "${0}")
 
-__link_dir__="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-__linked_script__=$(readlink "${__link_dir__}/${__script_name__}")
-__project_dir__=$(dirname "${__linked_script__}")
-cd ${__project_dir__}
+LINK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LINKED_SCRIPT=$(readlink "${LINK_DIR}/${SCRIPT_NAME}")
+if [[ -z "${LINKED_SCRIPT}" ]]; then
+    EXECUTABLES_DIR="${LINK_DIR}"
+else
+    EXECUTABLES_DIR=$(dirname "${LINKED_SCRIPT}")
+fi
+source "${EXECUTABLES_DIR}/project-header.sh"
 
-source ./project-header.sh
+#echo $SCRIPT_NAME
+#echo $EXECUTABLES_DIR
 
 # if exist a config file, source it, otherwise prints an error
 # message, unless $1 is --config-init
@@ -125,65 +130,65 @@ while [[ ${#} -gt 0 ]]; do
             echo "USAGE:"
             echo
             echo \
-                "${__script_name__}                                    "\
+                "${SCRIPT_NAME}                                    "\
                 "list all notes"
             echo \
-                "${__script_name__} [<group>]                          "\
+                "${SCRIPT_NAME} [<group>]                          "\
                 "list all notes within the group"
             echo \
-                "${__script_name__} [<group>/]<note>                   "\
+                "${SCRIPT_NAME} [<group>/]<note>                   "\
                 "list specific note"
             echo
             echo \
-                "${__script_name__} --config                           "\
+                "${SCRIPT_NAME} --config                           "\
                 "edit external configuration file"
             echo \
-                "${__script_name__} --init                             "\
+                "${SCRIPT_NAME} --init                             "\
                 "create an external configuration file"
             echo \
-                "${__script_name__} --reset                            "\
+                "${SCRIPT_NAME} --reset                            "\
                 "reset external configuration file"
             echo
             echo \
-                "${__script_name__} --backup                           "\
+                "${SCRIPT_NAME} --backup                           "\
                 "creates a backup according to tiprc configuration"
             echo \
-                "${__script_name__} --backup --all                     "\
+                "${SCRIPT_NAME} --backup --all                     "\
                 "creates a backup containing notes and configurations"
             echo \
-                "${__script_name__} --backup --config-only             "\
+                "${SCRIPT_NAME} --backup --config-only             "\
                 "creates a backup containing configurations"
             echo \
-                "${__script_name__} --backup --notes-only              "\
+                "${SCRIPT_NAME} --backup --notes-only              "\
                 "creates a backup containing notes"
             echo
             echo \
-                "${__script_name__} --edit [<group>/]<note>            "\
+                "${SCRIPT_NAME} --edit [<group>/]<note>            "\
                 "add/edit note"
             echo \
-                "${__script_name__} --delete [<group>/]<note>          "\
+                "${SCRIPT_NAME} --delete [<group>/]<note>          "\
                 "delete note"
             echo \
-                "${__script_name__} --find [<group>] <text>            "\
+                "${SCRIPT_NAME} --find [<group>] <text>            "\
                 "find notes which name contains <text>"
             echo \
-                "${__script_name__} --find-content [<group>] <text>    "\
+                "${SCRIPT_NAME} --find-content [<group>] <text>    "\
                 "find notes which contains <text>"
             echo
             echo \
-                "${__script_name__} --remove                           "\
+                "${SCRIPT_NAME} --remove                           "\
                 "remove ${___HEADER___PROJECT_NAME___} from system"
             echo \
-                "${__script_name__} --purge                            "\
+                "${SCRIPT_NAME} --purge                            "\
                 "remove ${___HEADER___PROJECT_NAME___} from system including"
             echo "                                       "\
                 "configuration files and notes"
             echo
             echo \
-                "${__script_name__} --version                          "\
+                "${SCRIPT_NAME} --version                          "\
                 "shows ${___HEADER___PROJECT_NAME___} version"
             echo \
-                "${__script_name__} --authors                          "\
+                "${SCRIPT_NAME} --authors                          "\
                 "shows ${___HEADER___PROJECT_NAME___} authors list"
             echo
             echo
@@ -198,7 +203,7 @@ while [[ ${#} -gt 0 ]]; do
             echo
             echo
             echo \
-                "${__script_name__} --help                             "\
+                "${SCRIPT_NAME} --help                             "\
                 "shows ${___HEADER___PROJECT_NAME___}'s help"
             echo
             exit 0
@@ -214,9 +219,9 @@ while [[ ${#} -gt 0 ]]; do
         '-b' | '--backup')
             shift
             if [[ "${#}" -gt 0 ]]; then
-                ./backup ${@}
+                "${EXECUTABLES_DIR}/backup" ${@}
             else
-                ./backup
+                "${EXECUTABLES_DIR}/backup"
             fi
             exit 0
             ;;
@@ -273,16 +278,16 @@ while [[ ${#} -gt 0 ]]; do
         '-F' | '--find-content')
             shift
             if [[ "${#}" -eq 1 ]]; then
-                ./find-notes-by-content "${1}"
+                "${EXECUTABLES_DIR}/find-notes-by-content" "${1}"
                 exit 0
             elif [[ "${#}" -eq 2 ]]; then
-                ./find-notes-by-content "${1}" "${2}"
+                "${EXECUTABLES_DIR}/find-notes-by-content" "${1}" "${2}"
                 exit 0
             fi
             echo "ERROR: --find-content received unexpected number of arguments!"
             echo
             echo "usage:"
-            echo "${__script_name__} --find-content [<group>] <text>"
+            echo "${SCRIPT_NAME} --find-content [<group>] <text>"
             echo
             echo "[<group>] is optional"
             echo
@@ -291,23 +296,23 @@ while [[ ${#} -gt 0 ]]; do
         '-f' | '--find')
             shift
             if [[ "${#}" -eq 1 ]]; then
-                ./find-notes-by-name "${1}"
+                "${EXECUTABLES_DIR}/find-notes-by-name" "${1}"
                 exit 0
             elif [[ "${#}" -eq 2 ]]; then
-                ./find-notes-by-name "${1}" "${2}"
+                "${EXECUTABLES_DIR}/find-notes-by-name" "${1}" "${2}"
                 exit 0
             fi
             echo "ERROR: --find received unexpected number of arguments!"
             echo
             echo "usage:"
-            echo "${__script_name__} --find [<group>] <text>"
+            echo "${SCRIPT_NAME} --find [<group>] <text>"
             echo
             echo "[<group>] is optional"
             echo
             exit 1
             ;;
         '--authors')
-            cat ./authors
+            cat "${EXECUTABLES_DIR}/authors"
             exit 0
             ;;
         '--config')
@@ -325,7 +330,7 @@ while [[ ${#} -gt 0 ]]; do
             exit 1
             ;;
         '--init')
-            ./init
+            "${EXECUTABLES_DIR}/init"
             exit 0
             ;;
         '--reset')
@@ -337,7 +342,7 @@ while [[ ${#} -gt 0 ]]; do
                 fi
             fi
             rm "${___HEADER___PROJECT_CONFIG_FILE___}"
-            ./init
+            "${EXECUTABLES_DIR}/init"
             exit 0
             ;;
         '--remove')
@@ -348,7 +353,7 @@ while [[ ${#} -gt 0 ]]; do
                     exit 1
                 fi
             fi
-            ./remove
+            "${EXECUTABLES_DIR}/remove"
             exit 0
             ;;
         '--purge')
@@ -359,7 +364,7 @@ while [[ ${#} -gt 0 ]]; do
                     exit 1
                 fi
             fi
-            ./remove --purge
+            "${EXECUTABLES_DIR}/remove" '--purge'
             exit 0
             ;;
         '--version')
@@ -397,13 +402,14 @@ fi
 
 # if no arguments list available notes
 if [[ "${#}" -eq 0 ]]; then
-    ./list-notes
+    # echo 'calling list-notes'
+    "${EXECUTABLES_DIR}/list-notes"
     exit 0
 fi
 
 if [[ "${#}" -eq 1 ]]; then
     if [[ -d "${___CONFIG___TIP_NOTES_FOLDER}/${1}" ]]; then
-        ./list-notes "${1}"
+        "${EXECUTABLES_DIR}/list-notes" "${1}"
         exit 0
     elif [[ -f "${___CONFIG___TIP_NOTES_FOLDER}/${1}" ]]; then
         more "${___CONFIG___TIP_NOTES_FOLDER}/${1}"

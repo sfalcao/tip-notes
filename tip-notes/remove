@@ -10,13 +10,17 @@
 #
 #==============================================================================
 
-__script_name__="remove"
+SCRIPT_NAME=$(basename "${0}")
 
-# get:
-# __project_name__, __project_binaries_folder__, __project_links_folder__
-#
-# from project-header file
-source ./project-header.sh
+LINK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LINKED_SCRIPT=$(readlink "${LINK_DIR}/${SCRIPT_NAME}")
+if [[ -z "${LINKED_SCRIPT}" ]]; then
+    EXECUTABLES_DIR="${LINK_DIR}"
+else
+    EXECUTABLES_DIR=$(dirname "${LINKED_SCRIPT}")
+fi
+source "${EXECUTABLES_DIR}/project-header.sh"
+
 
 
 # if parameters are passed shows help
@@ -24,7 +28,7 @@ if [[ "${#}" -gt 0 ]] && [[ "${1}" != "--purge" ]]; then
     echo
     echo "usage:"
     echo
-    echo "  sudo ${__script_name__} [--purge]"
+    echo "  sudo ${SCRIPT_NAME} [--purge]"
     echo
     exit 1
 fi

@@ -29,7 +29,7 @@
 
 
 
-set -o errexit
+#set -o errexit
 set -o nounset
 set -o pipefail
 #set -o xtrace
@@ -39,9 +39,19 @@ set -o pipefail
 # CONFIGURATION SECTION
 #-------------------------------------------------------------------------------
 #
-__script_name__="init"
+SCRIPT_NAME=$(basename "${0}")
 
-source ./project-header.sh
+LINK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LINKED_SCRIPT=$(readlink "${LINK_DIR}/${SCRIPT_NAME}")
+if [[ -z "${LINKED_SCRIPT}" ]]; then
+    EXECUTABLES_DIR="${LINK_DIR}"
+else
+    EXECUTABLES_DIR=$(dirname "${LINKED_SCRIPT}")
+fi
+source "${EXECUTABLES_DIR}/project-header.sh"
+
+
+
 
 # if doesn't exist a config folder create one
 if ! [[ -d "${___HEADER___PROJECT_CONFIG_FOLDER___}" ]]; then
@@ -59,4 +69,4 @@ fi
 # MAIN SECTION'
 #-------------------------------------------------------------------------------'
 
-cp ./tiprc-default "${___HEADER___PROJECT_CONFIG_FILE___}"
+cp "${EXECUTABLES_DIR}/tiprc-default" "${___HEADER___PROJECT_CONFIG_FILE___}"

@@ -27,7 +27,7 @@
 #---------
 # HEADER
 #---------
-__script_name__="make-deb"
+SCRIPT_NAME=$(basename "${0}")
 
 package_architecture='all'
 
@@ -48,7 +48,7 @@ if [[ "${#}" -eq 0 ]]; then
     echo "ERROR: destination folder missing!"
     echo
     echo 'usage:'
-    echo "${__script_name__} <destination folder>"
+    echo "${SCRIPT_NAME} <destination folder>"
     echo
     exit 1
 fi

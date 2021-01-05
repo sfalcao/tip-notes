@@ -48,8 +48,3 @@ _home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
 _home=${_home:-$HOME}
 ___HEADER___PROJECT_CONFIG_FOLDER___="${_home}/.config/${___HEADER___PROJECT_NAME___}"
 ___HEADER___PROJECT_CONFIG_FILE___="${___HEADER___PROJECT_CONFIG_FOLDER___}/tiprc"
-
-
-# defaults (may be changed after sourcing configuration file)
-# TODO: transferred to config file. I believe can be removed fro  here
-#___CONFIG___TIP_EDITOR=''
