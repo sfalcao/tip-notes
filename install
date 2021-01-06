@@ -28,7 +28,7 @@ echo \
 echo "trough assistance of system packaging manager. Please check README.md"
 echo "installation section to see how to do it!"
 echo
-read -p "Ignore this warning and install? Type 'YES' to proceed: " answer
+read -r -p "Ignore this warning and install? Type 'YES' to proceed: " answer
 echo
 if [[ "${answer}" != 'YES' ]]; then
     echo "Installation aborted by user!"
