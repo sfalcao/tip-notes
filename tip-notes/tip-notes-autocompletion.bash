@@ -14,8 +14,10 @@ if [[ -z "${LINKED_SCRIPT}" ]]; then
 else
     EXECUTABLES_DIR=$(dirname "${LINKED_SCRIPT}")
 fi
+# shellcheck source=./project-header.sh
 source "${EXECUTABLES_DIR}/project-header.sh"
-source ${___HEADER___PROJECT_CONFIG_FILE___}
+# shellcheck source=/home/falcao/.config/tip-notes/tiprc
+source "${___HEADER___PROJECT_CONFIG_FILE___}"
 
 #echo $EXECUTABLES_DIR
 #echo $___HEADER___PROJECT_CONFIG_FILE___
@@ -39,7 +41,7 @@ _tip() {
     tip_backup_suboptions_long='--all --config-only --notes-only'
 
     notes_list=$(
-        find ${___CONFIG___TIP_NOTES_FOLDER} \
+        find "${___CONFIG___TIP_NOTES_FOLDER}" \
         | sort \
         | grep -oP "${___CONFIG___TIP_NOTES_FOLDER}/\K.*" \
     )
@@ -47,27 +49,29 @@ _tip() {
 
 
     if [[ ${cur} == '-' && ${COMP_CWORD} -eq 1 ]]; then
-        COMPREPLY=( $(compgen -W "${tip_opts_short}" -- ${cur}) )
+        # shellcheck sugesttion causes undesired column efect. Keep as it is
+        COMPREPLY=( $(compgen -W "${tip_opts_short}" -- "${cur}") )
         return 0
     elif [[ ${cur} == '--'* && ${COMP_CWORD} -eq 1 ]]; then
-        COMPREPLY=( $(compgen -W "${tip_opts_long}" -- ${cur}) )
+        # shellcheck sugesttion causes undesired column efect. Keep as it is
+        COMPREPLY=( $(compgen -W "${tip_opts_long}" -- "${cur}") )
         return 0
     elif [[ ${COMP_CWORD} -eq 1 ]]; then
-        COMPREPLY=( $(compgen -W "${notes_list}" -- ${cur}) )
+        COMPREPLY=( $(compgen -W "${notes_list}" -- "${cur}") )
         return 0
     fi
  
-    case "${COMP_WORDS[1]}" in
+    case "${prev}" in
         '-d' | '--delete')
-            COMPREPLY=( $(compgen -W "${notes_list}" -- ${cur}) )
+            COMPREPLY=( $(compgen -W "${notes_list}" -- "${cur}") )
             ;;
         '-e' | '--edit')
-            COMPREPLY=( $(compgen -W "${notes_list}" -- ${cur}) )
+            COMPREPLY=( $(compgen -W "${notes_list}" -- "${cur}") )
             ;;
         '-b' | '--backup')
             if [[ "${COMP_CWORD}" -eq 2 ]]; then
                 COMPREPLY=(
-                    $(compgen -W "${tip_backup_suboptions_long}" -- ${cur})
+                    $(compgen -W "${tip_backup_suboptions_long}" -- "${cur}")
                 )
             fi
             ;;
