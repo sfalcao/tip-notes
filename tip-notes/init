@@ -70,4 +70,12 @@ fi
 # MAIN SECTION'
 #-------------------------------------------------------------------------------'
 
-cp "${EXECUTABLES_DIR}/tiprc-default" "${___HEADER___PROJECT_CONFIG_FILE___}"
+
+if \
+ ! cp \
+    "${EXECUTABLES_DIR}/tiprc-default" \
+    "${___HEADER___PROJECT_CONFIG_FILE___}"; then
+    exit 1
+fi
+
+printf "Please, close terminal and open it again to changes take efect!\n"
