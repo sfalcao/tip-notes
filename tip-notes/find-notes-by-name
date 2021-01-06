@@ -48,12 +48,14 @@ if [[ -z "${LINKED_SCRIPT}" ]]; then
 else
     EXECUTABLES_DIR=$(dirname "${LINKED_SCRIPT}")
 fi
+# shellcheck source=./project-header.sh
 source "${EXECUTABLES_DIR}/project-header.sh"
 
 
 
 
 if [[ -f "${___HEADER___PROJECT_CONFIG_FILE___}" ]]; then
+    # shellcheck source=/home/falcao/.config/tip-notes/tiprc
     source "${___HEADER___PROJECT_CONFIG_FILE___}"
 else
     echo "ERROR: --> configuration file does not exist!"
@@ -81,7 +83,7 @@ else
 fi
 
 find \
-    ${folder_to_list} \
+    "${folder_to_list}" \
     -type f \
     | sort \
     | grep -oP "${folder_to_list}/\K.*" \

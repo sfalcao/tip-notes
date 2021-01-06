@@ -19,6 +19,7 @@ if [[ -z "${LINKED_SCRIPT}" ]]; then
 else
     EXECUTABLES_DIR=$(dirname "${LINKED_SCRIPT}")
 fi
+# shellcheck source=./project-header.sh
 source "${EXECUTABLES_DIR}/project-header.sh"
 
 

@@ -48,6 +48,7 @@ if [[ -z "${LINKED_SCRIPT}" ]]; then
 else
     EXECUTABLES_DIR=$(dirname "${LINKED_SCRIPT}")
 fi
+# shellcheck source=./project-header.sh
 source "${EXECUTABLES_DIR}/project-header.sh"
 
 #echo $SCRIPT_NAME
@@ -56,6 +57,7 @@ source "${EXECUTABLES_DIR}/project-header.sh"
 # if exist a config file, source it, otherwise prints an error
 # message, unless $1 is --config-init
 if [[ -f "${___HEADER___PROJECT_CONFIG_FILE___}" ]]; then
+    # shellcheck source=/home/falcao/.config/tip-notes/tiprc
     source "${___HEADER___PROJECT_CONFIG_FILE___}"
 else
     if [[ "${#}" -eq 0 ]] || [[ "${1}" != '--init' ]]; then
@@ -110,8 +112,8 @@ function print_if_verbose(){
 POSITIONAL_ARGUMENTS=()
 
 
-VERBOSE_FLAG=0
-SILENT_FLAG=0
+#VERBOSE_FLAG=0
+#SILENT_FLAG=0
 
 
 while [[ ${#} -gt 0 ]]; do
@@ -208,18 +210,18 @@ while [[ ${#} -gt 0 ]]; do
             echo
             exit 0
             ;;
-        '-s' | '--silent')
-            SILENT_FLAG=1
-            shift # past argument
-            ;;
-        '-v' | '--verbose')
-            VERBOSE_FLAG=1
-            shift # past argument
-            ;;
+#        '-s' | '--silent')
+#            SILENT_FLAG=1
+#            shift # past argument
+#            ;;
+#        '-v' | '--verbose')
+#            VERBOSE_FLAG=1
+#            shift # past argument
+#            ;;
         '-b' | '--backup')
             shift
             if [[ "${#}" -gt 0 ]]; then
-                "${EXECUTABLES_DIR}/backup" ${@}
+                "${EXECUTABLES_DIR}/backup" "${@}"
             else
                 "${EXECUTABLES_DIR}/backup"
             fi
@@ -233,20 +235,20 @@ while [[ ${#} -gt 0 ]]; do
             fi
             note_file="${___CONFIG___TIP_NOTES_FOLDER}/${1}"
 
-            if [[ -n ${note_file} ]]; then
-                mkdir -p $(dirname ${note_file}) && touch ${note_file}
+            if [[ -n "${note_file}" ]]; then
+                mkdir -p "$(dirname "${note_file}")" && touch "${note_file}"
             fi
             if [[ -z "${___CONFIG___TIP_EDITOR}" ]]; then
                 if ! [[ -f "${note_file}" ]]; then
                     touch "${note_file}"
                 fi
-                xdg-open ${note_file}
+                xdg-open "${note_file}"
             else
-                ${___CONFIG___TIP_EDITOR} "${note_file}"
+                "${___CONFIG___TIP_EDITOR}" "${note_file}"
             fi
             # removes a zero leght file that eventually remains
             if ! [[ -s ${note_file} ]]; then
-                rm ${note_file}
+                rm "${note_file}"
             fi
             exit 0
             ;;
@@ -260,7 +262,7 @@ while [[ ${#} -gt 0 ]]; do
             if [[ -f "${note_file}" ]]; then
                 if [ "${___CONFIG___TIP_CONFIRM_DELETE_NOTE}" = true ]; then
 
-                    read -p "Are you sure? (y/n): " answer
+                    read -r -p "Are you sure? (y/n): " answer
                     if ! [[ "${answer}" =~ [y|Y] ]]; then
                         echo "reset operation aborted by user!"
                         exit 1
@@ -318,9 +320,9 @@ while [[ ${#} -gt 0 ]]; do
         '--config')
             if [[ -s "${___HEADER___PROJECT_CONFIG_FILE___}" ]]; then
                 if [[ -z "${___CONFIG___TIP_EDITOR}" ]]; then
-                    xdg-open ${___HEADER___PROJECT_CONFIG_FILE___}
+                    xdg-open "${___HEADER___PROJECT_CONFIG_FILE___}"
                 else
-                    ${___CONFIG___TIP_EDITOR} "${___HEADER___PROJECT_CONFIG_FILE___}"
+                    "${___CONFIG___TIP_EDITOR}" "${___HEADER___PROJECT_CONFIG_FILE___}"
                 fi
                 exit 0
             fi
@@ -335,7 +337,7 @@ while [[ ${#} -gt 0 ]]; do
             ;;
         '--reset')
             if [ "${___CONFIG___TIP_CONFIRM_RESET}" = true ]; then
-                read -p "Are you sure? (y/n): " answer
+                read -r -p "Are you sure? (y/n): " answer
                 if ! [[ "${answer}" =~ [y|Y] ]]; then
                     echo "reset operation aborted by user!"
                     exit 1
@@ -347,7 +349,7 @@ while [[ ${#} -gt 0 ]]; do
             ;;
         '--remove')
             if [ "${___CONFIG___TIP_CONFIRM_REMOVE}" = true ]; then
-                read -p "Are you sure? (y/n): " answer
+                read -r -p "Are you sure? (y/n): " answer
                 if ! [[ "${answer}" =~ [y|Y] ]]; then
                     echo "remove operation aborted by user!"
                     exit 1
@@ -358,7 +360,7 @@ while [[ ${#} -gt 0 ]]; do
             ;;
         '--purge')
             if [ "${___CONFIG___TIP_CONFIRM_PURGE}" = true ]; then
-                read -p "Are you sure? (y/n): " answer
+                read -r -p "Are you sure? (y/n): " answer
                 if ! [[ "${answer}" =~ [y|Y] ]]; then
                     echo "purge operation aborted by user!"
                     exit 1

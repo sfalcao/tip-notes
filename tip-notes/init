@@ -48,6 +48,7 @@ if [[ -z "${LINKED_SCRIPT}" ]]; then
 else
     EXECUTABLES_DIR=$(dirname "${LINKED_SCRIPT}")
 fi
+# shellcheck source=./project-header.sh
 source "${EXECUTABLES_DIR}/project-header.sh"
 
 
@@ -55,7 +56,7 @@ source "${EXECUTABLES_DIR}/project-header.sh"
 
 # if doesn't exist a config folder create one
 if ! [[ -d "${___HEADER___PROJECT_CONFIG_FOLDER___}" ]]; then
-    mkdir ${___HEADER___PROJECT_CONFIG_FOLDER___}
+    mkdir "${___HEADER___PROJECT_CONFIG_FOLDER___}"
 fi
 
 # if exist a config file, skip creation

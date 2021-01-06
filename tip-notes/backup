@@ -48,11 +48,13 @@ if [[ -z "${LINKED_SCRIPT}" ]]; then
 else
     EXECUTABLES_DIR=$(dirname "${LINKED_SCRIPT}")
 fi
+# shellcheck source=./project-header.sh
 source "${EXECUTABLES_DIR}/project-header.sh"
 
 
 
 if [[ -f "${___HEADER___PROJECT_CONFIG_FILE___}" ]]; then
+    # shellcheck source=/home/falcao/.config/tip-notes/tiprc
     source "${___HEADER___PROJECT_CONFIG_FILE___}"
 else
     echo "ERROR: --> configuration file does not exist!"
@@ -71,7 +73,7 @@ fi
 if [[ ! -d "${___CONFIG___TIP_BACKUP_FOLDER}" ]]; then
     if [ "${___CONFIG___TIP_CONFIRM_BACKUP_FOLDER_CREATION}" == true ]; then
         echo "tip-notes backup folder does not exist!"
-        read -p "Do you like to create it now? Type 'y' or 'n' :" answer
+        read -r -p "Do you like to create it now? Type 'y' or 'n' :" answer
         if [[ ! "${answer}" =~ [Y|y] ]]; then
             echo "ERROR: tip backup folder creation aborted by user!"
             exit 1
