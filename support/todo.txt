@@ -1,5 +1,29 @@
-+ implement --delete-group (only empty? forced option?)
-+ implement a routine to clean backups
-+ group things in tiprc???
 
-+ improove autocompletion (see code-canditates)
++ group things in tiprc???
+    Confirmations, folders, etc
+
+
++ implement a routine to clean backups
+
+
++ allow alternative path for notes overriding tip-notes folder
+
+  eg:
+  tip -a ~/Lixo/rep/tip-notes/support/notes/todo
+
+
++ implement encrypted notes option
+
++ implement an option o interctivelly open notes reported by --find and
+  --find-content
+
+    + perhaps a numbered list if for more than one match tipp 1, tipp 2, etc
+      maybe an option to open the list? -l?
+
+    + if find returns a single file, autocopy the command tip <found note>
+      to clipboard so that user only need to CTRL + V ?
+
+
++ improve autocompletion for fish
+
+  + include fish autocompletion in install, remove and make-deb routines
