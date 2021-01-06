@@ -48,15 +48,15 @@ _tip() {
 
 
 
-    if [[ ${cur} == '-' && ${COMP_CWORD} -eq 1 ]]; then
-        # shellcheck sugesttion causes undesired column efect. Keep as it is
+    if [[ "${cur}" == '-' && ${COMP_CWORD} -eq 1 ]]; then
+        # linting sugesttion causes undesired column efect. Keep as it is
         COMPREPLY=( $(compgen -W "${tip_opts_short}" -- "${cur}") )
         return 0
-    elif [[ ${cur} == '--'* && ${COMP_CWORD} -eq 1 ]]; then
-        # shellcheck sugesttion causes undesired column efect. Keep as it is
+    elif [[ "${cur}" == '--'* && ${COMP_CWORD} -eq 1 ]]; then
+        # linting sugesttion causes undesired column efect. Keep as it is
         COMPREPLY=( $(compgen -W "${tip_opts_long}" -- "${cur}") )
         return 0
-    elif [[ ${COMP_CWORD} -eq 1 ]]; then
+    elif [[ "${COMP_CWORD}" -eq 1 ]]; then
         COMPREPLY=( $(compgen -W "${notes_list}" -- "${cur}") )
         return 0
     fi
