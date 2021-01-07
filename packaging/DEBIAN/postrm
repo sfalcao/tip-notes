@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# remove links
+rm -f "___CHANGE_HERE___LINKS_FOLDER___/tip"
+
+# remove config folder if required
+if [[ "${1}" == "purge" ]]; then
+    rm -rf "___CHANGE_HERE___CONFIG_FOLDER___"
+fi

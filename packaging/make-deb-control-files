@@ -21,61 +21,37 @@
 
 # deal with DEBIAN files
 
-# copy control file
+# copy control files
 cp -r ./DEBIAN "${package_folder}"
 
-# adjust version number in control file
+# adjust project name and version number in control file
 sed -i \
-    "s/Version:\ [0-9]*\.[0-9]*\.[0-9]*$/Version:\ ${___HEADER___PROJECT_VERSION___}/" \
+    "s|___CHANGE_HERE___PROJECT_NAME___|${___HEADER___PROJECT_NAME___}|" \
+    "${package_folder}/DEBIAN/control"
+sed -i \
+    "s|___CHANGE_HERE___PROJECT_VERSION___|${___HEADER___PROJECT_VERSION___}|" \
     "${package_folder}/DEBIAN/control"
 
-# create postinst file
+# ajust executables and links folders in postinst file
 postinst_file="${package_folder}/DEBIAN/postinst"
-echo "#!/bin/bash" > "${postinst_file}"
-echo >> "${postinst_file}"
-echo \
-    "ln -s ${___HEADER___PROJECT_EXECUTABLES_FOLDER___}/tip" \
-    " ${___HEADER___PROJECT_LINKS_FOLDER___}" >> "${postinst_file}"
+sed -i \
+    "s|___CHANGE_HERE___EXECUTABLES_FOLDER___|${___HEADER___PROJECT_EXECUTABLES_FOLDER___}|" \
+    "${postinst_file}"
+sed -i \
+    "s|___CHANGE_HERE___LINKS_FOLDER___|${___HEADER___PROJECT_LINKS_FOLDER___}|" \
+    "${postinst_file}"
+sed -i \
+    "s|___CHANGE_HERE___CONFIG_FILE___|${___HEADER___PROJECT_CONFIG_FILE___}|" \
+    "${postinst_file}"
 chmod 755 "${postinst_file}"
 
 
-
-# create postrm file
-
-# add:
-# #!/bin/bash
-#
+# ajust links and config folders in postrm file
 postrm_file="${package_folder}/DEBIAN/postrm"
-echo "#!/bin/bash" > "${postrm_file}"
-echo >> "${postrm_file}"
-
-# add:
-# _home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
-# _home=${_home:-$HOME}
-#
-echo \
-'_home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: '\
-'| cut -d: -f 6`"'\
->> "${postrm_file}"
-echo '_home=${_home:-$HOME}' >> "${postrm_file}"
-echo >> "${postrm_file}"
-
-# add:
-# rm -f /usr/local/bin/tip
-#
-echo \
-    "rm -f ${___HEADER___PROJECT_LINKS_FOLDER___}/tip" >>  "${postrm_file}"
-echo >> "${postrm_file}"
-
-# add:
-# if [[ "${1}" == "purge" ]]; then
-#     rm -rf "${_home}/.config/tip-notes"
-# fi
-# 
-echo 'if [[ "${1}" == "purge" ]]; then' >> "${postrm_file}"
-echo \
-'    rm -rf "${_home}"/.config/'\
-"${___HEADER___PROJECT_NAME___}"\
->> "${postrm_file}"
-echo "fi" >> "${postrm_file}"
+sed -i \
+    "s|___CHANGE_HERE___LINKS_FOLDER___|${___HEADER___PROJECT_LINKS_FOLDER___}|" \
+    "${postrm_file}"
+sed -i \
+    "s|___CHANGE_HERE___CONFIG_FOLDER___|${___HEADER___PROJECT_CONFIG_FOLDER___}|" \
+    "${postrm_file}"
 chmod 755 "${postrm_file}"

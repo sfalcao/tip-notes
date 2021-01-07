@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# create link
+ln -s \
+    "___CHANGE_HERE___EXECUTABLES_FOLDER___/tip" \
+    "___CHANGE_HERE___LINKS_FOLDER___"
+
+# create config files if not already existent
+if [[ ! -f "___CHANGE_HERE___CONFIG_FILE___/" ]]; then
+    "___CHANGE_HERE___EXECUTABLES_FOLDER___/init"
+fi

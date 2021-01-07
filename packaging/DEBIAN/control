@@ -1,5 +1,5 @@
-Package: tip-notes
-Version: 0.1.0
+Package: ___CHANGE_HERE___PROJECT_NAME___
+Version: ___CHANGE_HERE___PROJECT_VERSION___
 Architecture: all
 Essential: no
 Priority: optional

@@ -95,3 +95,7 @@ cp ./autocompletion/tip.bash "${___HEADER___PROJECT_AUTOCOMPLETION_FILE___}"
 # copy man page
 cp ./man/tip.1 "${___HEADER___PROJECT_MAN_FOLDER___}/tip.1"
 gzip "${___HEADER___PROJECT_MAN_FOLDER___}/tip.1"
+
+# create config files if does not exist
+"${___HEADER___PROJECT_EXECUTABLES_FOLDER___}/init" &> /dev/nul
+
