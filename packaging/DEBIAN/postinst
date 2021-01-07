@@ -9,3 +9,5 @@ ln -s \
 if [[ ! -f "___CHANGE_HERE___CONFIG_FILE___/" ]]; then
     "___CHANGE_HERE___EXECUTABLES_FOLDER___/init"
 fi
+
+exit 0
