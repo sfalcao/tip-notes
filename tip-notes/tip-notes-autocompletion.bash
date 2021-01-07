@@ -3,8 +3,6 @@
 # Bash completion file for tip-notes
 #
 
-set -o nounset
-
 SCRIPT_NAME=$(basename "${0}")
 
 LINK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
