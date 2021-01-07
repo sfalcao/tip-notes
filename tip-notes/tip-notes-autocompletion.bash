@@ -33,6 +33,7 @@ _tip() {
     tip_opts_long='--help --authors --version'
     tip_opts_long+=' --backup'
     tip_opts_long+=' --edit --delete'
+    tip_opts_long+=' --find --find-content'
     tip_opts_long+=' --config --reset --init'
     tip_opts_long+=' --remove --purge'
 
