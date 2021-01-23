@@ -47,4 +47,4 @@ ___HEADER___PROJECT_MAN_FOLDER___="/usr/local/man/man1"
 _home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
 _home=${_home:-$HOME}
 ___HEADER___PROJECT_CONFIG_FOLDER___="${_home}/.config/${___HEADER___PROJECT_NAME___}"
-___HEADER___PROJECT_CONFIG_FILE___="${___HEADER___PROJECT_CONFIG_FOLDER___}/tiprc"
+HEADER___PROJECT_CONFIG_FILE="${___HEADER___PROJECT_CONFIG_FOLDER___}/tiprc"

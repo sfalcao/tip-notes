@@ -60,7 +60,7 @@ if ! [[ -d "${___HEADER___PROJECT_CONFIG_FOLDER___}" ]]; then
 fi
 
 # if exist a config file, skip creation
-if [[ -f "${___HEADER___PROJECT_CONFIG_FILE___}" ]]; then
+if [[ -f "${HEADER___PROJECT_CONFIG_FILE}" ]]; then
     echo "ERROR: config file already exist!"
     exit 1
 fi
@@ -74,7 +74,7 @@ fi
 if \
  ! cp \
     "${EXECUTABLES_DIR}/tiprc-default" \
-    "${___HEADER___PROJECT_CONFIG_FILE___}"; then
+    "${HEADER___PROJECT_CONFIG_FILE}"; then
     exit 1
 fi
 

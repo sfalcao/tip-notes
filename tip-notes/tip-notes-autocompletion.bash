@@ -15,10 +15,10 @@ fi
 # shellcheck source=./project-header.sh
 source "${EXECUTABLES_DIR}/project-header.sh"
 # shellcheck source=/home/falcao/.config/tip-notes/tiprc
-source "${___HEADER___PROJECT_CONFIG_FILE___}"
+source "${HEADER___PROJECT_CONFIG_FILE}"
 
 #echo $EXECUTABLES_DIR
-#echo $___HEADER___PROJECT_CONFIG_FILE___
+#echo $HEADER___PROJECT_CONFIG_FILE
 #echo $___CONFIG___TIP_NOTES_FOLDER
 
 

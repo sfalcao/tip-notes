@@ -56,9 +56,9 @@ source "${EXECUTABLES_DIR}/project-header.sh"
 
 # if exist a config file, source it, otherwise prints an error
 # message, unless $1 is --config-init
-if [[ -f "${___HEADER___PROJECT_CONFIG_FILE___}" ]]; then
+if [[ -f "${HEADER___PROJECT_CONFIG_FILE}" ]]; then
     # shellcheck source=/home/falcao/.config/tip-notes/tiprc
-    source "${___HEADER___PROJECT_CONFIG_FILE___}"
+    source "${HEADER___PROJECT_CONFIG_FILE}"
 else
     if [[ "${#}" -eq 0 ]] || [[ "${1}" != '--init' ]]; then
         echo
@@ -318,11 +318,11 @@ while [[ ${#} -gt 0 ]]; do
             exit 0
             ;;
         '--config')
-            if [[ -s "${___HEADER___PROJECT_CONFIG_FILE___}" ]]; then
+            if [[ -s "${HEADER___PROJECT_CONFIG_FILE}" ]]; then
                 if [[ -z "${___CONFIG___TIP_EDITOR}" ]]; then
-                    xdg-open "${___HEADER___PROJECT_CONFIG_FILE___}"
+                    xdg-open "${HEADER___PROJECT_CONFIG_FILE}"
                 else
-                    "${___CONFIG___TIP_EDITOR}" "${___HEADER___PROJECT_CONFIG_FILE___}"
+                    "${___CONFIG___TIP_EDITOR}" "${HEADER___PROJECT_CONFIG_FILE}"
                 fi
                 exit 0
             fi
@@ -343,7 +343,7 @@ while [[ ${#} -gt 0 ]]; do
                     exit 1
                 fi
             fi
-            rm "${___HEADER___PROJECT_CONFIG_FILE___}"
+            rm "${HEADER___PROJECT_CONFIG_FILE}"
             "${EXECUTABLES_DIR}/init"
             exit 0
             ;;

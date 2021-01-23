@@ -54,9 +54,9 @@ source "${EXECUTABLES_DIR}/project-header.sh"
 
 
 
-if [[ -f "${___HEADER___PROJECT_CONFIG_FILE___}" ]]; then
+if [[ -f "${HEADER___PROJECT_CONFIG_FILE}" ]]; then
 # shellcheck source=/home/falcao/.config/tip-notes/tiprc
-    source "${___HEADER___PROJECT_CONFIG_FILE___}"
+    source "${HEADER___PROJECT_CONFIG_FILE}"
 else
     echo "ERROR: --> configuration file does not exist!"
     echo
