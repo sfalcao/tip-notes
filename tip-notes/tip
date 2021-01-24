@@ -125,7 +125,7 @@ while [[ ${#} -gt 0 ]]; do
             shift # past argument
             echo
             echo \
-                "${___HEADER___PROJECT_NAME___} "\
+                "${HEADER___PROJECT_NAME} "\
                 "${___HEADER___PROJECT_VERSION___}"
             echo
             echo
@@ -179,19 +179,19 @@ while [[ ${#} -gt 0 ]]; do
             echo
             echo \
                 "${SCRIPT_NAME} --remove                           "\
-                "remove ${___HEADER___PROJECT_NAME___} from system"
+                "remove ${HEADER___PROJECT_NAME} from system"
             echo \
                 "${SCRIPT_NAME} --purge                            "\
-                "remove ${___HEADER___PROJECT_NAME___} from system including"
+                "remove ${HEADER___PROJECT_NAME} from system including"
             echo "                                       "\
                 "configuration files and notes"
             echo
             echo \
                 "${SCRIPT_NAME} --version                          "\
-                "shows ${___HEADER___PROJECT_NAME___} version"
+                "shows ${HEADER___PROJECT_NAME} version"
             echo \
                 "${SCRIPT_NAME} --authors                          "\
-                "shows ${___HEADER___PROJECT_NAME___} authors list"
+                "shows ${HEADER___PROJECT_NAME} authors list"
             echo
             echo
             echo "SHORT FORMS:"
@@ -206,7 +206,7 @@ while [[ ${#} -gt 0 ]]; do
             echo
             echo \
                 "${SCRIPT_NAME} --help                             "\
-                "shows ${___HEADER___PROJECT_NAME___}'s help"
+                "shows ${HEADER___PROJECT_NAME}'s help"
             echo
             exit 0
             ;;

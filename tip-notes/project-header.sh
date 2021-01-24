@@ -29,15 +29,15 @@
 
 
 
-___HEADER___PROJECT_NAME___="tip-notes"
+HEADER___PROJECT_NAME="tip-notes"
 ___HEADER___PROJECT_VERSION___="0.1.0"
 ___HEADER___PROJECT_MAIL___="falecomigo.falcao@gmail.com"
 ___HEADER___PROJECT_DEV_STAGE___="DRAFT"
 
 
-___HEADER___PROJECT_EXECUTABLES_FOLDER___="/usr/lib/${___HEADER___PROJECT_NAME___}"
+___HEADER___PROJECT_EXECUTABLES_FOLDER___="/usr/lib/${HEADER___PROJECT_NAME}"
 ___HEADER___PROJECT_LINKS_FOLDER___='/usr/local/bin'
-___HEADER___PROJECT_DOC_FOLDER___="/usr/share/doc/${___HEADER___PROJECT_NAME___}"
+___HEADER___PROJECT_DOC_FOLDER___="/usr/share/doc/${HEADER___PROJECT_NAME}"
 ___HEADER___PROJECT_AUTOCOMPLETION_FOLDER___="/etc/bash_completion.d"
 ___HEADER___PROJECT_AUTOCOMPLETION_FILE___="${___HEADER___PROJECT_AUTOCOMPLETION_FOLDER___}/tip.bash"
 ___HEADER___PROJECT_MAN_FOLDER___="/usr/local/man/man1"
@@ -46,5 +46,5 @@ ___HEADER___PROJECT_MAN_FOLDER___="/usr/local/man/man1"
 # if change the following line, change also deb-make purge section
 _home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
 _home=${_home:-$HOME}
-___HEADER___PROJECT_CONFIG_FOLDER___="${_home}/.config/${___HEADER___PROJECT_NAME___}"
+___HEADER___PROJECT_CONFIG_FOLDER___="${_home}/.config/${HEADER___PROJECT_NAME}"
 HEADER___PROJECT_CONFIG_FILE="${___HEADER___PROJECT_CONFIG_FOLDER___}/tiprc"
