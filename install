@@ -11,7 +11,7 @@
 #=============================================================================
 
 
-__SCRIPT_NAME__="install"
+SCRIPT_NAME="install"
 
 # get:
 # __project_name__, __project_binaries_folder__, __project_links_folder__
@@ -56,12 +56,12 @@ fi
 
 # if any command line parameter has been passed display help message
 if [[ $# -gt 0 ]]; then
-    echo "${__SCRIPT_NAME__}"
+    echo "${SCRIPT_NAME}"
     echo "installs ${HEADER___PROJECT_NAME}"
     echo
     echo "usage:"
     echo
-    echo "  sudo ./${__SCRIPT_NAME__}"
+    echo "  sudo ./${SCRIPT_NAME}"
     echo
     exit 1
 fi
