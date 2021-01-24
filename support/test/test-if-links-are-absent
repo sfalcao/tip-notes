@@ -36,11 +36,11 @@ __script_name__="${0}"
 exit_status=0
 
 # check link
-if [[ -f "${___HEADER___PROJECT_LINKS_FOLDER___}/tip" ]]; then
+if [[ -f "${HEADER___PROJECT_LINKS_FOLDER}/tip" ]]; then
     echo \
         "[${0}] --> FAIL!"\
         "Link"\
-        "[${___HEADER___PROJECT_LINKS_FOLDER___}/tip]"\
+        "[${HEADER___PROJECT_LINKS_FOLDER}/tip]"\
         "remains on system!"
     exit_status=1
 fi

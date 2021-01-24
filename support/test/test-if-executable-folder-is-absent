@@ -33,14 +33,14 @@ source ../../tip-notes/project-header.sh
 __script_name__="${0}"
 
 # check binaries folder is present
-if [[ ! -d "${___HEADER___PROJECT_EXECUTABLES_FOLDER___}" ]]; then
+if [[ ! -d "${HEADER___PROJECT_EXECUTABLES_FOLDER}" ]]; then
     exit 0
 fi
 
 echo \
     "[${0}] --> FAIL!"\
     "Folder"\
-    "[${___HEADER___PROJECT_EXECUTABLES_FOLDER___}]"\
+    "[${HEADER___PROJECT_EXECUTABLES_FOLDER}]"\
     "remains on system!"
 
 exit 1

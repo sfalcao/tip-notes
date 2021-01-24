@@ -36,11 +36,11 @@ __script_name__="${0}"
 exit_status=0
 
 # check man page file is missing
-if [[ -f "${___HEADER___PROJECT_MAN_FOLDER___}/tip.1.gz" ]]; then
+if [[ -f "${HEADER___PROJECT_MAN_FOLDER}/tip.1.gz" ]]; then
     echo \
         "[${0}] --> FAIL!"\
         "File"\
-        "[${___HEADER___PROJECT_MAN_FOLDER___}/tip.1.gz]"\
+        "[${HEADER___PROJECT_MAN_FOLDER}/tip.1.gz]"\
         "remains on system!"
     exit_status=1
 fi

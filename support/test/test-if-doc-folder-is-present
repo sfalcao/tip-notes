@@ -36,14 +36,14 @@ __script_name__="${0}"
 exit_status=0
 
 # check if doc folder exists
-if [[ -d "${___HEADER___PROJECT_DOC_FOLDER___}" ]]; then
+if [[ -d "${HEADER___PROJECT_DOC_FOLDER}" ]]; then
     exit 0
 fi
 
 echo \
     "[${0}] --> FAIL!"\
     "Folder"\
-    "[${___HEADER___PROJECT_DOC_FOLDER___}]"\
+    "[${HEADER___PROJECT_DOC_FOLDER}]"\
     "is missing!"
 
 exit 1

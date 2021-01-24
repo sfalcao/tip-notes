@@ -40,11 +40,11 @@ if ./test-if-executable-folder-is-present &> /dev/null; then
     for element in ../../tip-notes/*; do
         element="$(basename ${element})"
         if [[ -f \
-        "${___HEADER___PROJECT_EXECUTABLES_FOLDER___}/${element}" ]]; then
+        "${HEADER___PROJECT_EXECUTABLES_FOLDER}/${element}" ]]; then
             echo \
                 "[${0}] --> FAIL!"\
                 "File"\
-                "[${___HEADER___PROJECT_EXECUTABLES_FOLDER___}/${element}]"\
+                "[${HEADER___PROJECT_EXECUTABLES_FOLDER}/${element}]"\
                 "remains on system!"
             exit_status=1
         fi
@@ -52,7 +52,7 @@ if ./test-if-executable-folder-is-present &> /dev/null; then
 #    echo \
 #        "[${0}] --> WARNING!"\
 #        "Executables folder"\
-#        "[${___HEADER___PROJECT_EXECUTABLES_FOLDER___}]"\
+#        "[${HEADER___PROJECT_EXECUTABLES_FOLDER}]"\
 #        "remains on system!"
 fi
 

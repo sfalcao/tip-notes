@@ -36,11 +36,11 @@ __script_name__="${0}"
 exit_status=0
 
 # check if autocompletion file is missing
-if [[ -f "${___HEADER___PROJECT_AUTOCOMPLETION_FILE___}" ]]; then
+if [[ -f "${HEADER___PROJECT_AUTOCOMPLETION_FILE}" ]]; then
     echo \
         "[${0}] --> FAIL!"\
         "File"\
-        "[${___HEADER___PROJECT_AUTOCOMPLETION_FILE___}]"\
+        "[${HEADER___PROJECT_AUTOCOMPLETION_FILE}]"\
         "remains!"
     exit_status=1
 fi

@@ -36,14 +36,14 @@ __script_name__="${0}"
 exit_status=0
 
 # check if config folder is present
-if [[ -d "${___HEADER___PROJECT_CONFIG_FOLDER___}" ]]; then
+if [[ -d "${HEADER___PROJECT_CONFIG_FOLDER}" ]]; then
     exit 0
 fi
 
 echo \
     "[${0}] --> FAIL!"\
     "Folder"\
-    "[${___HEADER___PROJECT_CONFIG_FOLDER___}]"\
+    "[${HEADER___PROJECT_CONFIG_FOLDER}]"\
     "is missing!"
 exit 1
 

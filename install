@@ -24,7 +24,7 @@ echo "ATTENTION!"
 echo
 echo \
     "We strongly recommend to always install and remove "\
-    "${___HEADER___PROJECT_NAME___}"
+    "${HEADER___PROJECT_NAME}"
 echo "trough assistance of system packaging manager. Please check README.md"
 echo "installation section to see how to do it!"
 echo
@@ -42,7 +42,7 @@ if apt list --installed 2> /dev/null | grep 'tip-notes'; then
     echo "ATTENTION!"
     echo
     echo\
-        "${___HEADER___PROJECT_NAME___} has already been installed "\
+        "${HEADER___PROJECT_NAME} has already been installed "\
         "using apt system's package manager!"
     echo
     echo "Remove installed version using:"
@@ -57,7 +57,7 @@ fi
 # if any command line parameter has been passed display help message
 if [[ $# -gt 0 ]]; then
     echo "${__SCRIPT_NAME__}"
-    echo "installs ${___HEADER___PROJECT_NAME___}"
+    echo "installs ${HEADER___PROJECT_NAME}"
     echo
     echo "usage:"
     echo
@@ -66,36 +66,36 @@ if [[ $# -gt 0 ]]; then
     exit 1
 fi
 
-if ! mkdir -p "${___HEADER___PROJECT_EXECUTABLES_FOLDER___}"; then
+if ! mkdir -p "${HEADER___PROJECT_EXECUTABLES_FOLDER}"; then
     echo "ERROR: destination folder could not be created"
     exit 1
 fi
 
-cp -r ./tip-notes/* "${___HEADER___PROJECT_EXECUTABLES_FOLDER___}"
+cp -r ./tip-notes/* "${HEADER___PROJECT_EXECUTABLES_FOLDER}"
 #cp remove "${__project_binaries_folder__}"
 
 if [[ -d /etc/bash_completion.d ]]; then
     cp \
         ./autocompletion/tip.bash \
-        "${___HEADER___PROJECT_AUTOCOMPLETION_FOLDER___}"
+        "${HEADER___PROJECT_AUTOCOMPLETION_FOLDER}"
 fi
 
 # create links to executables
 ln -s \
-    "${___HEADER___PROJECT_EXECUTABLES_FOLDER___}/tip" \
-    "${___HEADER___PROJECT_LINKS_FOLDER___}"
+    "${HEADER___PROJECT_EXECUTABLES_FOLDER}/tip" \
+    "${HEADER___PROJECT_LINKS_FOLDER}"
 
 # create docs
-mkdir -p "${___HEADER___PROJECT_DOC_FOLDER___}"
-cp ./packaging/copyright "${___HEADER___PROJECT_DOC_FOLDER___}"
+mkdir -p "${HEADER___PROJECT_DOC_FOLDER}"
+cp ./packaging/copyright "${HEADER___PROJECT_DOC_FOLDER}"
 
 # copy autocomplete file
-cp ./autocompletion/tip.bash "${___HEADER___PROJECT_AUTOCOMPLETION_FILE___}"
+cp ./autocompletion/tip.bash "${HEADER___PROJECT_AUTOCOMPLETION_FILE}"
 
 # copy man page
-cp ./man/tip.1 "${___HEADER___PROJECT_MAN_FOLDER___}/tip.1"
-gzip "${___HEADER___PROJECT_MAN_FOLDER___}/tip.1"
+cp ./man/tip.1 "${HEADER___PROJECT_MAN_FOLDER}/tip.1"
+gzip "${HEADER___PROJECT_MAN_FOLDER}/tip.1"
 
 # create config files if does not exist
-"${___HEADER___PROJECT_EXECUTABLES_FOLDER___}/init" &> /dev/nul
+"${HEADER___PROJECT_EXECUTABLES_FOLDER}/init" &> /dev/nul
 

@@ -42,11 +42,11 @@ if ! ./test-if-config-folder-is-present; then
 fi
     
 # check if config files are present
-if [[ ! -f "${___HEADER___PROJECT_CONFIG_FILE___}" ]]; then
+if [[ ! -f "${HEADER___PROJECT_CONFIG_FILE}" ]]; then
     echo \
         "[${0}] --> FAIL!"\
         "File"\
-        "[${___HEADER___PROJECT_CONFIG_FILE___}]"\
+        "[${HEADER___PROJECT_CONFIG_FILE}]"\
         "is missing!"
     exit_status=1
 fi

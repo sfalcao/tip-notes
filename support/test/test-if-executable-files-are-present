@@ -46,11 +46,11 @@ fi
 for element in ../../tip-notes/*; do
     element="$(basename ${element})"
     if [[ ! -f \
-    "${___HEADER___PROJECT_EXECUTABLES_FOLDER___}/${element}" ]]; then
+    "${HEADER___PROJECT_EXECUTABLES_FOLDER}/${element}" ]]; then
         echo \
             "[${0}] --> FAIL!"\
             "File"\
-            "[${___HEADER___PROJECT_EXECUTABLES_FOLDER___}/${element}]"\
+            "[${HEADER___PROJECT_EXECUTABLES_FOLDER}/${element}]"\
             "is missing!"
         exit_status=1
     fi

@@ -37,18 +37,18 @@ exit_status=0
 
 if ./test-if-doc-folder-is-present &> /dev/null; then
     # check doc files
-    if [[ -f "${___HEADER___PROJECT_DOC_FOLDER___}/copyright" ]]; then
+    if [[ -f "${HEADER___PROJECT_DOC_FOLDER}/copyright" ]]; then
         echo \
             "[${0}] --> FAIL!"\
             "File"\
-            "[${___HEADER___PROJECT_DOC_FOLDER___}/copyright}]"\
+            "[${HEADER___PROJECT_DOC_FOLDER}/copyright}]"\
             "remains!"
         exit_status=1
     fi
 #    echo \
 #        "[${0}] --> WARNING!"\
 #        "Doc folder"\
-#        "[${___HEADER___PROJECT_DOC_FOLDER___}]"\
+#        "[${HEADER___PROJECT_DOC_FOLDER}]"\
 #        "remains on system!"
 fi
 

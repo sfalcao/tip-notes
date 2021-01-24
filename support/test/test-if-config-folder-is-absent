@@ -33,11 +33,11 @@ source ../../tip-notes/project-header.sh
 __script_name__="${0}"
 
 
-if [[ -d "${___HEADER___PROJECT_CONFIG_FOLDER___}" ]]; then
+if [[ -d "${HEADER___PROJECT_CONFIG_FOLDER}" ]]; then
     echo \
         "[${__script_name__}] --> FAIL!"\
         "Configuration folder"\
-        "[${___HEADER___PROJECT_CONFIG_FOLDER___}]"\
+        "[${HEADER___PROJECT_CONFIG_FOLDER}]"\
         "remains on system!"
     exit 1
 fi
