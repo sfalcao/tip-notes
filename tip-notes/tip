@@ -68,6 +68,99 @@ else
 fi
 
 
+#-------------------------------------------------------------------------------
+# FUNCTIONS
+#-------------------------------------------------------------------------------
+#
+function show_help(){
+    echo
+    echo \
+        "${HEADER___PROJECT_NAME} "\
+        "${HEADER___PROJECT_VERSION}"
+    echo
+    echo
+    echo "USAGE:"
+    echo
+    echo \
+        "${script_name}                                    "\
+        "list all notes"
+    echo \
+        "${script_name} [<group>]                          "\
+        "list all notes within the group"
+    echo \
+        "${script_name} [<group>/]<note>                   "\
+        "list specific note"
+    echo
+    echo \
+        "${script_name} --config                           "\
+        "edit external configuration file"
+    echo \
+        "${script_name} --init                             "\
+        "create an external configuration file"
+    echo \
+        "${script_name} --reset                            "\
+        "reset external configuration file"
+    echo
+    echo \
+        "${script_name} --backup                           "\
+        "creates a backup according to tiprc configuration"
+    echo \
+        "${script_name} --backup --all                     "\
+        "creates a backup containing notes and configurations"
+    echo \
+        "${script_name} --backup --config-only             "\
+        "creates a backup containing configurations"
+    echo \
+        "${script_name} --backup --notes-only              "\
+        "creates a backup containing notes"
+    echo
+    echo \
+        "${script_name} --edit [<group>/]<note>            "\
+        "add/edit note"
+    echo \
+        "${script_name} --delete [<group>/]<note>          "\
+        "delete note"
+    echo \
+        "${script_name} --find [<group>] <text>            "\
+        "find notes which name contains <text>"
+    echo \
+        "${script_name} --find-content [<group>] <text>    "\
+        "find notes which contains <text>"
+    echo
+    echo \
+        "${script_name} --remove                           "\
+        "remove ${HEADER___PROJECT_NAME} from system"
+    echo \
+        "${script_name} --purge                            "\
+        "remove ${HEADER___PROJECT_NAME} from system including"
+    echo "                                       "\
+        "configuration files and notes"
+    echo
+    echo \
+        "${script_name} --version                          "\
+        "shows ${HEADER___PROJECT_NAME} version"
+    echo \
+        "${script_name} --authors                          "\
+        "shows ${HEADER___PROJECT_NAME} authors list"
+    echo
+    echo
+    echo "SHORT FORMS:"
+    echo
+    echo "-b is same of --backup"
+    echo "-d is same of --delete"
+    echo "-e is same of --edit"
+    echo "-f is same of --find"
+    echo "-F is same of --find-content"
+    echo "-h is same of --help"
+    echo
+    echo
+    echo \
+        "${script_name} --help                             "\
+        "shows ${HEADER___PROJECT_NAME}'s help"
+    echo
+    return 0
+}
+
 
 #-------------------------------------------------------------------------------
 # PARSING
@@ -76,8 +169,14 @@ fi
 POSITIONAL_ARGUMENTS=()
 
 
-#VERBOSE_FLAG=0
-#SILENT_FLAG=0
+
+number_of_passed_options=0
+
+backup_flag=0
+edit_flag=0
+delete_flag=0
+find_by_content_flag=0
+find_by_name_flag=0
 
 
 while [[ ${#} -gt 0 ]]; do
@@ -85,136 +184,11 @@ while [[ ${#} -gt 0 ]]; do
     arg="$1"
 
     case ${arg} in
+
+        # early quitting options
         '-h' | '--help')
-            shift # past argument
-            echo
-            echo \
-                "${HEADER___PROJECT_NAME} "\
-                "${HEADER___PROJECT_VERSION}"
-            echo
-            echo
-            echo "USAGE:"
-            echo
-            echo \
-                "${script_name}                                    "\
-                "list all notes"
-            echo \
-                "${script_name} [<group>]                          "\
-                "list all notes within the group"
-            echo \
-                "${script_name} [<group>/]<note>                   "\
-                "list specific note"
-            echo
-            echo \
-                "${script_name} --config                           "\
-                "edit external configuration file"
-            echo \
-                "${script_name} --init                             "\
-                "create an external configuration file"
-            echo \
-                "${script_name} --reset                            "\
-                "reset external configuration file"
-            echo
-            echo \
-                "${script_name} --backup                           "\
-                "creates a backup according to tiprc configuration"
-            echo \
-                "${script_name} --backup --all                     "\
-                "creates a backup containing notes and configurations"
-            echo \
-                "${script_name} --backup --config-only             "\
-                "creates a backup containing configurations"
-            echo \
-                "${script_name} --backup --notes-only              "\
-                "creates a backup containing notes"
-            echo
-            echo \
-                "${script_name} --edit [<group>/]<note>            "\
-                "add/edit note"
-            echo \
-                "${script_name} --delete [<group>/]<note>          "\
-                "delete note"
-            echo \
-                "${script_name} --find [<group>] <text>            "\
-                "find notes which name contains <text>"
-            echo \
-                "${script_name} --find-content [<group>] <text>    "\
-                "find notes which contains <text>"
-            echo
-            echo \
-                "${script_name} --remove                           "\
-                "remove ${HEADER___PROJECT_NAME} from system"
-            echo \
-                "${script_name} --purge                            "\
-                "remove ${HEADER___PROJECT_NAME} from system including"
-            echo "                                       "\
-                "configuration files and notes"
-            echo
-            echo \
-                "${script_name} --version                          "\
-                "shows ${HEADER___PROJECT_NAME} version"
-            echo \
-                "${script_name} --authors                          "\
-                "shows ${HEADER___PROJECT_NAME} authors list"
-            echo
-            echo
-            echo "SHORT FORMS:"
-            echo
-            echo "-b is same of --backup"
-            echo "-d is same of --delete"
-            echo "-e is same of --edit"
-            echo "-f is same of --find"
-            echo "-F is same of --find-content"
-            echo "-h is same of --help"
-            echo
-            echo
-            echo \
-                "${script_name} --help                             "\
-                "shows ${HEADER___PROJECT_NAME}'s help"
-            echo
-            exit 0
-            ;;
-#        '-s' | '--silent')
-#            SILENT_FLAG=1
-#            shift # past argument
-#            ;;
-#        '-v' | '--verbose')
-#            VERBOSE_FLAG=1
-#            shift # past argument
-#            ;;
-        '-b' | '--backup')
             shift
-            if ! "${executables_dir}/backup" "${@}"; then
-                exit 1
-            fi
-            exit 0
-            ;;
-        '-e' | '--edit')
-            shift
-            if ! "${executables_dir}/edit" "${@}"; then
-                exit 1
-            fi
-            exit 0
-            ;;
-        '-d' | '--delete')
-            shift
-            if ! "${executables_dir}/delete" "${@}"; then
-                exit 1
-            fi
-            exit 0
-            ;;
-        '-F' | '--find-content')
-            shift
-            if ! "${executables_dir}/find-notes-by-content" "${@}"; then
-                exit 1
-            fi
-            exit 0
-            ;;
-        '-f' | '--find')
-            shift
-            if ! "${executables_dir}/find-notes-by-name" "${@}"; then
-                exit 1
-            fi
+            show_help
             exit 0
             ;;
         '--authors')
@@ -258,6 +232,34 @@ while [[ ${#} -gt 0 ]]; do
             exit 0
             ;;
 
+        # post processing options
+        '-b' | '--backup')
+            shift
+            backup_flag=1
+            let number_of_passed_options+=1
+            ;;
+        '-e' | '--edit')
+            shift
+            edit_flag=1
+            let number_of_passed_options+=1
+            ;;
+        '-d' | '--delete')
+            shift
+            delete_flag=1
+            let number_of_passed_options+=1
+            ;;
+        '-F' | '--find-content')
+            shift
+            find_by_content_flag=1
+            let number_of_passed_options+=1
+            ;;
+        '-f' | '--find')
+            shift
+            find_by_name_flag=1
+            let number_of_passed_options+=1
+            ;;
+
+
         *)
             # unknown option
             # save it in an array for later
@@ -281,7 +283,44 @@ set -- "${POSITIONAL_ARGUMENTS[@]}"
 #-------------------------------------------------------------------------------
 #
 
-# if no notes folfer creates one
+if [[ "${number_of_passed_options}" -gt 1 ]]; then
+    print_error "ERROR: too many options passed!"
+    exit 1
+fi
+
+
+
+if [[ "${backup_flag}" -eq 1 ]]; then
+    if ! "${executables_dir}/backup" "${@}"; then
+        exit 1
+    fi
+    exit 0
+elif [[ "${edit_flag}" -eq 1 ]]; then
+    if ! "${executables_dir}/edit" "${@}"; then
+        exit 1
+    fi
+    exit 0
+elif [[ "${delete_flag}" -eq 1 ]]; then
+    if ! "${executables_dir}/delete" "${@}"; then
+        exit 1
+    fi
+    exit 0
+elif [[ "${find_by_content_flag}" -eq 1 ]]; then
+    if ! "${executables_dir}/find-notes-by-content" "${@}"; then
+        exit 1
+    fi
+    exit 0
+elif [[ "${find_by_name_flag}" -eq 1 ]]; then
+    if ! "${executables_dir}/find-notes-by-name" "${@}"; then
+        exit 1
+    fi
+    exit 0
+fi
+
+
+
+
+# if no notes folder creates one
 if ! [[ -d "${RC___TIP_NOTES_FOLDER}" ]]; then
     mkdir "${RC___TIP_NOTES_FOLDER}"
 fi
@@ -293,10 +332,13 @@ if [[ "${#}" -eq 0 ]]; then
     exit 0
 fi
 
+# list notes
 if [[ "${#}" -eq 1 ]]; then
+    # if receives a folder list notes on it
     if [[ -d "${RC___TIP_NOTES_FOLDER}/${1}" ]]; then
         "${executables_dir}/list-notes" "${1}"
         exit 0
+    # if receives a note shows it's content
     elif [[ -f "${RC___TIP_NOTES_FOLDER}/${1}" ]]; then
         more "${RC___TIP_NOTES_FOLDER}/${1}"
         exit 0
@@ -306,5 +348,6 @@ if [[ "${#}" -eq 1 ]]; then
     exit 1
 fi
 
+# should not reach here
 print_error "ERROR: Unexpected condition!"
 exit 1
