@@ -184,135 +184,73 @@ while [[ ${#} -gt 0 ]]; do
 #            ;;
         '-b' | '--backup')
             shift
-            if [[ "${#}" -gt 0 ]]; then
-                "${executables_dir}/backup" "${@}"
-            else
-                "${executables_dir}/backup"
+            if ! "${executables_dir}/backup" "${@}"; then
+                exit 1
             fi
             exit 0
             ;;
         '-e' | '--edit')
             shift
-            if [[ ${#} -ne 1 ]]; then
-                print_error "ERROR: --edit option waits for a note name"
+            if ! "${executables_dir}/edit" "${@}"; then
                 exit 1
-            fi
-            note_file="${RC___TIP_NOTES_FOLDER}/${1}"
-
-            if [[ -n "${note_file}" ]]; then
-                mkdir -p "$(dirname "${note_file}")" && touch "${note_file}"
-            fi
-            if [[ -z "${RC___TIP_EDITOR}" ]]; then
-                if ! [[ -f "${note_file}" ]]; then
-                    touch "${note_file}"
-                fi
-                xdg-open "${note_file}"
-            else
-                "${RC___TIP_EDITOR}" "${note_file}"
-            fi
-            # removes a zero leght file that eventually remains
-            if ! [[ -s ${note_file} ]]; then
-                rm "${note_file}"
             fi
             exit 0
             ;;
         '-d' | '--delete')
             shift
-            if ! "${executables_dir}/delete" "${1}"; then
+            if ! "${executables_dir}/delete" "${@}"; then
                 exit 1
             fi
             exit 0
             ;;
         '-F' | '--find-content')
             shift
-            if [[ "${#}" -eq 1 ]]; then
-                "${executables_dir}/find-notes-by-content" "${1}"
-                exit 0
-            elif [[ "${#}" -eq 2 ]]; then
-                "${executables_dir}/find-notes-by-content" "${1}" "${2}"
-                exit 0
+            if ! "${executables_dir}/find-notes-by-content" "${@}"; then
+                exit 1
             fi
-            print_error \
-                "ERROR: --find-content received unexpected number of arguments!"
-            print_error
-            print_error "usage:"
-            print_error "${script_name} --find-content [<group>] <text>"
-            print_error
-            print_error "[<group>] is optional"
-            print_error
-            exit 1
+            exit 0
             ;;
         '-f' | '--find')
             shift
-            if [[ "${#}" -eq 1 ]]; then
-                "${executables_dir}/find-notes-by-name" "${1}"
-                exit 0
-            elif [[ "${#}" -eq 2 ]]; then
-                "${executables_dir}/find-notes-by-name" "${1}" "${2}"
-                exit 0
+            if ! "${executables_dir}/find-notes-by-name" "${@}"; then
+                exit 1
             fi
-            print_error \
-                "ERROR: --find received unexpected number of arguments!"
-            print_error
-            print_error "usage:"
-            print_error "${script_name} --find [<group>] <text>"
-            print_error
-            print_error "[<group>] is optional"
-            print_error
-            exit 1
+            exit 0
             ;;
         '--authors')
-            cat "${executables_dir}/authors"
+            if ! cat "${executables_dir}/authors"; then
+                exit 1
+            fi
             exit 0
             ;;
         '--config')
-            if [[ -s "${HEADER___PROJECT_CONFIG_FILE}" ]]; then
-                if [[ -z "${RC___TIP_EDITOR}" ]]; then
-                    xdg-open "${HEADER___PROJECT_CONFIG_FILE}"
-                else
-                    "${RC___TIP_EDITOR}" "${HEADER___PROJECT_CONFIG_FILE}"
-                fi
-                exit 0
+            if ! "${executables_dir}/config"; then
+                exit 1
             fi
-            print_error "ERROR: config file not found!"
-            exit 1
+            exit 0
             ;;
         '--init')
-            "${executables_dir}/init"
+            if ! "${executables_dir}/init"; then
+                exit 1
+            fi
             exit 0
             ;;
         '--reset')
-            if [ "${RC___TIP_TO_CONFIRM_BEFORE_RESET}" = true ]; then
-                read -r -p "Are you sure? (y/n): " answer
-                if ! [[ "${answer}" =~ [y|Y] ]]; then
-                    print_error "reset operation aborted by user!"
-                    exit 1
-                fi
+            if ! "${executables_dir}/reset"; then
+                exit 1
             fi
-            rm "${HEADER___PROJECT_CONFIG_FILE}"
-            "${executables_dir}/init"
             exit 0
             ;;
         '--remove')
-            if [ "${RC___TIP_TO_CONFIRM_BEFORE_REMOVE}" = true ]; then
-                read -r -p "Are you sure? (y/n): " answer
-                if ! [[ "${answer}" =~ [y|Y] ]]; then
-                    print_error "remove operation aborted by user!"
-                    exit 1
-                fi
+            if ! "${executables_dir}/remove"; then
+                exit 1
             fi
-            "${executables_dir}/remove"
             exit 0
             ;;
         '--purge')
-            if [ "${RC___TIP_TO_CONFIRM_BEFORE_PURGE}" = true ]; then
-                read -r -p "Are you sure? (y/n): " answer
-                if ! [[ "${answer}" =~ [y|Y] ]]; then
-                    print_error "purge operation aborted by user!"
-                    exit 1
-                fi
+            if ! "${executables_dir}/remove" '--purge'; then
+                exit 1
             fi
-            "${executables_dir}/remove" '--purge'
             exit 0
             ;;
         '--version')

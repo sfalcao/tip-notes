@@ -3,7 +3,7 @@
 #
 #   DESCRIPTION: deletes a note
 # 
-#         USAGE: ./delete
+#         USAGE: ./delete <note>
 #                
 #        AUTHOR: S. Falcao
 #       CREATED: 24.01.2021 15:10

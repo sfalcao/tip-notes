@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #===============================================================================
 #
-#   DESCRIPTION: find notes by content
+#   DESCRIPTION: edit tip-notes config file
 # 
-#         USAGE: ./find-notes-by-content <text>
+#         USAGE: ./config
 #                
 #        AUTHOR: S. Falcao
-#       CREATED: 09.08.2020 17:26
+#       CREATED: 24.01.2021 15:43
 
 #===============================================================================
 
@@ -53,41 +53,33 @@ source "${executables_dir}/project-header.sh"
 # shellcheck source=./tip-lib.sh
 source "${executables_dir}/tip-lib.sh"
 
-
+# if exist a config file, source it, otherwise prints an error
+# message, unless $1 is --config-init
 if [[ -f "${HEADER___PROJECT_CONFIG_FILE}" ]]; then
-# shellcheck source=/home/falcao/.config/tip-notes/tiprc
+    # shellcheck source=/home/falcao/.config/tip-notes/tiprc
     source "${HEADER___PROJECT_CONFIG_FILE}"
 else
-    print_error "ERROR: --> configuration file does not exist!"
-    exit 1
-fi
-
-
-
-#-------------------------------------------------------------------------------
-# MAIN
-#-------------------------------------------------------------------------------
-#
-folder_to_list=''
-if [[ "${#}" -eq 1 ]]; then
-    folder_to_list="${RC___TIP_NOTES_FOLDER}"
-    text="${1}"
-elif [[ "${#}" -eq 2 ]]; then
-    folder_to_list="${RC___TIP_NOTES_FOLDER}/${1}"
-    text="${2}"
-    if ! [[ -d "${folder_to_list}" ]]; then
-        print_error "ERROR: [${1}] seems no to be a valid GROUP of notes"
+    if [[ "${#}" -eq 0 ]] || [[ "${1}" != '--init' ]]; then
+        print_error "ERROR: --> configuration file does not exist!"
         exit 1
     fi
-else
-    print_error "ERROR: unexpected number os parameters"
-    exit 1
 fi
 
-find "${folder_to_list}"\
-    -type f\
-    -print0\
-    | xargs -0 grep -li "${text}"\
-    | grep -oP "${folder_to_list}/\K.*"\
-    | sort\
-    | uniq
+
+
+#-------------------------------------------------------------------------------
+# MAIN SECTION
+#-------------------------------------------------------------------------------
+#
+
+if [[ -s "${HEADER___PROJECT_CONFIG_FILE}" ]]; then
+    if [[ -z "${RC___TIP_EDITOR}" ]]; then
+        xdg-open "${HEADER___PROJECT_CONFIG_FILE}"
+    else
+        "${RC___TIP_EDITOR}" "${HEADER___PROJECT_CONFIG_FILE}"
+    fi
+    exit 0
+fi
+
+print_error "ERROR: config file not found!"
+exit 1

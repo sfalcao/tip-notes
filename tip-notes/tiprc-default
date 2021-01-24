@@ -42,26 +42,6 @@ RC___TIP_NOTES_FOLDER="${_home}/.tip-notes"
 RC___TIP_EDITOR=''
 
 #-----------------------------------------------------------------------------
-# control if --remove will ask for confirmation or not
-# IS SAFER TO KEEP IT true
-#
-# RC___TIP_TO_CONFIRM_BEFORE_REMOVE=true           asks for confirmation
-# RC___TIP_TO_CONFIRM_BEFORE_REMOVE=false          removes without asking
-#-----------------------------------------------------------------------------
-RC___TIP_TO_CONFIRM_BEFORE_REMOVE=true
-
-#-----------------------------------------------------------------------------
-# control if --purge will ask for confirmation
-# IS STRONGLY RECOMMENDED TO KEEP IT true
-# Changing this option may lead to accidentally loosing all
-# your notes
-#
-# RC___TIP_TO_CONFIRM_BEFORE_PURGE=true            asks for confirmation
-# RC___TIP_TO_CONFIRM_BEFORE_PURGE=false           removes without asking
-#-----------------------------------------------------------------------------
-RC___TIP_TO_CONFIRM_BEFORE_PURGE=true
-
-#-----------------------------------------------------------------------------
 # control if --reset will ask for confirmation
 # IS SAFER TO KEEP IT true
 #'

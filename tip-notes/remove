@@ -56,6 +56,16 @@ if apt list --installed 2> /dev/null | grep 'tip-notes'; then
     exit 1
 fi
 
+
+
+
+read -r -p "Are you sure? (y/n): " answer
+if ! [[ "${answer}" =~ [y|Y] ]]; then
+    print_error "remove operation aborted by user!"
+    exit 1
+fi
+
+
 # remove files and folders destination
 if ! rm -r "${HEADER___PROJECT_EXECUTABLES_FOLDER}"; then
     exit_status=1
