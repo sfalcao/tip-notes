@@ -39,11 +39,11 @@ _tip() {
 
     tip_backup_suboptions_long='--all --config-only --notes-only'
 
-    notes_list=$(
-        find "${RC___TIP_NOTES_FOLDER}" \
+    notes_list="$(
+        find "${RC___TIP_NOTES_FOLDER}" -type f \
         | sort \
         | grep -oP "${RC___TIP_NOTES_FOLDER}/\K.*" \
-    )
+    )"
 
 
 
