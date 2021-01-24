@@ -5,10 +5,10 @@
 
 script_name=$(basename "${0}")
 
-LINK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-LINKED_SCRIPT=$(readlink "${LINK_DIR}/${script_name}")
+link_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LINKED_SCRIPT=$(readlink "${link_dir}/${script_name}")
 if [[ -z "${LINKED_SCRIPT}" ]]; then
-    EXECUTABLES_DIR="${LINK_DIR}"
+    EXECUTABLES_DIR="${link_dir}"
 else
     EXECUTABLES_DIR=$(dirname "${LINKED_SCRIPT}")
 fi
