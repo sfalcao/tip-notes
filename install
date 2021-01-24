@@ -13,11 +13,11 @@
 
 script_name="$(basename ${0})"
 
-# get:
-# __project_name__, __project_binaries_folder__, __project_links_folder__
-#
+exit_status=0
+
 # from project-header file
 source ./tip-notes/project-header.sh
+source ./tip-notes/tip-lib.sh
 
 echo
 echo "ATTENTION!"
@@ -56,46 +56,66 @@ fi
 
 # if any command line parameter has been passed display help message
 if [[ $# -gt 0 ]]; then
-    echo "${script_name}"
-    echo "installs ${HEADER___PROJECT_NAME}"
-    echo
-    echo "usage:"
-    echo
-    echo "  sudo ./${script_name}"
-    echo
+    error_message "${script_name}"
+    error_message "installs ${HEADER___PROJECT_NAME}"
+    error_message
+    error_message "usage:"
+    error_message
+    error_message "  sudo ./${script_name}"
+    error_message
     exit 1
 fi
 
+
+# copy executables
 if ! mkdir -p "${HEADER___PROJECT_EXECUTABLES_FOLDER}"; then
-    echo "ERROR: destination folder could not be created"
+    error_message "ERROR: destination folder could not be created"
     exit 1
 fi
+if ! cp -r ./tip-notes/* "${HEADER___PROJECT_EXECUTABLES_FOLDER}"; then
+    error_message "copy executables status --> FAILED"
+    exit_status=1
+fi
 
-cp -r ./tip-notes/* "${HEADER___PROJECT_EXECUTABLES_FOLDER}"
-#cp remove "${__project_binaries_folder__}"
-
-if [[ -d /etc/bash_completion.d ]]; then
-    cp \
-        ./autocompletion/tip.bash \
-        "${HEADER___PROJECT_AUTOCOMPLETION_FOLDER}"
+# copy autocompletion files
+if ! cp ./autocompletion/tip.bash "${HEADER___PROJECT_AUTOCOMPLETION_FOLDER}"; then
+    error_message "copy autocompletion status --> FAILED"
+    exit_status=1
 fi
 
 # create links to executables
-ln -s \
+if ! ln -s \
     "${HEADER___PROJECT_EXECUTABLES_FOLDER}/tip" \
-    "${HEADER___PROJECT_LINKS_FOLDER}"
+    "${HEADER___PROJECT_LINKS_FOLDER}"; then
+    error_message "create links status --> FAILED"
+    exit_status=1
+fi
 
 # create docs
-mkdir -p "${HEADER___PROJECT_DOC_FOLDER}"
-cp ./packaging/copyright "${HEADER___PROJECT_DOC_FOLDER}"
-
-# copy autocomplete file
-cp ./autocompletion/tip.bash "${HEADER___PROJECT_AUTOCOMPLETION_FILE}"
+if ! mkdir -p "${HEADER___PROJECT_DOC_FOLDER}"; then
+    error_message "create docs folder status --> FAILED"
+fi
+if ! cp ./packaging/copyright "${HEADER___PROJECT_DOC_FOLDER}"; then
+    error_message "copy docs status --> FAILED"
+    exit_status=1
+fi
 
 # copy man page
-cp ./man/tip.1 "${HEADER___PROJECT_MAN_FOLDER}/tip.1"
-gzip "${HEADER___PROJECT_MAN_FOLDER}/tip.1"
+if ! cp ./man/tip.1 "${HEADER___PROJECT_MAN_FOLDER}/tip.1"; then
+    error_message "copy man page status --> FAILED"
+    exit_status=1
+fi
+if ! gzip -f "${HEADER___PROJECT_MAN_FOLDER}/tip.1"; then
+    error_message "compress man page status --> FAILED"
+    exit_status=1
+fi
 
 # create config files if does not exist
-"${HEADER___PROJECT_EXECUTABLES_FOLDER}/init" &> /dev/nul
+if ! "${HEADER___PROJECT_EXECUTABLES_FOLDER}/init" &> /dev/nul; then
+    error_message \
+        "create config files status --> FAILED" \
+        "(Not a problem if config files already exist!)"
+    exit_status=1
+fi
 
+exit "${exit_status}"
