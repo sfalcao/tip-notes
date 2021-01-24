@@ -19,27 +19,47 @@ exit_status=0
 source ./tip-notes/project-header.sh
 source ./tip-notes/tip-lib.sh
 
-echo
-echo "ATTENTION!"
-echo
-echo \
-    "We strongly recommend to always install and remove "\
-    "${HEADER___PROJECT_NAME}"
-echo "trough assistance of system packaging manager. Please check README.md"
-echo "installation section to see how to do it!"
-echo
-read -r -p "Ignore this warning and install? Type 'YES' to proceed: " answer
-echo
-if [[ "${answer}" != 'YES' ]]; then
-    echo "Installation aborted by user!"
-    echo
+skip_warning=0
+
+case "${1:-}" in
+    '-s' | '--skip')
+        skip_warning=1
+        shift
+        ;;
+    '')
+        :
+        ;;
+    *)
+        print_error "ERROR: unexpected parameter(s): ${@}"
+        exit 1
+        ;;
+esac
+
+if [[ ${#} -gt 0 ]]; then
+    print_error "ERROR: unexpected parameter(s): ${@}"
     exit 1
 fi
 
-# aborts if already installed by apt
-if apt list --installed 2> /dev/null | grep 'tip-notes'; then
+if [[ "${skip_warning}" -eq 0 ]]; then
     echo
     echo "ATTENTION!"
+    echo
+    echo \
+        "We strongly recommend to always install and remove "\
+        "${HEADER___PROJECT_NAME}"
+    echo "trough assistance of system packaging manager. Please check README.md"
+    echo "installation section to see how to do it!"
+    echo
+    echo "To ignore this warning and install, type:"
+    echo "${script_name} -s"
+    echo
+    exit 0
+fi
+
+
+
+# aborts if already installed by apt
+if apt list --installed 2> /dev/null | grep 'tip-notes'; then
     echo
     echo\
         "${HEADER___PROJECT_NAME} has already been installed "\
@@ -50,13 +70,6 @@ if apt list --installed 2> /dev/null | grep 'tip-notes'; then
     echo
     echo "then, call this script again"
     echo
-    exit 1
-fi
-
-
-# if any command line parameter has been passed display help message
-if [[ $# -gt 0 ]]; then
-    print_error "ERROR: unexpeted parameter(s): ${@}"
     exit 1
 fi
 
