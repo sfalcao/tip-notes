@@ -40,7 +40,7 @@ HEADER___PROJECT_LINKS_FOLDER='/usr/local/bin'
 HEADER___PROJECT_DOC_FOLDER="/usr/share/doc/${HEADER___PROJECT_NAME}"
 HEADER___PROJECT_AUTOCOMPLETION_FOLDER="/etc/bash_completion.d"
 HEADER___PROJECT_AUTOCOMPLETION_FILE="${HEADER___PROJECT_AUTOCOMPLETION_FOLDER}/tip.bash"
-___HEADER___PROJECT_MAN_FOLDER___="/usr/local/man/man1"
+HEADER___PROJECT_MAN_FOLDER="/usr/local/man/man1"
 
 
 # if change the following line, change also deb-make purge section
