@@ -218,27 +218,9 @@ while [[ ${#} -gt 0 ]]; do
             ;;
         '-d' | '--delete')
             shift
-            if [[ ${#} -ne 1 ]]; then
-                print_error "ERROR: --delete option waits for a note name"
+            if ! "${executables_dir}/delete" "${1}"; then
                 exit 1
             fi
-            note_file="${RC___TIP_NOTES_FOLDER}/${1}"
-            if [[ -f "${note_file}" ]]; then
-                if [ "${RC___TIP_TO_CONFIRM_BEFORE_DELETE_NOTE}" = true ]; then
-
-                    read -r -p "Are you sure? (y/n): " answer
-                    if ! [[ "${answer}" =~ [y|Y] ]]; then
-                        print_error "reset operation aborted by user!"
-                        exit 1
-                    fi
-
-                fi
-                rm "${note_file}"
-            else
-                print_error "ERROR: no ${1} note to be removed!"
-                exit 1
-            fi
-            find "${RC___TIP_NOTES_FOLDER}" -type d -empty -delete
             exit 0
             ;;
         '-F' | '--find-content')
