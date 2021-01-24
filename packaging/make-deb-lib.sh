@@ -44,7 +44,7 @@ function copy_and_set_permissions(){
 
     origin="${1}"
     destination="${2}"
-    permissions_number="${3:-644}"   #if no permission passed 644 is assumed
+    permissions_number="${3:-}"
 
     folder_mode='false'
 
@@ -59,18 +59,25 @@ function copy_and_set_permissions(){
     mkdir -p "${destination}"
     #echo "criando folder: ${destination}"
 
+    #TODO: to fix chmod part of routine, the way it is or keeps
+    #      files permissions or change to 644
+
     IFS=$'\t'
     if [[ "${folder_mode}" ==  'false' ]]; then
         for full_path in ${origin}; do
             file_name=$(basename -- "${full_path}")
             cp ${full_path} "${destination}/${file_name}"
-            chmod "${permissions_number}" "${destination}/${file_name}"
+            if [[ -n "${permissions_number}" ]]; then
+                chmod 644 "${destination}/${file_name}"
+            fi
         done
     else
         for file_name in "${origin}"/*; do
             #echo "${file_name}"
             cp "${file_name}" "${destination}"/"${file_name}"
-            chmod "${permissions_number}" "${destination}/${file_name}"
+            if [[ -n "${permissions_number}" ]]; then
+                chmod 644 "${destination}/${file_name}"
+            fi
         done
     fi
 }
