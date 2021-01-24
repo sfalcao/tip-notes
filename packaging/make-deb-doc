@@ -27,7 +27,7 @@ IFS=$'\t'
 full_path_list="copyright"
 #full_path_list+="${IFS}<<doc_file_2>>"
 #...
-destination_folder="${package_folder}${___HEADER___PROJECT_DOC_FOLDER___}"
+destination_folder="${package_folder}${HEADER___PROJECT_DOC_FOLDER}"
 copy_and_set_permissions \
     "${full_path_list}" \
     "${destination_folder}" \

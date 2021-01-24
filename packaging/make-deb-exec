@@ -20,6 +20,6 @@
 
 # the idea here is to keep all executables in a single folder named after
 # project, if it is not the case, change bellow accordingly
-destination_folder="${package_folder}${___HEADER___PROJECT_EXECUTABLES_FOLDER___}"
+destination_folder="${package_folder}${HEADER___PROJECT_EXECUTABLES_FOLDER}"
 copy_and_set_permissions \
-    ../"${___HEADER___PROJECT_NAME___}" "${destination_folder}"
+    ../"${HEADER___PROJECT_NAME}" "${destination_folder}"

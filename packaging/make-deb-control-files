@@ -26,22 +26,22 @@ cp -r ./DEBIAN "${package_folder}"
 
 # adjust project name and version number in control file
 sed -i \
-    "s|___CHANGE_HERE___PROJECT_NAME___|${___HEADER___PROJECT_NAME___}|" \
+    "s|___CHANGE_HERE___PROJECT_NAME___|${HEADER___PROJECT_NAME}|" \
     "${package_folder}/DEBIAN/control"
 sed -i \
-    "s|___CHANGE_HERE___PROJECT_VERSION___|${___HEADER___PROJECT_VERSION___}|" \
+    "s|___CHANGE_HERE___PROJECT_VERSION___|${HEADER___PROJECT_VERSION}|" \
     "${package_folder}/DEBIAN/control"
 
 # ajust executables and links folders in postinst file
 postinst_file="${package_folder}/DEBIAN/postinst"
 sed -i \
-    "s|___CHANGE_HERE___EXECUTABLES_FOLDER___|${___HEADER___PROJECT_EXECUTABLES_FOLDER___}|" \
+    "s|___CHANGE_HERE___EXECUTABLES_FOLDER___|${HEADER___PROJECT_EXECUTABLES_FOLDER}|" \
     "${postinst_file}"
 sed -i \
-    "s|___CHANGE_HERE___LINKS_FOLDER___|${___HEADER___PROJECT_LINKS_FOLDER___}|" \
+    "s|___CHANGE_HERE___LINKS_FOLDER___|${HEADER___PROJECT_LINKS_FOLDER}|" \
     "${postinst_file}"
 sed -i \
-    "s|___CHANGE_HERE___CONFIG_FILE___|${___HEADER___PROJECT_CONFIG_FILE___}|" \
+    "s|___CHANGE_HERE___CONFIG_FILE___|${HEADER___PROJECT_CONFIG_FILE}|" \
     "${postinst_file}"
 chmod 755 "${postinst_file}"
 
@@ -49,9 +49,9 @@ chmod 755 "${postinst_file}"
 # ajust links and config folders in postrm file
 postrm_file="${package_folder}/DEBIAN/postrm"
 sed -i \
-    "s|___CHANGE_HERE___LINKS_FOLDER___|${___HEADER___PROJECT_LINKS_FOLDER___}|" \
+    "s|___CHANGE_HERE___LINKS_FOLDER___|${HEADER___PROJECT_LINKS_FOLDER}|" \
     "${postrm_file}"
 sed -i \
-    "s|___CHANGE_HERE___CONFIG_FOLDER___|${___HEADER___PROJECT_CONFIG_FOLDER___}|" \
+    "s|___CHANGE_HERE___CONFIG_FOLDER___|${HEADER___PROJECT_CONFIG_FOLDER}|" \
     "${postrm_file}"
 chmod 755 "${postrm_file}"
