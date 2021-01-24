@@ -126,7 +126,7 @@ while [[ ${#} -gt 0 ]]; do
             echo
             echo \
                 "${HEADER___PROJECT_NAME} "\
-                "${___HEADER___PROJECT_VERSION___}"
+                "${HEADER___PROJECT_VERSION}"
             echo
             echo
             echo "USAGE:"
@@ -370,7 +370,7 @@ while [[ ${#} -gt 0 ]]; do
             exit 0
             ;;
         '--version')
-            echo "${___HEADER___PROJECT_VERSION___}"
+            echo "${HEADER___PROJECT_VERSION}"
             exit 0
             ;;
 
