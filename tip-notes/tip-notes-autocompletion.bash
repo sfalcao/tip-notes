@@ -19,7 +19,7 @@ source "${HEADER___PROJECT_CONFIG_FILE}"
 
 #echo $executables_dir
 #echo $HEADER___PROJECT_CONFIG_FILE
-#echo $___CONFIG___TIP_NOTES_FOLDER
+#echo $RC___TIP_NOTES_FOLDER
 
 
 _tip() {
@@ -40,9 +40,9 @@ _tip() {
     tip_backup_suboptions_long='--all --config-only --notes-only'
 
     notes_list=$(
-        find "${___CONFIG___TIP_NOTES_FOLDER}" \
+        find "${RC___TIP_NOTES_FOLDER}" \
         | sort \
-        | grep -oP "${___CONFIG___TIP_NOTES_FOLDER}/\K.*" \
+        | grep -oP "${RC___TIP_NOTES_FOLDER}/\K.*" \
     )
 
 

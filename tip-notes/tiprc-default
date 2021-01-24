@@ -25,30 +25,30 @@ _home=${_home:-$HOME}
 #-----------------------------------------------------------------------------
 # point to folder where notes are stored'
 #-----------------------------------------------------------------------------
-___CONFIG___TIP_NOTES_FOLDER="${_home}/.tip-notes"
+RC___TIP_NOTES_FOLDER="${_home}/.tip-notes"
 
 #-----------------------------------------------------------------------------
 # choose editor to be used by tip-notes
 #
-# if ___CONFIG___TIP_EDITOR is set to '' then tip will use system's
+# if RC___TIP_EDITOR is set to '' then tip will use system's
 # default editor to edit notes and configurations
 #
-# ___CONFIG___TIP_EDITOR=''                 system default editor
-# ___CONFIG___TIP_EDITOR='vim'              vim as editor (must be installed)
-# ___CONFIG___TIP_EDITOR='nano'             nano as editor (must be installed)
+# RC___TIP_EDITOR=''                 system default editor
+# RC___TIP_EDITOR='vim'              vim as editor (must be installed)
+# RC___TIP_EDITOR='nano'             nano as editor (must be installed)
 # and so on...
 #
 #-----------------------------------------------------------------------------
-___CONFIG___TIP_EDITOR=''
+RC___TIP_EDITOR=''
 
 #-----------------------------------------------------------------------------
 # control if --remove will ask for confirmation or not
 # IS SAFER TO KEEP IT true
 #
-# ___CONFIG___TIP_CONFIRM_REMOVE=true           asks for confirmation
-# ___CONFIG___TIP_CONFIRM_REMOVE=false          removes without asking
+# RC___TIP_TO_CONFIRM_BEFORE_REMOVE=true           asks for confirmation
+# RC___TIP_TO_CONFIRM_BEFORE_REMOVE=false          removes without asking
 #-----------------------------------------------------------------------------
-___CONFIG___TIP_CONFIRM_REMOVE=true
+RC___TIP_TO_CONFIRM_BEFORE_REMOVE=true
 
 #-----------------------------------------------------------------------------
 # control if --purge will ask for confirmation
@@ -56,42 +56,42 @@ ___CONFIG___TIP_CONFIRM_REMOVE=true
 # Changing this option may lead to accidentally loosing all
 # your notes
 #
-# ___CONFIG___TIP_CONFIRM_PURGE=true            asks for confirmation
-# ___CONFIG___TIP_CONFIRM_PURGE=false           removes without asking
+# RC___TIP_TO_CONFIRM_BEFORE_PURGE=true            asks for confirmation
+# RC___TIP_TO_CONFIRM_BEFORE_PURGE=false           removes without asking
 #-----------------------------------------------------------------------------
-___CONFIG___TIP_CONFIRM_PURGE=true
+RC___TIP_TO_CONFIRM_BEFORE_PURGE=true
 
 #-----------------------------------------------------------------------------
 # control if --reset will ask for confirmation
 # IS SAFER TO KEEP IT true
 #'
-# ___CONFIG___TIP_CONFIRM_RESET=true            asks for confirmation
-# ___CONFIG___TIP_CONFIRM_RESET=false           resets without asking
+# RC___TIP_TO_CONFIRM_BEFORE_RESET=true            asks for confirmation
+# RC___TIP_TO_CONFIRM_BEFORE_RESET=false           resets without asking
 #-----------------------------------------------------------------------------
-___CONFIG___TIP_CONFIRM_RESET=true
+RC___TIP_TO_CONFIRM_BEFORE_RESET=true
 
 #-----------------------------------------------------------------------------
 # control if --delete will ask for confirmation
 # IS SAFER TO KEEP IT true
 #'
-# ___CONFIG___TIP_CONFIRM_DELETE_NOTE=true      asks for confirmation
-# ___CONFIG___TIP_CONFIRM_DELETE_NOTE=false     resets without asking
+# RC___TIP_TO_CONFIRM_BEFORE_DELETE_NOTE=true      asks for confirmation
+# RC___TIP_TO_CONFIRM_BEFORE_DELETE_NOTE=false     resets without asking
 #-----------------------------------------------------------------------------
-___CONFIG___TIP_CONFIRM_DELETE_NOTE=true
+RC___TIP_TO_CONFIRM_BEFORE_DELETE_NOTE=true
 
 #-----------------------------------------------------------------------------
 # point to folder where notes and configs are backuped
 #-----------------------------------------------------------------------------
-___CONFIG___TIP_BACKUP_FOLDER="${_home}/tip-notes-backup"
+RC___TIP_BACKUP_FOLDER="${_home}/tip-notes-backup"
 
 #-----------------------------------------------------------------------------
 # control if --backup will ask for confirmation before
 # creating backup folder if it does not exist
 #
-# ___CONFIG___TIP_CONFIRM_BACKUP_FOLDER_CREATION=true   asks for confirmation
-# ___CONFIG___TIP_CONFIRM_BACKUP_FOLDER_CREATION=false  do not ask confirmation
+# RC___TIP_CONFIRM_TO_CREATE_BACKUP_FOLDER=true   asks for confirmation
+# RC___TIP_CONFIRM_TO_CREATE_BACKUP_FOLDER=false  do not ask confirmation
 #-----------------------------------------------------------------------------
-___CONFIG___TIP_CONFIRM_BACKUP_FOLDER_CREATION=true
+RC___TIP_CONFIRM_TO_CREATE_BACKUP_FOLDER=true
 
 #-----------------------------------------------------------------------------
 # this section controls --backup behaviour. Basically you choose what is to
@@ -103,8 +103,8 @@ ___CONFIG___TIP_CONFIRM_BACKUP_FOLDER_CREATION=true
 #
 # IS SAFER TO KEEP IT '--all'
 #
-# ___CONFIG___TIP_BACKUP_BEHAVIOUR='--all'          configurations and notes
-# ___CONFIG___TIP_BACKUP_BEHAVIOUR='--config-only'  only configurations
-# ___CONFIG___TIP_BACKUP_BEHAVIOUR='--notes-only'   only notes
+# RC___TIP_BACKUP_BEHAVIOUR='--all'          configurations and notes
+# RC___TIP_BACKUP_BEHAVIOUR='--config-only'  only configurations
+# RC___TIP_BACKUP_BEHAVIOUR='--notes-only'   only notes
 #-----------------------------------------------------------------------------
-___CONFIG___TIP_BACKUP_BEHAVIOUR='--all'
+RC___TIP_BACKUP_BEHAVIOUR='--all'

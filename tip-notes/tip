@@ -233,18 +233,18 @@ while [[ ${#} -gt 0 ]]; do
                 echo "ERROR: --edit option waits for a note name"
                 exit 1
             fi
-            note_file="${___CONFIG___TIP_NOTES_FOLDER}/${1}"
+            note_file="${RC___TIP_NOTES_FOLDER}/${1}"
 
             if [[ -n "${note_file}" ]]; then
                 mkdir -p "$(dirname "${note_file}")" && touch "${note_file}"
             fi
-            if [[ -z "${___CONFIG___TIP_EDITOR}" ]]; then
+            if [[ -z "${RC___TIP_EDITOR}" ]]; then
                 if ! [[ -f "${note_file}" ]]; then
                     touch "${note_file}"
                 fi
                 xdg-open "${note_file}"
             else
-                "${___CONFIG___TIP_EDITOR}" "${note_file}"
+                "${RC___TIP_EDITOR}" "${note_file}"
             fi
             # removes a zero leght file that eventually remains
             if ! [[ -s ${note_file} ]]; then
@@ -258,9 +258,9 @@ while [[ ${#} -gt 0 ]]; do
                 echo "ERROR: --delete option waits for a note name"
                 exit 1
             fi
-            note_file="${___CONFIG___TIP_NOTES_FOLDER}/${1}"
+            note_file="${RC___TIP_NOTES_FOLDER}/${1}"
             if [[ -f "${note_file}" ]]; then
-                if [ "${___CONFIG___TIP_CONFIRM_DELETE_NOTE}" = true ]; then
+                if [ "${RC___TIP_TO_CONFIRM_BEFORE_DELETE_NOTE}" = true ]; then
 
                     read -r -p "Are you sure? (y/n): " answer
                     if ! [[ "${answer}" =~ [y|Y] ]]; then
@@ -274,7 +274,7 @@ while [[ ${#} -gt 0 ]]; do
                 echo "no ${1} note to be removed!"
                 exit 1
             fi
-            find "${___CONFIG___TIP_NOTES_FOLDER}" -type d -empty -delete
+            find "${RC___TIP_NOTES_FOLDER}" -type d -empty -delete
             exit 0
             ;;
         '-F' | '--find-content')
@@ -319,10 +319,10 @@ while [[ ${#} -gt 0 ]]; do
             ;;
         '--config')
             if [[ -s "${HEADER___PROJECT_CONFIG_FILE}" ]]; then
-                if [[ -z "${___CONFIG___TIP_EDITOR}" ]]; then
+                if [[ -z "${RC___TIP_EDITOR}" ]]; then
                     xdg-open "${HEADER___PROJECT_CONFIG_FILE}"
                 else
-                    "${___CONFIG___TIP_EDITOR}" "${HEADER___PROJECT_CONFIG_FILE}"
+                    "${RC___TIP_EDITOR}" "${HEADER___PROJECT_CONFIG_FILE}"
                 fi
                 exit 0
             fi
@@ -336,7 +336,7 @@ while [[ ${#} -gt 0 ]]; do
             exit 0
             ;;
         '--reset')
-            if [ "${___CONFIG___TIP_CONFIRM_RESET}" = true ]; then
+            if [ "${RC___TIP_TO_CONFIRM_BEFORE_RESET}" = true ]; then
                 read -r -p "Are you sure? (y/n): " answer
                 if ! [[ "${answer}" =~ [y|Y] ]]; then
                     echo "reset operation aborted by user!"
@@ -348,7 +348,7 @@ while [[ ${#} -gt 0 ]]; do
             exit 0
             ;;
         '--remove')
-            if [ "${___CONFIG___TIP_CONFIRM_REMOVE}" = true ]; then
+            if [ "${RC___TIP_TO_CONFIRM_BEFORE_REMOVE}" = true ]; then
                 read -r -p "Are you sure? (y/n): " answer
                 if ! [[ "${answer}" =~ [y|Y] ]]; then
                     echo "remove operation aborted by user!"
@@ -359,7 +359,7 @@ while [[ ${#} -gt 0 ]]; do
             exit 0
             ;;
         '--purge')
-            if [ "${___CONFIG___TIP_CONFIRM_PURGE}" = true ]; then
+            if [ "${RC___TIP_TO_CONFIRM_BEFORE_PURGE}" = true ]; then
                 read -r -p "Are you sure? (y/n): " answer
                 if ! [[ "${answer}" =~ [y|Y] ]]; then
                     echo "purge operation aborted by user!"
@@ -398,8 +398,8 @@ set -- "${POSITIONAL_ARGUMENTS[@]}"
 #
 
 # if no notes folfer creates one
-if ! [[ -d "${___CONFIG___TIP_NOTES_FOLDER}" ]]; then
-    mkdir "${___CONFIG___TIP_NOTES_FOLDER}"
+if ! [[ -d "${RC___TIP_NOTES_FOLDER}" ]]; then
+    mkdir "${RC___TIP_NOTES_FOLDER}"
 fi
 
 # if no arguments list available notes
@@ -410,11 +410,11 @@ if [[ "${#}" -eq 0 ]]; then
 fi
 
 if [[ "${#}" -eq 1 ]]; then
-    if [[ -d "${___CONFIG___TIP_NOTES_FOLDER}/${1}" ]]; then
+    if [[ -d "${RC___TIP_NOTES_FOLDER}/${1}" ]]; then
         "${executables_dir}/list-notes" "${1}"
         exit 0
-    elif [[ -f "${___CONFIG___TIP_NOTES_FOLDER}/${1}" ]]; then
-        more "${___CONFIG___TIP_NOTES_FOLDER}/${1}"
+    elif [[ -f "${RC___TIP_NOTES_FOLDER}/${1}" ]]; then
+        more "${RC___TIP_NOTES_FOLDER}/${1}"
         exit 0
     fi
 
