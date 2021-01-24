@@ -39,10 +39,10 @@ set -o pipefail
 # CONFIGURATION SECTION
 #-------------------------------------------------------------------------------
 #
-SCRIPT_NAME=$(basename "${0}")
+script_name=$(basename "${0}")
 
 LINK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-LINKED_SCRIPT=$(readlink "${LINK_DIR}/${SCRIPT_NAME}")
+LINKED_SCRIPT=$(readlink "${LINK_DIR}/${script_name}")
 if [[ -z "${LINKED_SCRIPT}" ]]; then
     EXECUTABLES_DIR="${LINK_DIR}"
 else
@@ -51,7 +51,7 @@ fi
 # shellcheck source=./project-header.sh
 source "${EXECUTABLES_DIR}/project-header.sh"
 
-#echo $SCRIPT_NAME
+#echo $script_name
 #echo $EXECUTABLES_DIR
 
 # if exist a config file, source it, otherwise prints an error
@@ -132,65 +132,65 @@ while [[ ${#} -gt 0 ]]; do
             echo "USAGE:"
             echo
             echo \
-                "${SCRIPT_NAME}                                    "\
+                "${script_name}                                    "\
                 "list all notes"
             echo \
-                "${SCRIPT_NAME} [<group>]                          "\
+                "${script_name} [<group>]                          "\
                 "list all notes within the group"
             echo \
-                "${SCRIPT_NAME} [<group>/]<note>                   "\
+                "${script_name} [<group>/]<note>                   "\
                 "list specific note"
             echo
             echo \
-                "${SCRIPT_NAME} --config                           "\
+                "${script_name} --config                           "\
                 "edit external configuration file"
             echo \
-                "${SCRIPT_NAME} --init                             "\
+                "${script_name} --init                             "\
                 "create an external configuration file"
             echo \
-                "${SCRIPT_NAME} --reset                            "\
+                "${script_name} --reset                            "\
                 "reset external configuration file"
             echo
             echo \
-                "${SCRIPT_NAME} --backup                           "\
+                "${script_name} --backup                           "\
                 "creates a backup according to tiprc configuration"
             echo \
-                "${SCRIPT_NAME} --backup --all                     "\
+                "${script_name} --backup --all                     "\
                 "creates a backup containing notes and configurations"
             echo \
-                "${SCRIPT_NAME} --backup --config-only             "\
+                "${script_name} --backup --config-only             "\
                 "creates a backup containing configurations"
             echo \
-                "${SCRIPT_NAME} --backup --notes-only              "\
+                "${script_name} --backup --notes-only              "\
                 "creates a backup containing notes"
             echo
             echo \
-                "${SCRIPT_NAME} --edit [<group>/]<note>            "\
+                "${script_name} --edit [<group>/]<note>            "\
                 "add/edit note"
             echo \
-                "${SCRIPT_NAME} --delete [<group>/]<note>          "\
+                "${script_name} --delete [<group>/]<note>          "\
                 "delete note"
             echo \
-                "${SCRIPT_NAME} --find [<group>] <text>            "\
+                "${script_name} --find [<group>] <text>            "\
                 "find notes which name contains <text>"
             echo \
-                "${SCRIPT_NAME} --find-content [<group>] <text>    "\
+                "${script_name} --find-content [<group>] <text>    "\
                 "find notes which contains <text>"
             echo
             echo \
-                "${SCRIPT_NAME} --remove                           "\
+                "${script_name} --remove                           "\
                 "remove ${HEADER___PROJECT_NAME} from system"
             echo \
-                "${SCRIPT_NAME} --purge                            "\
+                "${script_name} --purge                            "\
                 "remove ${HEADER___PROJECT_NAME} from system including"
             echo "                                       "\
                 "configuration files and notes"
             echo
             echo \
-                "${SCRIPT_NAME} --version                          "\
+                "${script_name} --version                          "\
                 "shows ${HEADER___PROJECT_NAME} version"
             echo \
-                "${SCRIPT_NAME} --authors                          "\
+                "${script_name} --authors                          "\
                 "shows ${HEADER___PROJECT_NAME} authors list"
             echo
             echo
@@ -205,7 +205,7 @@ while [[ ${#} -gt 0 ]]; do
             echo
             echo
             echo \
-                "${SCRIPT_NAME} --help                             "\
+                "${script_name} --help                             "\
                 "shows ${HEADER___PROJECT_NAME}'s help"
             echo
             exit 0
@@ -289,7 +289,7 @@ while [[ ${#} -gt 0 ]]; do
             echo "ERROR: --find-content received unexpected number of arguments!"
             echo
             echo "usage:"
-            echo "${SCRIPT_NAME} --find-content [<group>] <text>"
+            echo "${script_name} --find-content [<group>] <text>"
             echo
             echo "[<group>] is optional"
             echo
@@ -307,7 +307,7 @@ while [[ ${#} -gt 0 ]]; do
             echo "ERROR: --find received unexpected number of arguments!"
             echo
             echo "usage:"
-            echo "${SCRIPT_NAME} --find [<group>] <text>"
+            echo "${script_name} --find [<group>] <text>"
             echo
             echo "[<group>] is optional"
             echo

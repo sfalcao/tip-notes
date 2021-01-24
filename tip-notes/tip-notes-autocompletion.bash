@@ -3,10 +3,10 @@
 # Bash completion file for tip-notes
 #
 
-SCRIPT_NAME=$(basename "${0}")
+script_name=$(basename "${0}")
 
 LINK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-LINKED_SCRIPT=$(readlink "${LINK_DIR}/${SCRIPT_NAME}")
+LINKED_SCRIPT=$(readlink "${LINK_DIR}/${script_name}")
 if [[ -z "${LINKED_SCRIPT}" ]]; then
     EXECUTABLES_DIR="${LINK_DIR}"
 else
