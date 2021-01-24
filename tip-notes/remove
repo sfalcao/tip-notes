@@ -66,7 +66,7 @@ rm "${___HEADER___PROJECT_AUTOCOMPLETION_FILE___}"
 rm "${HEADER___PROJECT_LINKS_FOLDER}/tip"
 
 # remove docs
-rm -r "${___HEADER___PROJECT_DOC_FOLDER___}"
+rm -r "${HEADER___PROJECT_DOC_FOLDER}"
 
 # remove man page
 rm -r /usr/local/man/man1/tip.1.gz
