@@ -93,7 +93,7 @@ if ! rm -r /usr/local/man/man1/tip.1.gz; then
 fi
 
 # purge files if required
-if [[ "${1}" == "--purge" ]]; then
+if [[ "${1:-}" == "--purge" ]]; then
     if ! rm -r "${HEADER___PROJECT_CONFIG_FOLDER}"; then
         exit_status=1
     fi
