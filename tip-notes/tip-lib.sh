@@ -79,7 +79,7 @@ function print_error_if_flag_is_false(){
     #  prints <message> to stderr depending on flag value
 
     local message="${1}"
-    local flag="${2-false}"     # if no value is passed for flag, false is
+    local flag="${2:-false}"    # if no value is passed for flag, false is
                                 # assumed therefore message is displayed
 
     if [[ "${flag}" -eq "0" ]] || [[ "${flag}" == 'false' ]]; then
