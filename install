@@ -41,18 +41,20 @@ if [[ ${#} -gt 0 ]]; then
 fi
 
 if [[ "${skip_warning}" -eq 0 ]]; then
-    echo
-    echo "ATTENTION!"
-    echo
-    echo \
-        "We strongly recommend to always install and remove "\
+    printf "\n"
+    printf "ATTENTION!\n"
+    printf "\n"
+    printf \
+        "We strongly recommend to always install and remove %s trough\n" \
         "${HEADER___PROJECT_NAME}"
-    echo "trough assistance of system packaging manager. Please check README.md"
-    echo "installation section to see how to do it!"
-    echo
-    echo "To ignore this warning and install, type:"
-    echo "${script_name} -s"
-    echo
+    printf \
+        "assistance of system packaging manager. Please check README.md\n" \
+        "installation section to see how to do it!\n" \
+    printf "\n"
+    printf "To ignore this warning and install, type:\n"
+    printf "\n"
+    printf "sudo ./${script_name} -s\n"
+    printf "\n"
     exit 0
 fi
 
