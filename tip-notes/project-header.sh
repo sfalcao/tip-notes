@@ -31,7 +31,7 @@
 
 HEADER___PROJECT_NAME="tip-notes"
 HEADER___PROJECT_VERSION="0.1.0"
-___HEADER___PROJECT_MAIL___="falecomigo.falcao@gmail.com"
+HEADER___PROJECT_MAIL="falecomigo.falcao@gmail.com"
 ___HEADER___PROJECT_DEV_STAGE___="DRAFT"
 
 
