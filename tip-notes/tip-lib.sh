@@ -35,11 +35,16 @@ set -o pipefail
 #set -o xtrace
 
 
-#-------------------------------------------------------------------------------
-# CONFIGURATION SECTION
-#-------------------------------------------------------------------------------
-#
+
 script_name=$(basename "${0}")
+
+
+
+#-------------------------------------------------------------------------------
+# FUNCTIONS
+#-------------------------------------------------------------------------------
+# use this section to store your functions
+#
 
 
 #####
@@ -59,6 +64,7 @@ function print_error(){
 
     printf "%s\n" "$*" >/dev/stderr;
 }
+
 
 function print_error_if_flag_is_false(){
 
@@ -89,6 +95,7 @@ function print_error_if_flag_is_false(){
         return "1"
     fi
 }
+
 
 #####
 # P #
