@@ -46,5 +46,5 @@ HEADER___PROJECT_MAN_FOLDER="/usr/local/man/man1"
 # if change the following line, change also deb-make purge section
 _home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
 _home=${_home:-$HOME}
-___HEADER___PROJECT_CONFIG_FOLDER___="${_home}/.config/${HEADER___PROJECT_NAME}"
-HEADER___PROJECT_CONFIG_FILE="${___HEADER___PROJECT_CONFIG_FOLDER___}/tiprc"
+HEADER___PROJECT_CONFIG_FOLDER="${_home}/.config/${HEADER___PROJECT_NAME}"
+HEADER___PROJECT_CONFIG_FILE="${HEADER___PROJECT_CONFIG_FOLDER}/tiprc"

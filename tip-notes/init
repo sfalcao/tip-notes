@@ -55,8 +55,8 @@ source "${EXECUTABLES_DIR}/project-header.sh"
 
 
 # if doesn't exist a config folder create one
-if ! [[ -d "${___HEADER___PROJECT_CONFIG_FOLDER___}" ]]; then
-    mkdir "${___HEADER___PROJECT_CONFIG_FOLDER___}"
+if ! [[ -d "${HEADER___PROJECT_CONFIG_FOLDER}" ]]; then
+    mkdir "${HEADER___PROJECT_CONFIG_FOLDER}"
 fi
 
 # if exist a config file, skip creation

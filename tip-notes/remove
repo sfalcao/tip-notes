@@ -73,7 +73,7 @@ rm -r /usr/local/man/man1/tip.1.gz
 
 # purge files if required
 if [[ "${1}" == "--purge" ]]; then
-    rm -r "${___HEADER___PROJECT_CONFIG_FOLDER___}"
+    rm -r "${HEADER___PROJECT_CONFIG_FOLDER}"
 fi
 
 exit 0
