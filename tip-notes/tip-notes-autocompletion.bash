@@ -8,16 +8,16 @@ script_name=$(basename "${0}")
 link_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 linked_script=$(readlink "${link_dir}/${script_name}")
 if [[ -z "${linked_script}" ]]; then
-    EXECUTABLES_DIR="${link_dir}"
+    executables_dir="${link_dir}"
 else
-    EXECUTABLES_DIR=$(dirname "${linked_script}")
+    executables_dir=$(dirname "${linked_script}")
 fi
 # shellcheck source=./project-header.sh
-source "${EXECUTABLES_DIR}/project-header.sh"
+source "${executables_dir}/project-header.sh"
 # shellcheck source=/home/falcao/.config/tip-notes/tiprc
 source "${HEADER___PROJECT_CONFIG_FILE}"
 
-#echo $EXECUTABLES_DIR
+#echo $executables_dir
 #echo $HEADER___PROJECT_CONFIG_FILE
 #echo $___CONFIG___TIP_NOTES_FOLDER
 

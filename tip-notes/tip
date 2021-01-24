@@ -44,15 +44,15 @@ script_name=$(basename "${0}")
 link_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 linked_script=$(readlink "${link_dir}/${script_name}")
 if [[ -z "${linked_script}" ]]; then
-    EXECUTABLES_DIR="${link_dir}"
+    executables_dir="${link_dir}"
 else
-    EXECUTABLES_DIR=$(dirname "${linked_script}")
+    executables_dir=$(dirname "${linked_script}")
 fi
 # shellcheck source=./project-header.sh
-source "${EXECUTABLES_DIR}/project-header.sh"
+source "${executables_dir}/project-header.sh"
 
 #echo $script_name
-#echo $EXECUTABLES_DIR
+#echo $executables_dir
 
 # if exist a config file, source it, otherwise prints an error
 # message, unless $1 is --config-init
@@ -221,9 +221,9 @@ while [[ ${#} -gt 0 ]]; do
         '-b' | '--backup')
             shift
             if [[ "${#}" -gt 0 ]]; then
-                "${EXECUTABLES_DIR}/backup" "${@}"
+                "${executables_dir}/backup" "${@}"
             else
-                "${EXECUTABLES_DIR}/backup"
+                "${executables_dir}/backup"
             fi
             exit 0
             ;;
@@ -280,10 +280,10 @@ while [[ ${#} -gt 0 ]]; do
         '-F' | '--find-content')
             shift
             if [[ "${#}" -eq 1 ]]; then
-                "${EXECUTABLES_DIR}/find-notes-by-content" "${1}"
+                "${executables_dir}/find-notes-by-content" "${1}"
                 exit 0
             elif [[ "${#}" -eq 2 ]]; then
-                "${EXECUTABLES_DIR}/find-notes-by-content" "${1}" "${2}"
+                "${executables_dir}/find-notes-by-content" "${1}" "${2}"
                 exit 0
             fi
             echo "ERROR: --find-content received unexpected number of arguments!"
@@ -298,10 +298,10 @@ while [[ ${#} -gt 0 ]]; do
         '-f' | '--find')
             shift
             if [[ "${#}" -eq 1 ]]; then
-                "${EXECUTABLES_DIR}/find-notes-by-name" "${1}"
+                "${executables_dir}/find-notes-by-name" "${1}"
                 exit 0
             elif [[ "${#}" -eq 2 ]]; then
-                "${EXECUTABLES_DIR}/find-notes-by-name" "${1}" "${2}"
+                "${executables_dir}/find-notes-by-name" "${1}" "${2}"
                 exit 0
             fi
             echo "ERROR: --find received unexpected number of arguments!"
@@ -314,7 +314,7 @@ while [[ ${#} -gt 0 ]]; do
             exit 1
             ;;
         '--authors')
-            cat "${EXECUTABLES_DIR}/authors"
+            cat "${executables_dir}/authors"
             exit 0
             ;;
         '--config')
@@ -332,7 +332,7 @@ while [[ ${#} -gt 0 ]]; do
             exit 1
             ;;
         '--init')
-            "${EXECUTABLES_DIR}/init"
+            "${executables_dir}/init"
             exit 0
             ;;
         '--reset')
@@ -344,7 +344,7 @@ while [[ ${#} -gt 0 ]]; do
                 fi
             fi
             rm "${HEADER___PROJECT_CONFIG_FILE}"
-            "${EXECUTABLES_DIR}/init"
+            "${executables_dir}/init"
             exit 0
             ;;
         '--remove')
@@ -355,7 +355,7 @@ while [[ ${#} -gt 0 ]]; do
                     exit 1
                 fi
             fi
-            "${EXECUTABLES_DIR}/remove"
+            "${executables_dir}/remove"
             exit 0
             ;;
         '--purge')
@@ -366,7 +366,7 @@ while [[ ${#} -gt 0 ]]; do
                     exit 1
                 fi
             fi
-            "${EXECUTABLES_DIR}/remove" '--purge'
+            "${executables_dir}/remove" '--purge'
             exit 0
             ;;
         '--version')
@@ -405,13 +405,13 @@ fi
 # if no arguments list available notes
 if [[ "${#}" -eq 0 ]]; then
     # echo 'calling list-notes'
-    "${EXECUTABLES_DIR}/list-notes"
+    "${executables_dir}/list-notes"
     exit 0
 fi
 
 if [[ "${#}" -eq 1 ]]; then
     if [[ -d "${___CONFIG___TIP_NOTES_FOLDER}/${1}" ]]; then
-        "${EXECUTABLES_DIR}/list-notes" "${1}"
+        "${executables_dir}/list-notes" "${1}"
         exit 0
     elif [[ -f "${___CONFIG___TIP_NOTES_FOLDER}/${1}" ]]; then
         more "${___CONFIG___TIP_NOTES_FOLDER}/${1}"
