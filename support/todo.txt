@@ -2,12 +2,9 @@
 + group things in tiprc???
     Confirmations, folders, etc
 
-
 + implement a routine to clean backups
 
-
 + allow alternative path for notes overriding tip-notes folder
-
   eg:
   tip -a ~/Lixo/rep/tip-notes/support/notes/todo
 
@@ -23,7 +20,5 @@
     + if find returns a single file, autocopy the command tip <found note>
       to clipboard so that user only need to CTRL + V ?
 
-
 + improve autocompletion for fish
-
   + include fish autocompletion in install, remove and make-deb routines
