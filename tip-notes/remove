@@ -60,7 +60,7 @@ rm -r "${HEADER___PROJECT_EXECUTABLES_FOLDER}"
 
 # remove autocompletion file
 # TODO: expand to remove also fish autocompletion
-rm "${___HEADER___PROJECT_AUTOCOMPLETION_FILE___}"
+rm "${HEADER___PROJECT_AUTOCOMPLETION_FILE}"
 
 # remove links
 rm "${HEADER___PROJECT_LINKS_FOLDER}/tip"
