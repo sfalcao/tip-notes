@@ -65,6 +65,11 @@ else
     fi
 fi
 
+# check if user has root powers
+if [[ $(id -u) -ne 0 ]]; then
+    print_error "ERROR: please run as root!"
+    exit 1
+fi
 
 
 #-------------------------------------------------------------------------------
