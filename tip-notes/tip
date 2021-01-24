@@ -50,9 +50,10 @@ else
 fi
 # shellcheck source=./project-header.sh
 source "${executables_dir}/project-header.sh"
+# shellcheck source=./tip-lib.sh
+source "${executables_dir}/tip-lib.sh"
 
-#echo $script_name
-#echo $executables_dir
+
 
 # if exist a config file, source it, otherwise prints an error
 # message, unless $1 is --config-init
@@ -61,47 +62,10 @@ if [[ -f "${HEADER___PROJECT_CONFIG_FILE}" ]]; then
     source "${HEADER___PROJECT_CONFIG_FILE}"
 else
     if [[ "${#}" -eq 0 ]] || [[ "${1}" != '--init' ]]; then
-        echo
-        echo "ERROR: --> configuration file does not exist!"
-        echo
-        echo "To fix it type:"
-        echo "tip --init"
-        echo
+        print_error "ERROR: --> configuration file does not exist!"
         exit 1
     fi
 fi
-
-
-#-------------------------------------------------------------------------------
-# FUNCTIONS
-#-------------------------------------------------------------------------------
-# use this section to store your functions
-#
-#
-
-#####
-# P #
-#####
-#
-
-function print_if_not_silenced(){
-    if [[ "$FLAG_SILENT" -eq "0" ]] ; then
-        echo "$1"
-        return "0"
-    else
-        return "1"
-    fi
-}
-
-
-function print_if_verbose(){
-    if [[ "$FLAG_VERBOSE" -eq "1" ]] ; then
-        echo "$1"
-        return 0
-    else
-        return 1
-    fi
-}
 
 
 
@@ -230,7 +194,7 @@ while [[ ${#} -gt 0 ]]; do
         '-e' | '--edit')
             shift
             if [[ ${#} -ne 1 ]]; then
-                echo "ERROR: --edit option waits for a note name"
+                print_error "ERROR: --edit option waits for a note name"
                 exit 1
             fi
             note_file="${RC___TIP_NOTES_FOLDER}/${1}"
@@ -255,7 +219,7 @@ while [[ ${#} -gt 0 ]]; do
         '-d' | '--delete')
             shift
             if [[ ${#} -ne 1 ]]; then
-                echo "ERROR: --delete option waits for a note name"
+                print_error "ERROR: --delete option waits for a note name"
                 exit 1
             fi
             note_file="${RC___TIP_NOTES_FOLDER}/${1}"
@@ -264,14 +228,14 @@ while [[ ${#} -gt 0 ]]; do
 
                     read -r -p "Are you sure? (y/n): " answer
                     if ! [[ "${answer}" =~ [y|Y] ]]; then
-                        echo "reset operation aborted by user!"
+                        print_error "reset operation aborted by user!"
                         exit 1
                     fi
 
                 fi
                 rm "${note_file}"
             else
-                echo "no ${1} note to be removed!"
+                print_error "ERROR: no ${1} note to be removed!"
                 exit 1
             fi
             find "${RC___TIP_NOTES_FOLDER}" -type d -empty -delete
@@ -286,13 +250,14 @@ while [[ ${#} -gt 0 ]]; do
                 "${executables_dir}/find-notes-by-content" "${1}" "${2}"
                 exit 0
             fi
-            echo "ERROR: --find-content received unexpected number of arguments!"
-            echo
-            echo "usage:"
-            echo "${script_name} --find-content [<group>] <text>"
-            echo
-            echo "[<group>] is optional"
-            echo
+            print_error \
+                "ERROR: --find-content received unexpected number of arguments!"
+            print_error
+            print_error "usage:"
+            print_error "${script_name} --find-content [<group>] <text>"
+            print_error
+            print_error "[<group>] is optional"
+            print_error
             exit 1
             ;;
         '-f' | '--find')
@@ -304,13 +269,14 @@ while [[ ${#} -gt 0 ]]; do
                 "${executables_dir}/find-notes-by-name" "${1}" "${2}"
                 exit 0
             fi
-            echo "ERROR: --find received unexpected number of arguments!"
-            echo
-            echo "usage:"
-            echo "${script_name} --find [<group>] <text>"
-            echo
-            echo "[<group>] is optional"
-            echo
+            print_error \
+                "ERROR: --find received unexpected number of arguments!"
+            print_error
+            print_error "usage:"
+            print_error "${script_name} --find [<group>] <text>"
+            print_error
+            print_error "[<group>] is optional"
+            print_error
             exit 1
             ;;
         '--authors')
@@ -326,9 +292,7 @@ while [[ ${#} -gt 0 ]]; do
                 fi
                 exit 0
             fi
-            echo "ERROR: config file not found! To create a config file type:"
-            echo "tip --config-init"
-            echo
+            print_error "ERROR: config file not found!"
             exit 1
             ;;
         '--init')
@@ -339,7 +303,7 @@ while [[ ${#} -gt 0 ]]; do
             if [ "${RC___TIP_TO_CONFIRM_BEFORE_RESET}" = true ]; then
                 read -r -p "Are you sure? (y/n): " answer
                 if ! [[ "${answer}" =~ [y|Y] ]]; then
-                    echo "reset operation aborted by user!"
+                    print_error "reset operation aborted by user!"
                     exit 1
                 fi
             fi
@@ -351,7 +315,7 @@ while [[ ${#} -gt 0 ]]; do
             if [ "${RC___TIP_TO_CONFIRM_BEFORE_REMOVE}" = true ]; then
                 read -r -p "Are you sure? (y/n): " answer
                 if ! [[ "${answer}" =~ [y|Y] ]]; then
-                    echo "remove operation aborted by user!"
+                    print_error "remove operation aborted by user!"
                     exit 1
                 fi
             fi
@@ -362,7 +326,7 @@ while [[ ${#} -gt 0 ]]; do
             if [ "${RC___TIP_TO_CONFIRM_BEFORE_PURGE}" = true ]; then
                 read -r -p "Are you sure? (y/n): " answer
                 if ! [[ "${answer}" =~ [y|Y] ]]; then
-                    echo "purge operation aborted by user!"
+                    print_error "purge operation aborted by user!"
                     exit 1
                 fi
             fi
@@ -418,9 +382,9 @@ if [[ "${#}" -eq 1 ]]; then
         exit 0
     fi
 
-    echo "no tips for ${1}"
+    print_error "ERROR: no tips for ${1}!"
     exit 1
 fi
 
-echo "ERROR: Unexpected arguments!"
+print_error "ERROR: Unexpected condition!"
 exit 1

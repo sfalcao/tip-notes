@@ -56,30 +56,24 @@ fi
 
 # if any command line parameter has been passed display help message
 if [[ $# -gt 0 ]]; then
-    error_message "${script_name}"
-    error_message "installs ${HEADER___PROJECT_NAME}"
-    error_message
-    error_message "usage:"
-    error_message
-    error_message "  sudo ./${script_name}"
-    error_message
+    print_error "ERROR: unexpeted parameter(s): ${@}"
     exit 1
 fi
 
 
 # copy executables
 if ! mkdir -p "${HEADER___PROJECT_EXECUTABLES_FOLDER}"; then
-    error_message "ERROR: destination folder could not be created"
+    print_error "ERROR: destination folder could not be created"
     exit 1
 fi
 if ! cp -r ./tip-notes/* "${HEADER___PROJECT_EXECUTABLES_FOLDER}"; then
-    error_message "copy executables status --> FAILED"
+    print_error "copy executables status --> FAILED"
     exit_status=1
 fi
 
 # copy autocompletion files
 if ! cp ./autocompletion/tip.bash "${HEADER___PROJECT_AUTOCOMPLETION_FOLDER}"; then
-    error_message "copy autocompletion status --> FAILED"
+    print_error "copy autocompletion status --> FAILED"
     exit_status=1
 fi
 
@@ -87,32 +81,32 @@ fi
 if ! ln -s \
     "${HEADER___PROJECT_EXECUTABLES_FOLDER}/tip" \
     "${HEADER___PROJECT_LINKS_FOLDER}"; then
-    error_message "create links status --> FAILED"
+    print_error "create links status --> FAILED"
     exit_status=1
 fi
 
 # create docs
 if ! mkdir -p "${HEADER___PROJECT_DOC_FOLDER}"; then
-    error_message "create docs folder status --> FAILED"
+    print_error "create docs folder status --> FAILED"
 fi
 if ! cp ./packaging/copyright "${HEADER___PROJECT_DOC_FOLDER}"; then
-    error_message "copy docs status --> FAILED"
+    print_error "copy docs status --> FAILED"
     exit_status=1
 fi
 
 # copy man page
 if ! cp ./man/tip.1 "${HEADER___PROJECT_MAN_FOLDER}/tip.1"; then
-    error_message "copy man page status --> FAILED"
+    print_error "copy man page status --> FAILED"
     exit_status=1
 fi
 if ! gzip -f "${HEADER___PROJECT_MAN_FOLDER}/tip.1"; then
-    error_message "compress man page status --> FAILED"
+    print_error "compress man page status --> FAILED"
     exit_status=1
 fi
 
 # create config files if does not exist
 if ! "${HEADER___PROJECT_EXECUTABLES_FOLDER}/init" &> /dev/nul; then
-    error_message \
+    print_error \
         "create config files status --> FAILED" \
         "(Not a problem if config files already exist!)"
     exit_status=1

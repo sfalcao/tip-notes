@@ -12,6 +12,9 @@
 
 script_name=$(basename "${0}")
 
+exit_status=0
+
+
 link_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 linked_script=$(readlink "${link_dir}/${script_name}")
 if [[ -z "${linked_script}" ]]; then
@@ -21,59 +24,69 @@ else
 fi
 # shellcheck source=./project-header.sh
 source "${executables_dir}/project-header.sh"
+# shellcheck source=./tip-lib.sh
+source "${executables_dir}/tip-lib.sh"
 
 
 
 # if parameters are passed shows help
 if [[ "${#}" -gt 0 ]] && [[ "${1}" != "--purge" ]]; then
-    echo
-    echo "usage:"
-    echo
-    echo "  sudo ${script_name} [--purge]"
-    echo
+    print_error "ERROR: unexpected argument!"
     exit 1
 fi
 
 
 # aborts if already installed by apt
 if apt list --installed 2> /dev/null | grep 'tip-notes'; then
-    echo
-    echo "ATTENTION!"
-    echo
-    echo\
-        "${HEADER___PROJECT_NAME} has been installed using apt system's"\
-        "package manager!"
-    echo
+    print_error
+    print_error "ATTENTION!"
+    print_error
+    print_error\
+    print_error"${HEADER___PROJECT_NAME} has been installed using apt system's"\
+    print_error"package manager!"
+    print_error
     if [[ "${1}" == "--purge" ]]; then
-        echo "Purge installed version using:"
-        echo "sudo apt purge tip-notes"
+        print_error "Purge installed version using:"
+        print_error "sudo apt purge tip-notes"
     else
-        echo "Remove installed version using:"
-        echo "sudo apt remove tip-notes"
+        print_error "Remove installed version using:"
+        print_error "sudo apt remove tip-notes"
     fi
-    echo
+    print_error
     exit 1
 fi
 
 # remove files and folders destination
-rm -r "${HEADER___PROJECT_EXECUTABLES_FOLDER}"
+if ! rm -r "${HEADER___PROJECT_EXECUTABLES_FOLDER}"; then
+    exit_status=1
+fi
 
 # remove autocompletion file
 # TODO: expand to remove also fish autocompletion
-rm "${HEADER___PROJECT_AUTOCOMPLETION_FILE}"
+if ! rm "${HEADER___PROJECT_AUTOCOMPLETION_FILE}"; then
+    exit_status=1
+fi
 
 # remove links
-rm "${HEADER___PROJECT_LINKS_FOLDER}/tip"
+if ! rm "${HEADER___PROJECT_LINKS_FOLDER}/tip"; then
+    exit_status=1
+fi
 
 # remove docs
-rm -r "${HEADER___PROJECT_DOC_FOLDER}"
+if ! rm -r "${HEADER___PROJECT_DOC_FOLDER}"; then
+    exit_status=1
+fi
 
 # remove man page
-rm -r /usr/local/man/man1/tip.1.gz
+if ! rm -r /usr/local/man/man1/tip.1.gz; then
+    exit_status=1
+fi
 
 # purge files if required
 if [[ "${1}" == "--purge" ]]; then
-    rm -r "${HEADER___PROJECT_CONFIG_FOLDER}"
+    if ! rm -r "${HEADER___PROJECT_CONFIG_FOLDER}"; then
+        exit_status=1
+    fi
 fi
 
-exit 0
+exit "${exit_status}"

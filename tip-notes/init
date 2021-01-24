@@ -50,7 +50,8 @@ else
 fi
 # shellcheck source=./project-header.sh
 source "${executables_dir}/project-header.sh"
-
+# shellcheck source=./tip-lib.sh
+source "${executables_dir}/tip-lib.sh"
 
 
 
@@ -61,7 +62,7 @@ fi
 
 # if exist a config file, skip creation
 if [[ -f "${HEADER___PROJECT_CONFIG_FILE}" ]]; then
-    echo "ERROR: config file already exist!"
+    print_error "ERROR: config file already exist!"
     exit 1
 fi
 

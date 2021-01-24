@@ -50,6 +50,8 @@ else
 fi
 # shellcheck source=./project-header.sh
 source "${executables_dir}/project-header.sh"
+# shellcheck source=./tip-lib.sh
+source "${executables_dir}/tip-lib.sh"
 
 
 
@@ -58,11 +60,7 @@ if [[ -f "${HEADER___PROJECT_CONFIG_FILE}" ]]; then
     # shellcheck source=/home/falcao/.config/tip-notes/tiprc
     source "${HEADER___PROJECT_CONFIG_FILE}"
 else
-    echo "ERROR: --> configuration file does not exist!"
-    echo
-    echo "To fix it type:"
-    echo "tip --init"
-    echo
+    print_error "ERROR: --> configuration file does not exist!"
     exit 1
 fi
 
@@ -74,11 +72,11 @@ elif [[ "${#}" -eq 2 ]]; then
     folder_to_list="${RC___TIP_NOTES_FOLDER}/${1}"
     text="${2}"
     if ! [[ -d "${folder_to_list}" ]]; then
-        echo "ERROR: [${1}] seems no to be a valid GROUP of notes"
+        print_error "ERROR: [${1}] seems no to be a valid GROUP of notes"
         exit 1
     fi
 else
-    echo "ERROR: unexpected number os parameters"
+    print_error "ERROR: unexpected number os parameters"
     exit 1
 fi
 

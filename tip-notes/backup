@@ -50,6 +50,8 @@ else
 fi
 # shellcheck source=./project-header.sh
 source "${executables_dir}/project-header.sh"
+# shellcheck source=./tip-lib.sh
+source "${executables_dir}/tip-lib.sh"
 
 
 
@@ -57,11 +59,7 @@ if [[ -f "${HEADER___PROJECT_CONFIG_FILE}" ]]; then
     # shellcheck source=/home/falcao/.config/tip-notes/tiprc
     source "${HEADER___PROJECT_CONFIG_FILE}"
 else
-    echo "ERROR: --> configuration file does not exist!"
-    echo
-    echo "To fix it type:"
-    echo "tip --init"
-    echo
+    print_error "ERROR: --> configuration file does not exist!"
     exit 1
 fi
 
@@ -75,7 +73,7 @@ if [[ ! -d "${RC___TIP_BACKUP_FOLDER}" ]]; then
         echo "tip-notes backup folder does not exist!"
         read -r -p "Do you like to create it now? Type 'y' or 'n' :" answer
         if [[ ! "${answer}" =~ [Y|y] ]]; then
-            echo "ERROR: tip backup folder creation aborted by user!"
+            print_error "ERROR: tip backup folder creation aborted by user!"
             exit 1
         fi
     fi
@@ -87,9 +85,7 @@ if [[ "${#}" -eq 0 ]]; then
 elif [[ "${#}" -eq 1 ]]; then
     behaviour="${1}"
 else
-    echo
-    echo "ERROR: unexpected number of parameters!"
-    echo
+    print_error "ERROR: unexpected number of parameters!"
     exit 1
 fi
 
@@ -120,7 +116,7 @@ elif [[ "${behaviour}" == '--notes-only' ]];then
         &> /dev/null
         echo 'WARNING --> only notes have been saved!'
 else
-    echo "ERROR: unknown backup parameter!"
+    print_error "ERROR: unknown backup parameter!"
     exit 1
 fi
 

@@ -24,7 +24,7 @@ package_name="${HEADER___PROJECT_NAME}_${HEADER___PROJECT_VERSION}_${package_arc
 package_folder="${destination_folder}${package_name}"
 
 if [[ -d "${package_folder}" ]]; then
-    echo "ERROR: package folder already exist! Creation aborted!"
+    print_error "ERROR: package folder already exist! Creation aborted!"
     exit 1
 fi
 mkdir -p "${package_folder}"

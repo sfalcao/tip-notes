@@ -38,6 +38,7 @@ package_architecture='all'
 
 source ../tip-notes/project-header.sh
 source ./make-deb-lib.sh
+source ../tip-notes/tip-lib.sh
 
 
 destination_folder="${1}"
@@ -45,16 +46,16 @@ destination_folder="${1}"
 
 
 if [[ "${#}" -eq 0 ]]; then
-    echo "ERROR: destination folder missing!"
-    echo
-    echo 'usage:'
-    echo "${script_name} <destination folder>"
-    echo
+    print_error "ERROR: destination folder missing!"
+    print_error
+    print_error 'usage:'
+    print_error "${script_name} <destination folder>"
+    print_error
     exit 1
 fi
 
 if ! [[ -d "${destination_folder}" ]]; then
-    echo "ERROR: destination folder does not exist!"
+    print_error "ERROR: destination folder does not exist!"
     exit 1
 fi
 

@@ -47,9 +47,9 @@ script_name=$(basename "${0}")
 #####
 #
 
-function error_message(){
+function print_error(){
 
-    # error_message <message>
+    # print_error <message>
     #
     # input:
     #  message      message to be displayed
@@ -60,11 +60,11 @@ function error_message(){
     printf "%s\n" "$*" >/dev/stderr;
 }
 
-function error_message_if_flag_is_false(){
+function print_error_if_flag_is_false(){
 
     # usage:
     #
-    # error_message_if_flag_is_false <message> [<flag>]
+    # print_error_if_flag_is_false <message> [<flag>]
     #
     # useful for example when you want to avoid messages from being displayed
     # based on a silent flag or something like that
