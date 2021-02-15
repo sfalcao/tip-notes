@@ -19,13 +19,13 @@
 #-----------------------------------------------------------------------------
 # DO NOT CHANGE the following two lines
 #-----------------------------------------------------------------------------
-_home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
-_home=${_home:-$HOME}
+_HOME="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
+_HOME=${_HOME:-$HOME}
 
 #-----------------------------------------------------------------------------
 # point to folder where notes are stored'
 #-----------------------------------------------------------------------------
-RC___TIP_NOTES_FOLDER="${_home}/.tip-notes"
+RC___TIP_NOTES_FOLDER="${_HOME}/.tip-notes"
 
 #-----------------------------------------------------------------------------
 # choose editor to be used by tip-notes
@@ -62,7 +62,7 @@ RC___TIP_TO_CONFIRM_BEFORE_DELETE_NOTE=true
 #-----------------------------------------------------------------------------
 # point to folder where notes and configs are backuped
 #-----------------------------------------------------------------------------
-RC___TIP_BACKUP_FOLDER="${_home}/tip-notes-backup"
+RC___TIP_BACKUP_FOLDER="${_HOME}/tip-notes-backup"
 
 #-----------------------------------------------------------------------------
 # control if --backup will ask for confirmation before
