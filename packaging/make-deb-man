@@ -18,6 +18,7 @@
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 
+
 # 1. put all involved files full paths in full_path_list separated by '\t'
 # 2. make sure that names in 1 correspond to your project names
 # 3. if your project demands more than one file, uncomment and
@@ -25,11 +26,12 @@
 IFS=$'\t'
 full_path_list="../man/tip.1"
 #full_path_list+="${IFS}../<<man_page_2>>.1"
-destination_folder="${package_folder}/usr/local/man/man1"
-copy_and_set_permissions \
-    "${full_path_list}" \
-    "${destination_folder}" \
-    644
-# TODO: improve compression routine
-gzip "${destination_folder}/tip.1"
-#gzip "${destination_folder}/<<man_page_2>>.1"
+destination_folder="${PCKHEADER___PACKAGE_FOLDER}${HEADER___PROJECT_MAN_FOLDER}"
+for full_path in ${full_path_list}; do
+    install \
+        -D "${full_path}" \
+        -t "${destination_folder}" \
+        -m 644
+    file_name="$(basename -- ${full_path})"
+    gzip "${destination_folder}/${file_name}"
+done

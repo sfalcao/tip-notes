@@ -18,6 +18,7 @@
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 
+
 # deal with doc files
 # 1. put all involved files full paths in full_path_list separated by '\t'
 # 2. make sure that names in 1 correspond to your project names
@@ -25,10 +26,12 @@
 #    add required lines so that full_path_list contain all of them
 IFS=$'\t'
 full_path_list="copyright"
-#full_path_list+="${IFS}<<doc_file_2>>"
+#full_path_list+="${IFS}___EDIT_HERE___DOC_FILE_2___"
 #...
-destination_folder="${package_folder}${HEADER___PROJECT_DOC_FOLDER}"
-copy_and_set_permissions \
-    "${full_path_list}" \
-    "${destination_folder}" \
-    644
+destination_folder="${PCKHEADER___PACKAGE_FOLDER}${HEADER___PROJECT_DOC_FOLDER}"
+for full_path in ${full_path_list}; do
+    install \
+        -D "${full_path}" \
+        -t "${destination_folder}" \
+        -m 644
+done

@@ -25,17 +25,20 @@
 #     GNU General Public License for more details.
 #
 #     You should have received a copy of the GNU General Public License
-#     along with Foobar.  If not, see <https://www.gnu.org/licenses/>
+#     along with this program. If not, see <https://www.gnu.org/licenses/>
 
 
+# improved /home detection required when used with sudo
+_HOME="$(cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6)"
+_HOME=${_HOME:-$HOME}
 
 HEADER___PROJECT_NAME="tip-notes"
 HEADER___PROJECT_VERSION="0.1.0"
 HEADER___PROJECT_MAIL="falecomigo.falcao@gmail.com"
 HEADER___PROJECT_DEV_STAGE="DRAFT"
 
-
 HEADER___PROJECT_EXECUTABLES_FOLDER="/usr/lib/${HEADER___PROJECT_NAME}"
+HEADER___PROJECT_EXECUTABLE_FILE_NAME_1="tip"
 HEADER___PROJECT_LINKS_FOLDER='/usr/local/bin'
 HEADER___PROJECT_DOC_FOLDER="/usr/share/doc/${HEADER___PROJECT_NAME}"
 HEADER___PROJECT_AUTOCOMPLETION_FOLDER="/etc/bash_completion.d"
@@ -44,7 +47,5 @@ HEADER___PROJECT_MAN_FOLDER="/usr/local/man/man1"
 
 
 # if change the following line, change also deb-make purge section
-_home="`cat /etc/passwd |grep ^${SUDO_USER:-$(id -un)}: | cut -d: -f 6`"
-_home=${_home:-$HOME}
-HEADER___PROJECT_CONFIG_FOLDER="${_home}/.config/${HEADER___PROJECT_NAME}"
+HEADER___PROJECT_CONFIG_FOLDER="${_HOME}/.config/${HEADER___PROJECT_NAME}"
 HEADER___PROJECT_CONFIG_FILE="${HEADER___PROJECT_CONFIG_FOLDER}/tiprc"

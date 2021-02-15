@@ -18,17 +18,17 @@
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 
-# create package folder according to project name, version and architecture
-package_name=''
-package_name="${HEADER___PROJECT_NAME}_${HEADER___PROJECT_VERSION}_${package_architecture}"
-package_folder="${destination_folder}${package_name}"
 
-if [[ -d "${package_folder}" ]]; then
-    read -r -p "package_folder already exist! Overwrite? (y/n): " answer
+source ../tip-notes/tip-lib.sh
+
+
+
+if [[ -d "${PCKHEADER___PACKAGE_FOLDER}" ]]; then
+    read -r -p "${PCKHEADER___PACKAGE_FOLDER} already exist! Overwrite? (y/n): " answer
     if [[ ! "${answer}" =~ [y|Y] ]]; then
         print_error "ERROR: package folder already exist! Creation aborted!"
         exit 1
     fi
 fi
-rm -rf "${package_folder}"
-mkdir -p "${package_folder}"
+rm -rf "${PCKHEADER___PACKAGE_FOLDER}"
+mkdir -p "${PCKHEADER___PACKAGE_FOLDER}"

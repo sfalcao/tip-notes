@@ -18,6 +18,7 @@
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 
+
 #set -o errexit
 #set -o nounset
 #set -o pipefail
@@ -27,21 +28,17 @@
 #---------
 # HEADER
 #---------
-script_name=$(basename "${0}")
+readonly SCRIPT_NAME="$(basename ${0})"
 
-package_architecture='all'
 
 
 #---------------
 # MAIN ROUTINE
 #---------------
 
+source ./make-deb-header "${@}"
 source ../tip-notes/project-header.sh
-source ./make-deb-lib.sh
 source ../tip-notes/tip-lib.sh
-
-
-destination_folder="${1}"
 
 
 
@@ -49,23 +46,19 @@ if [[ "${#}" -eq 0 ]]; then
     print_error "ERROR: destination folder missing!"
     print_error
     print_error 'usage:'
-    print_error "${script_name} <destination folder>"
+    print_error "${SCRIPT_NAME} <destination folder>"
     print_error
     exit 1
 fi
 
-if ! [[ -d "${destination_folder}" ]]; then
-    print_error "ERROR: destination folder does not exist!"
-    exit 1
-fi
 
 
 # 1. create package folder named according to conventions
 source ./make-deb-create-pack-folder
 
 
-# 2. add elements to package folder as required.
-#    Uncomment optional elements to activate
+# 2. add elements to package folder as required. Notice tha some modules are
+#    uncomment optional elements to activate
 source ./make-deb-control-files
 source ./make-deb-exec
 source ./make-deb-autocompletion
@@ -74,5 +67,4 @@ source ./make-deb-man
 
 
 # 3. build the deb file from package folder
-cd "${destination_folder}"
-dpkg-deb --build "${package_folder}"
+source ./make-deb-file

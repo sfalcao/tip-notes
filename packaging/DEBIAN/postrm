@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+
+
 # remove links
-rm -f "___CHANGE_HERE___LINKS_FOLDER___/tip"
+rm -f "___WILL_BE_CHANGED_BY_MAKE_DEB___PROJECT_LINKS_FOLDER___/___WILL_BE_CHANGED_BY_MAKE_DEB___PROJECT_EXECUTABLE_FILE_NAME_1___"
 
 # remove config folder if required
 if [[ "${1}" == "purge" ]]; then
-    rm -rf "___CHANGE_HERE___CONFIG_FOLDER___"
+    rm -rf "___WILL_BE_CHANGED_BY_MAKE_DEB___PROJECT_CONFIG_FOLDER___"
 fi

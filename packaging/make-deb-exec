@@ -18,8 +18,10 @@
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 
+
 # the idea here is to keep all executables in a single folder named after
 # project, if it is not the case, change bellow accordingly
-destination_folder="${package_folder}${HEADER___PROJECT_EXECUTABLES_FOLDER}"
-copy_and_set_permissions \
-    ../"${HEADER___PROJECT_NAME}" "${destination_folder}"
+destination_folder="${PCKHEADER___PACKAGE_FOLDER}${HEADER___PROJECT_EXECUTABLES_FOLDER}"
+install \
+    -D ../"${HEADER___PROJECT_NAME}"/* \
+    -t "${destination_folder}"

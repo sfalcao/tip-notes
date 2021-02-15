@@ -1,5 +1,5 @@
-Package: ___CHANGE_HERE___PROJECT_NAME___
-Version: ___CHANGE_HERE___PROJECT_VERSION___
+Package: ___WILL_BE_CHANGED_BY_MAKE_DEB___PROJECT_NAME___
+Version: ___WILL_BE_CHANGED_BY_MAKE_DEB___PROJECT_VERSION___
 Architecture: all
 Essential: no
 Priority: optional

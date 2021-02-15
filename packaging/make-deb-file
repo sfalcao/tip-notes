@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Copyright (C) 2020 tip-notes authors.
+# Copyright (C) ___WILL_BE_CHANGED_BY_CONFIG___PROJECT_START_YEAR___ ___WILL_BE_CHANGED_BY_CONFIG___PROJECT_NAME___ authors.
 #
-# This file is part of tip-notes.
+# This file is part of ___WILL_BE_CHANGED_BY_CONFIG___PROJECT_NAME___
 #
 #     This program is free software: you can redistribute it and/or modify
 #     it under the terms of the GNU General Public License as published by
@@ -19,18 +19,6 @@
 
 
 
-# 1. put all involved files full paths in full_path_list separated by '\t'
-# 2. make sure that names in 1 correspond to your project names
-# 3. if your project demands more than one file, uncomment and
-#    add required lines so that full_path_list contain all of them
-IFS=$'\t'
-full_path_list='../autocompletion/tip.bash'
-#full_path_list+="${IFS}../autocompletion/<autocompletion_file_2>>"
-#...
-destination_folder="${PCKHEADER___PACKAGE_FOLDER}${HEADER___PROJECT_AUTOCOMPLETION_FOLDER}"
-for full_path in ${full_path_list}; do
-    install \
-        -D "${full_path}" \
-        -t "${destination_folder}" \
-        -m 644
-done
+# build the deb file from package folder
+cd "${PCKHEADER___ARGUMENT_DESTINATION_FOLDER}"
+dpkg-deb --build "${PCKHEADER___PACKAGE_FOLDER}"

@@ -19,39 +19,53 @@
 
 
 
+source ./make-deb-header 
+
+
+
 # deal with DEBIAN files
 
 # copy control files
-cp -r ./DEBIAN "${package_folder}"
+cp -r ./DEBIAN "${PCKHEADER___PACKAGE_FOLDER}"
 
 # adjust project name and version number in control file
 sed -i \
-    "s|___CHANGE_HERE___PROJECT_NAME___|${HEADER___PROJECT_NAME}|" \
-    "${package_folder}/DEBIAN/control"
+    "s|___WILL_BE_CHANGED_BY_MAKE_DEB___PROJECT_NAME___|${HEADER___PROJECT_NAME}|" \
+    "${PCKHEADER___PACKAGE_FOLDER}/DEBIAN/control"
 sed -i \
-    "s|___CHANGE_HERE___PROJECT_VERSION___|${HEADER___PROJECT_VERSION}|" \
-    "${package_folder}/DEBIAN/control"
+    "s|___WILL_BE_CHANGED_BY_MAKE_DEB___PROJECT_VERSION___|${HEADER___PROJECT_VERSION}|" \
+    "${PCKHEADER___PACKAGE_FOLDER}/DEBIAN/control"
 
-# ajust executables and links folders in postinst file
-postinst_file="${package_folder}/DEBIAN/postinst"
+
+
+# edit and ajust permissions of postinst file
+postinst_file="${PCKHEADER___PACKAGE_FOLDER}/DEBIAN/postinst"
 sed -i \
-    "s|___CHANGE_HERE___EXECUTABLES_FOLDER___|${HEADER___PROJECT_EXECUTABLES_FOLDER}|" \
+    "s|___WILL_BE_CHANGED_BY_MAKE_DEB___PROJECT_EXECUTABLES_FOLDER___|${HEADER___PROJECT_EXECUTABLES_FOLDER}|" \
     "${postinst_file}"
 sed -i \
-    "s|___CHANGE_HERE___LINKS_FOLDER___|${HEADER___PROJECT_LINKS_FOLDER}|" \
+    "s|___WILL_BE_CHANGED_BY_MAKE_DEB___PROJECT_EXECUTABLE_FILE_NAME_1___|${HEADER___PROJECT_EXECUTABLE_FILE_NAME_1}|" \
     "${postinst_file}"
 sed -i \
-    "s|___CHANGE_HERE___CONFIG_FILE___|${HEADER___PROJECT_CONFIG_FILE}|" \
+    "s|___WILL_BE_CHANGED_BY_MAKE_DEB___PROJECT_LINKS_FOLDER___|${HEADER___PROJECT_LINKS_FOLDER}|" \
     "${postinst_file}"
+sed -i \
+    "s|___WILL_BE_CHANGED_BY_MAKE_DEB___PROJECT_CONFIG_FILE___|${HEADER___PROJECT_CONFIG_FILE}|" \
+    "${postinst_file}"
+
 chmod 755 "${postinst_file}"
 
 
-# ajust links and config folders in postrm file
-postrm_file="${package_folder}/DEBIAN/postrm"
+
+# edit and ajust permissions of postrm file
+postrm_file="${PCKHEADER___PACKAGE_FOLDER}/DEBIAN/postrm"
 sed -i \
-    "s|___CHANGE_HERE___LINKS_FOLDER___|${HEADER___PROJECT_LINKS_FOLDER}|" \
+    "s|___WILL_BE_CHANGED_BY_MAKE_DEB___PROJECT_EXECUTABLE_FILE_NAME_1___|${HEADER___PROJECT_EXECUTABLE_FILE_NAME_1}|" \
     "${postrm_file}"
 sed -i \
-    "s|___CHANGE_HERE___CONFIG_FOLDER___|${HEADER___PROJECT_CONFIG_FOLDER}|" \
+    "s|___WILL_BE_CHANGED_BY_MAKE_DEB___PROJECT_LINKS_FOLDER___|${HEADER___PROJECT_LINKS_FOLDER}|" \
+    "${postrm_file}"
+sed -i \
+    "s|___WILL_BE_CHANGED_BY_MAKE_DEB___PROJECT_CONFIG_FOLDER___|${HEADER___PROJECT_CONFIG_FOLDER}|" \
     "${postrm_file}"
 chmod 755 "${postrm_file}"
