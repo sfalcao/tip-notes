@@ -119,7 +119,7 @@ function print_if_flag_is_false(){
     local flag="${2}"
 
     if [[ "${flag}" -eq "0" ]] || [[ "${flag}" == 'false' ]]; then
-        printf "${message}"
+        printf "${message}\n"
         return "0"
     else
         return "1"
@@ -144,7 +144,7 @@ function print_if_flag_is_true(){
     local flag="${2}"
 
     if [[ "${flag}" -eq "1" ]] || [[ "${flag}" == 'true' ]]; then
-        printf "${message}"
+        printf "${message}\n"
         return 0
     else
         return 1
