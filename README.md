@@ -73,6 +73,78 @@ if preferred mode above fails, then type:
 sudo tip --purge
 ```
 
+
+
+## IMPORTANT FILES AND FOLDERS
+
+### configuration file
+
+```bash
+~/.config/tip-notes/tiprc
+```
+**tiprc** has self explanatory comments, and everything there is made exactly
+to be edited by users who wants to change **tip-note**'s default behaviour!
+
+### notes folder
+
+```bash
+~/.tip-notes
+```
+notice that is a hidden folder. See **Visible x hidden notes** folder section
+bellow. This location can be changed editing **tiprc** file
+
+### backup folder
+
+```bash
+~/tip-notes-backup
+```
+This location can be changed editing **tiprc** file
+
+### backup your notes and configuration files
+
+**tip-notes** has it's own backup routine. Basically user can choose among
+saving configurations, notes or both. Backups are stored on a specific backup
+location pointed in **tiprc** configuration file, where also is possible to
+choose default backup behaviour among --all, --config-only or --notes-only.
+Backups are composed by time stamped tar.gz files which names are pretty much
+self descriptive
+
+To make a backup based on tiprc setup:
+```bash
+tip -b
+```
+To override tiprc and backup both, configurations and notes:
+```bash
+tip -b --all
+```
+To override tiprc and backup configurations only:
+```bash
+tip -b --config-only
+```
+To override tiprc and backup notes only:
+```bash
+tip -b --notes-only
+```
+
+### Visible x hidden folders
+
+If folder name is preceded by a dot (".") your folder will be hidden.
+**tip-notes** itself is NOT affected by visibility of folders.  The folder
+visibility only affects whether your notes, backups and configurations will be
+seen by other apps or listed by file browsers like Nemo, Nautilus, etc
+
+#### visible folder example:
+
+```bash
+tip_notes_folder=~/this_is_a_visible_folder
+```
+
+#### invisible folder example:
+
+```bash
+tip_notes_folder=~/.this_is_a_hidden_folder
+```
+
 ## QUICK START
 
 ### install tip-notes
@@ -93,7 +165,7 @@ tip --config
 ### create and/or edit a note
 
 ```bash
-tip -e <my_note_name>
+tip <my_note_name> -e
 ```
 
 ### see a note
@@ -105,7 +177,7 @@ tip <my_note_name>
 ### create and/or edit a note in a specific group
 
 ```bash
-tip -e <group_name>/<my_note_name>
+tip <group_name>/<my_note_name> -e
 ```
 
 ### see a note within a group
@@ -134,6 +206,11 @@ Information within [ ] is optional and if passed limits the search within that g
 tip -f [<group_name>] <text>
 
 ```
+or
+```bash
+tip [<group_name>] <text> -f
+
+```
 
 ### list all notes which contain a text incorporated to the note itself
 
@@ -142,77 +219,11 @@ Information within [ ] is optional and if passed limits the search within that g
 ```bash
 tip -F [<group_name>] <text>
 ```
-
-### backup your notes and configuration files
-
-**tip-notes** has it's own backup routine. Basically user can choose among saving
-configurations, notes or both. Backups are stored on a specific backup location
-pointed in **tiprc** configuration file, where also is possible to choose
-default backup behaviour among --all, --config-only or --notes-only. Backups
-are composed by time stamped tar.gz files which names are pretty much self descriptive
-
-To make a backup based on tiprc setup:
+or
 ```bash
-tip -b
-```
-To override tiprc and backup both, configurations and notes:
-```bash
-tip -b --all
-```
-To override tiprc and backup configurations only:
-```bash
-tip -b --config-only
-```
-To override tiprc and backup notes only:
-```bash
-tip -b --notes-only
+tip [<group_name>] <text> -F
 ```
 
-
-## IMPORTANT FILES AND FOLDERS
-
-### configuration file
-
-```bash
-~/.config/tip-notes/tiprc
-```
-**tiprc** has self explanatory comments, and everything there is made exactly
-to be edited by users who wants to change **tip-note**'s default behaviour!
-
-### notes folder
-
-```bash
-~/.tip-notes
-```
-notice that is a hidden folder. See **Visible x hidden notes** folder section
-bellow. This location can be changed editing **tiprc** file
-
-### backup folder
-
-```bash
-~/tip-notes-backup
-```
-This location can be changed editing **tiprc** file
-
-### Visible x hidden folders
-
-If folder name is preceded by a dot (".") your folder will be hidden.
-**tip-notes** itself is not affected by visibility of folders.
-The folder visibility only affects whether your notes, backups and
-configurations will be seen by other apps or listed on file browsers like
-Nemo, Nautilus, etc
-
-#### visible folder example:
-
-```bash
-tip_notes_folder=~/this_is_a_visible_folder
-```
-
-#### invisible folder example:
-
-```bash
-tip_notes_folder=~/.this_is_a_hidden_folder
-```
 
 ## LICENSE
 
